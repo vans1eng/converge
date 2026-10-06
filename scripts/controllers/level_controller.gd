@@ -11,7 +11,7 @@ var validator := LevelValidator.new()
 var board_state: BoardState
 
 
-func load_level(level_id: String) -> bool:
+func load_level(level_id: String, publish := true) -> bool:
 	var definition := repository.load_level(level_id)
 	if definition == null:
 		load_failed.emit(repository.get_last_error())
@@ -20,7 +20,8 @@ func load_level(level_id: String) -> bool:
 		load_failed.emit("\n".join(validator.issues))
 		return false
 	board_state = BoardState.new(definition)
-	level_loaded.emit(board_state)
+	if publish:
+		level_loaded.emit(board_state)
 	return true
 
 

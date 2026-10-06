@@ -65,6 +65,11 @@ func setup(cell_definition: CellDefinition, cell_runtime: CellRuntimeState, cell
 	_last_display_text = text
 
 
+func refresh_palette() -> void:
+	_current_fill = _fill_color()
+	queue_redraw()
+
+
 func set_intelligence_visible(visible: bool) -> void:
 	if intelligence_visible != visible:
 		intelligence_visible = visible
@@ -141,6 +146,14 @@ func play_success() -> void:
 	_scale_tween.tween_property(self, "scale", Vector2.ONE, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 
+func stop_feedback_motion() -> void:
+	if _scale_tween != null:
+		_scale_tween.kill()
+	if _error_shake_tween != null:
+		_error_shake_tween.kill()
+	_set_error_offset(0.0)
+
+
 func play_error() -> void:
 	if _error_shake_tween != null:
 		_error_shake_tween.kill()
@@ -178,7 +191,8 @@ func _draw() -> void:
 	if definition == null or runtime == null:
 		return
 	var points := _hex_points()
-	_draw_shadow(points)
+	if not runtime.solved:
+		_draw_shadow(points)
 	if not intelligence_visible:
 		draw_colored_polygon(points, _palette().gray)
 		return
@@ -212,7 +226,7 @@ func _create_break_shards() -> void:
 	_break_elapsed = 0.0
 	var old_color := _palette().gray
 	if definition.mode == CellDefinition.MODE_CANDIDATE:
-		old_color = _brick_color(runtime.candidate_pick) if not runtime.candidate_pick.is_empty() else old_color
+		old_color = _current_fill
 	elif definition.mode == CellDefinition.MODE_RED_INPUT:
 		old_color = _palette().red
 	elif definition.is_wildcard():
@@ -297,16 +311,20 @@ func _draw_candidate(points: PackedVector2Array) -> void:
 	for index in definition.candidate_types.size():
 		var type := definition.candidate_types[index]
 		var mix := clampf((float(dot_scales.get(type, 1.0)) - 1.0) / (0.075 / 0.045 - 1.0), 0.0, 1.0)
-		var dot_color := _palette().cell_text
-		dot_color.a = lerpf(0.3, 0.9, mix)
+		var dot_color := _brick_color(type)
+		dot_color.a = lerpf(0.65, 1.0, mix)
 		var x := (index - (definition.candidate_types.size() - 1) / 2.0) * grid_radius * 0.17
-		draw_circle(Vector2(x, grid_radius * 0.52), grid_radius * 0.045 * float(dot_scales.get(type, 1.0)), dot_color)
+		var center := Vector2(x, grid_radius * 0.52)
+		var dot_radius := grid_radius * 0.045 * float(dot_scales.get(type, 1.0))
+		draw_circle(center, dot_radius, dot_color)
+		if mix > 0.01:
+			draw_arc(center, dot_radius + grid_radius * 0.025, 0.0, TAU, 24, Color(dot_color, mix), 1.0, true)
 
 
 func _fill_color() -> Color:
 	var palette := _palette()
 	if definition.mode == CellDefinition.MODE_CANDIDATE and not runtime.solved:
-		return _brick_color(runtime.candidate_pick) if not runtime.candidate_pick.is_empty() else palette.gray
+		return palette.gray
 	if definition.mode == CellDefinition.MODE_RED_INPUT and not runtime.solved:
 		return palette.red
 	if definition.mode == CellDefinition.MODE_HIDDEN and not runtime.solved:

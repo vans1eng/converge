@@ -44,8 +44,5 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("move_left"):
 		board_controller.change_selected_value(-1)
 		handled_gameplay_input = true
-	elif event.is_action_pressed("clear_input"):
-		board_controller.clear_selected_input()
-		handled_gameplay_input = true
 	if handled_gameplay_input:
 		get_viewport().set_input_as_handled()

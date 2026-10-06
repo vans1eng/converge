@@ -5,6 +5,7 @@ class_name HexScopeOverlay
 # boundaries, and share the resulting vertices between touching hexagons.
 const VERTICES := [Vector2i(1, -1), Vector2i(1, 1), Vector2i(0, 2), Vector2i(-1, 1), Vector2i(-1, -1), Vector2i(0, -2)]
 var polygons: Array[PackedVector2Array] = []
+var outlines: Array[PackedVector2Array] = []
 var color := Color.TRANSPARENT
 var target_color := Color.TRANSPARENT
 var amount := 0.0
@@ -18,6 +19,7 @@ func _ready() -> void:
 
 func configure(source: CellDefinition, cells: Array[CellDefinition], grid_radius: float, gap: float) -> void:
 	polygons.clear()
+	outlines.clear()
 	var origin := HexCoordinate.offset_to_axial(source.row, source.col)
 	var edges := {}
 	var tiles: Array[Array] = []
@@ -55,6 +57,12 @@ func configure(source: CellDefinition, cells: Array[CellDefinition], grid_radius
 			if next.is_empty():
 				break
 			edge = next
+		var outline := PackedVector2Array()
+		for vertex in loop:
+			outline.append(_pixel(vertex, grid_radius))
+		if not outline.is_empty():
+			outline.append(outline[0])
+			outlines.append(outline)
 		for index in loop.size():
 			var p := _pixel(loop[index], grid_radius)
 			var before := _pixel(loop[posmod(index - 1, loop.size())], grid_radius)
@@ -81,6 +89,11 @@ func set_active(active: bool, fill: Color) -> void:
 	set_process(amount != target_amount or (active and not color.is_equal_approx(target_color)))
 
 
+func refresh_palette() -> void:
+	color = target_color
+	queue_redraw()
+
+
 func _pixel(vertex: Vector2i, grid_radius: float) -> Vector2:
 	return Vector2(vertex.x * sqrt(3.0) * grid_radius / 2.0, vertex.y * grid_radius / 2.0)
 
@@ -102,3 +115,7 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	for polygon in polygons:
 		draw_colored_polygon(polygon, color)
+	var palette: GameColorPalette = ThemeManager.get_palette()
+	for outline in outlines:
+		draw_polyline(outline, Color(palette.background, amount), 4.0, true)
+		draw_polyline(outline, Color(palette.main_text, amount * 0.9), 1.8, true)

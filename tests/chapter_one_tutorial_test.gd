@@ -33,7 +33,7 @@ func _run() -> void:
 	assert(tutorial.get_child_count() == 3)
 	assert(tutorial._left.mouse_filter == Control.MOUSE_FILTER_IGNORE)
 	assert(tutorial._left.modulate.a == 0 and tutorial._right.modulate.a == 0)
-	assert(tutorial._intro.text == "鼠标左键点击选中砖块")
+	assert(tutorial._intro.text == "鼠标左键点击选中砖块\n按下R键重玩本关")
 	assert(is_equal_approx(tutorial._intro.modulate.a, 1))
 	var id: String = game.level_controller.board_state.level.cells[0].id
 	var original_position: Vector2 = board._cell_views[id].position

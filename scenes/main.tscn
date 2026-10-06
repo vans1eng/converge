@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://5kwc130nenxh" path="res://scripts/ui/pause_menu.gd" id="7_pause"]
 [ext_resource type="PackedScene" uid="uid://c78m60mybp7e6" path="res://scenes/level_complete.tscn" id="8_complete"]
 
+[ext_resource type="Script" path="res://scripts/ui/restart_button.gd" id="9_restart"]
+
 [sub_resource type="StyleBoxFlat" id="StyleGuideButtonNormal"]
 bg_color = Color(0, 0, 0, 0)
 border_width_left = 2
@@ -159,13 +161,22 @@ theme_override_styles/pressed = SubResource("StyleGuideButtonNormal")
 theme_override_styles/hover = SubResource("StyleGuideButtonHover")
 text = "?"
 
+[node name="RestartButton" type="Button" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 72.0
+offset_right = 62.0
+offset_bottom = 106.0
+tooltip_text = "RESTART_HINT"
+script = ExtResource("9_restart")
+
 [node name="LegendPanel" type="PanelContainer" parent="CanvasLayer/HUD" unique_id=1200214805]
 visible = false
 layout_mode = 0
 offset_left = 28.0
-offset_top = 72.0
+offset_top = 116.0
 offset_right = 28.0
-offset_bottom = 72.0
+offset_bottom = 116.0
 
 [node name="Legend" type="VBoxContainer" parent="CanvasLayer/HUD/LegendPanel" unique_id=915918266]
 layout_mode = 2
@@ -421,7 +432,7 @@ layout_mode = 2
 
 [node name="Footer" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1197793620]
 layout_mode = 2
-theme_override_constants/separation = 96
+theme_override_constants/separation = 64
 alignment = 1
 
 [node name="BackToMainButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Footer" unique_id=241989312]
@@ -431,6 +442,15 @@ focus_mode = 0
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
 text = "PAUSE_BACK_TO_MAIN"
+flat = true
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Footer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "PAUSE_RESTART"
 flat = true
 
 [node name="ResumeButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Footer" unique_id=591916776]

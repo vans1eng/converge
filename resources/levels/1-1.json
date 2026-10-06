@@ -60,14 +60,14 @@
         "de": "Mit Rechtsklick oder Enter prüfen"
       },
       "intro": {
-        "zh_CN": "鼠标左键点击选中砖块",
-        "en": "Left-click to select a brick",
-        "zh_TW": "滑鼠左鍵點擊選中磚塊",
-        "ja": "左クリックでマスを選択します",
-        "ko": "왼쪽 클릭으로 칸을 선택하세요",
-        "ru": "Нажмите левую кнопку мыши,\nчтобы выбрать блок",
-        "fr": "Clic gauche pour sélectionner un bloc",
-        "de": "Mit Linksklick einen Block auswählen"
+        "zh_CN": "鼠标左键点击选中砖块\n按下R键重玩本关",
+        "en": "Left-click to select a brick\nPress R to restart this level",
+        "zh_TW": "滑鼠左鍵點擊選中磚塊\n按下R鍵重玩本關",
+        "ja": "左クリックでマスを選択します\nR キーでこのレベルをやり直せます",
+        "ko": "왼쪽 클릭으로 칸을 선택하세요\nR 키를 눌러 이 레벨을 다시 시작하세요",
+        "ru": "Нажмите левую кнопку мыши,\nчтобы выбрать блок\nНажмите R, чтобы начать уровень заново",
+        "fr": "Clic gauche pour sélectionner un bloc\nAppuyez sur R pour recommencer ce niveau",
+        "de": "Mit Linksklick einen Block auswählen\nDrücke R, um dieses Level neu zu starten"
       }
     },
     "practice": true

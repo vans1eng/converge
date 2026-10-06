@@ -57,21 +57,21 @@ COLOR_PURPLE,Purple,紫色,紫色,紫,보라,Фиолетовый,Violet,Violett
 COLOR_YELLOW,Yellow,黄色,黃色,黄,노랑,Жёлтый,Jaune,Gelb
 HUD_MISTAKES,Mistakes %d,失误 %d 次,失誤 %d 次,ミス %d 回,실수 %d회,Ошибки: %d,Erreurs : %d,Fehler: %d
 LEGEND_INPUT,"Left-click: select · Arrows/wheel: change type
-Enter/right-click: check · Backspace: clear
+Enter/right-click: check
 Click a known brick: show/hide its scope","左键选中 · 方向键／滚轮切换类型
-Enter／右键校验 · Backspace 清除
+Enter／右键校验
 点击已知砖块可开关范围显示","左鍵選中 · 方向鍵／滾輪切換類型
-Enter／右鍵校驗 · Backspace 清除
+Enter／右鍵校驗
 點擊已知磚塊可開關範圍顯示","左クリック：選択 · 矢印／ホイール：種類変更
-Enter／右クリック：確認 · Backspace：解除
+Enter／右クリック：確認
 既知のマスをクリック：範囲の表示切替","좌클릭: 선택 · 방향키/휠: 종류 변경
-Enter/우클릭: 확인 · Backspace: 지우기
+Enter/우클릭: 확인
 알려진 칸 클릭: 범위 표시 전환","Левая кнопка: выбор · Стрелки/колесо: смена типа
-Enter/правая кнопка: проверка · Backspace: очистка
+Enter/правая кнопка: проверка
 Нажмите известный блок: показать/скрыть область","Clic gauche : sélectionner · Flèches/molette : changer
-Entrée/clic droit : vérifier · Backspace : effacer
+Entrée/clic droit : vérifier
 Cliquez un bloc connu : afficher/masquer sa zone","Linksklick: auswählen · Pfeile/Mausrad: Typ wechseln
-Enter/Rechtsklick: prüfen · Backspace: löschen
+Enter/Rechtsklick: prüfen
 Bekannten Block anklicken: Bereich ein-/ausblenden"
 VALUE_RUSSIAN,RUSSIAN,俄语,俄語,ロシア語,러시아어,РУССКИЙ,RUSSE,RUSSISCH
 VALUE_FRENCH,FRENCH,法语,法語,フランス語,프랑스어,ФРАНЦУЗСКИЙ,FRANÇAIS,FRANZÖSISCH
@@ -121,3 +121,6 @@ Each brick still uses its own scope","墙壁不参与红绿计数
 Каждый блок использует свою область","Les murs ne comptent ni comme rouges ni comme verts
 Chaque bloc utilise sa propre zone","Mauern zählen weder als Rot noch als Grün
 Jeder Block nutzt seinen eigenen Bereich"
+
+PAUSE_RESTART,RESTART,重新开始,重新開始,やり直す,다시 시작,ЗАНОВО,RECOMMENCER,NEUSTART
+RESTART_HINT,Restart (R),重开关卡（R）,重開關卡（R）,やり直す (R),다시 시작 (R),Заново (R),Recommencer (R),Neustart (R)

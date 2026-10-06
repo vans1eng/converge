@@ -61,7 +61,7 @@ func _run() -> void:
 	controller.pick_selected_color(wrong)
 	var target_view: HexCellView = controller.board_view._cell_views[target.id]
 	await get_tree().create_timer(1.0).timeout
-	assert(target_view._current_fill == target_view._brick_color(wrong))
+	assert(target_view._current_fill == ThemeManager.get_palette().gray)
 	main.level_controller.verify_selected()
 	assert(state.mistakes == 1 and not state.get_runtime(target.id).solved)
 	controller.pick_selected_color(target.answer_type)

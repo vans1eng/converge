@@ -2,6 +2,7 @@ extends Control
 class_name PauseMenu
 
 signal closed
+signal restart_requested
 
 const FADE_DURATION := 0.2
 
@@ -10,6 +11,7 @@ var _is_closing := false
 
 @onready var background: ColorRect = $Background
 @onready var content: MarginContainer = $MarginContainer
+@onready var restart_button: Button = $MarginContainer/VBoxContainer/Footer/RestartButton
 @onready var resume_button: Button = $MarginContainer/VBoxContainer/Footer/ResumeButton
 @onready var back_to_main_button: Button = $MarginContainer/VBoxContainer/Footer/BackToMainButton
 @onready var language_button: Button = $MarginContainer/VBoxContainer/Language/Value
@@ -23,6 +25,10 @@ var _is_closing := false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	resume_button.pressed.connect(close)
+	restart_button.pressed.connect(func():
+		if not _is_closing:
+			restart_requested.emit()
+	)
 	back_to_main_button.pressed.connect(_back_to_main)
 	language_button.pressed.connect(SettingsManager.cycle_language)
 	display_button.pressed.connect(SettingsManager.cycle_display_mode)
@@ -46,7 +52,7 @@ func _apply_theme() -> void:
 	theme_manager.apply_to(self, false)
 	var palette: GameColorPalette = theme_manager.get_palette()
 	background.color = palette.background
-	for button in [resume_button, back_to_main_button, language_button, display_button, resolution_button, theme_button, music_button, sound_button]:
+	for button in [resume_button, restart_button, back_to_main_button, language_button, display_button, resolution_button, theme_button, music_button, sound_button]:
 		button.add_theme_color_override("font_hover_color", Color(palette.main_text.r, palette.main_text.g, palette.main_text.b, 0.7))
 		button.add_theme_color_override("font_pressed_color", Color(palette.main_text.r, palette.main_text.g, palette.main_text.b, 0.5))
 
@@ -65,7 +71,7 @@ func _refresh_values() -> void:
 
 
 func _fit_footer_button_hit_areas() -> void:
-	for button in [resume_button, back_to_main_button]:
+	for button in [resume_button, restart_button, back_to_main_button]:
 		var font: Font = button.get_theme_font("font")
 		var font_size: int = button.get_theme_font_size("font_size")
 		var text_width: float = font.get_string_size(tr(button.text), HORIZONTAL_ALIGNMENT_LEFT, -1.0, font_size).x

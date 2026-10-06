@@ -71,18 +71,6 @@ func pick_selected_color(type: String) -> void:
 	_refresh()
 
 
-func clear_selected_input() -> void:
-	var runtime := _selected_runtime()
-	if runtime == null:
-		return
-	var definition := _selected_definition()
-	if definition != null and definition.mode == CellDefinition.MODE_CANDIDATE:
-		runtime.candidate_pick = ""
-		runtime.wrong = false
-		_refresh()
-		return
-
-
 func request_verification() -> void:
 	if _selected_runtime() != null:
 		verification_requested.emit()

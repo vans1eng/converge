@@ -10,17 +10,21 @@ var _progress := PlayerProgress.new()
 @onready var hud_controller: HudController = $CanvasLayer/HUD
 @onready var pause_menu: PauseMenu = $CanvasLayer/PauseMenu
 @onready var level_complete: LevelComplete = $CanvasLayer/LevelComplete
+@onready var restart_button: Button = $CanvasLayer/HUD/RestartButton
 @onready var guide_button: Button = $CanvasLayer/HUD/GuideButton
 @onready var legend_panel: PanelContainer = $CanvasLayer/HUD/LegendPanel
 
 var current_level_index := 0
 var waiting_for_next_level := false
 var _timer_running := false
+var _restart_active := false
 var _hud_entrance_duration := 0.2
 
 
 func _ready() -> void:
 	legend_panel.hide()
+	restart_button.pressed.connect(_restart_level)
+	pause_menu.restart_requested.connect(func(): _restart_level(true))
 	guide_button.pressed.connect(_toggle_legend)
 	guide_button.mouse_entered.connect(AudioManager.play_ui_hover)
 	guide_button.pressed.connect(AudioManager.play_ui_click)
@@ -76,6 +80,12 @@ func _fit_legend_panel() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _restart_active:
+		return
+	if event is InputEventKey and event.is_pressed() and not event.is_echo() and (event.keycode == KEY_R or event.physical_keycode == KEY_R) and not event.ctrl_pressed and not event.meta_pressed and not event.alt_pressed:
+		_restart_level()
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.is_pressed() and not event.is_echo() and event.keycode == KEY_ESCAPE:
 		pause_menu.open()
 		get_viewport().set_input_as_handled()
@@ -83,6 +93,44 @@ func _unhandled_input(event: InputEvent) -> void:
 	if OS.has_feature("editor") and event is InputEventKey and event.is_pressed() and not event.is_echo() and event.keycode == KEY_QUOTELEFT:
 		get_viewport().set_input_as_handled()
 		get_tree().change_scene_to_file("res://scenes/level_editor.tscn")
+
+
+func _restart_level(from_pause := false) -> void:
+	var board := board_controller.board_view
+	if _restart_active or waiting_for_next_level or level_controller.board_state == null or level_controller.board_state.is_complete() or board._entrance_active or board._exit_active or not hud_controller.visible or (not from_pause and pause_menu.visible):
+		return
+	_restart_active = true
+	_timer_running = false
+	input_controller.set_gameplay_input_enabled(false)
+	restart_button.disabled = true
+	legend_panel.hide()
+	if from_pause:
+		# Keep the outgoing bricks hidden as the pause background fades away.
+		board.hide()
+		await pause_menu.close()
+		if not level_controller.load_level(LEVEL_IDS[current_level_index]):
+			board.show()
+			_finish_restart()
+			return
+	else:
+		# Reset data immediately; outgoing views retain the old runtime snapshot.
+		if not level_controller.load_level(LEVEL_IDS[current_level_index], false):
+			_finish_restart()
+			return
+		board_controller.board_state = level_controller.board_state
+		hud_controller.show_board_state(level_controller.board_state)
+		board.play_exit_wave()
+		await board.exit_finished
+		level_controller.level_loaded.emit(level_controller.board_state)
+	await board.entrance_finished
+	_finish_restart()
+
+
+func _finish_restart() -> void:
+	input_controller.set_gameplay_input_enabled(true)
+	_restart_active = false
+	restart_button.disabled = false
+	_timer_running = true
 
 
 func _advance_after_completion() -> void:

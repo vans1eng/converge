@@ -119,6 +119,7 @@ func play_exit_wave() -> void:
 		return
 	_exit_active = true
 	for view in _cell_views.values():
+		view.stop_feedback_motion()
 		view.scope_overlay.set_active(false, Color.TRANSPARENT)
 	_hovered_cell_id = ""
 	var last_finish := 0.0
@@ -184,7 +185,16 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_reposition_in_body)
 	var theme_manager := get_node_or_null("/root/ThemeManager")
 	if theme_manager != null:
-		theme_manager.theme_changed.connect(func(_is_dark_theme): refresh())
+		theme_manager.theme_changed.connect(_on_theme_changed)
+
+
+func _on_theme_changed(_is_dark_theme: bool) -> void:
+	refresh()
+	# Paused cells cannot run their color interpolation. Apply the palette now,
+	# including cached drawing commands for dots, text, shadows and scopes.
+	for view in _cell_views.values():
+		view.refresh_palette()
+		view.scope_overlay.refresh_palette()
 
 
 func _calculate_radius(level: LevelDefinition) -> float:
@@ -227,7 +237,7 @@ func refresh() -> void:
 		var assist_type := _active_assist_type(definition)
 		var preview := definition.is_editable() and not view.runtime.solved and definition.id == board_state.selected_cell_id and not view.runtime.candidate_pick.is_empty()
 		var known := not definition.is_editable() or view.runtime.solved
-		var enabled := not definition.is_black() and (preview or (known and _neighbor_masks_enabled.has(definition.id)))
+		var enabled := not definition.is_black() and (preview or (known and board_state.selected_cell_id.is_empty() and _neighbor_masks_enabled.has(definition.id)))
 		# Hidden assists need no geometry. Reuse it until the color or radius changes.
 		if enabled and assist_type in CellDefinition.COLOR_TYPES:
 			if _overlay_geometry_keys.get(definition.id, "") != assist_type:
@@ -273,6 +283,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not cell_id.is_empty():
 			var clicked_definition := board_state.get_definition(cell_id)
 			if clicked_definition.is_editable() and not board_state.get_runtime(cell_id).solved:
+				_neighbor_masks_enabled.clear()
 				cell_clicked.emit(cell_id, event.button_index)
 				get_viewport().set_input_as_handled()
 				return
@@ -280,6 +291,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				if _neighbor_masks_enabled.has(cell_id):
 					_neighbor_masks_enabled.erase(cell_id)
 				else:
+					_neighbor_masks_enabled.clear()
 					_neighbor_masks_enabled[cell_id] = true
 				board_state.clear_selection()
 				refresh()
