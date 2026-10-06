@@ -1,0 +1,158 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/about_page.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://assets/fonts/MiSans-Light.ttf" id="2_font"]
+
+[sub_resource type="Theme" id="Theme_about"]
+default_font = ExtResource("2_font")
+default_font_size = 18
+
+[node name="AboutPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_top = 45.0
+offset_bottom = 115.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 48
+text = "HOME_ABOUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Body" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = 155.0
+offset_right = 320.0
+offset_bottom = -125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_about")
+horizontal_scroll_mode = 0
+
+[node name="Content" type="VBoxContainer" parent="Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Credits" type="VBoxContainer" parent="Body/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Brand" type="Label" parent="Body/Content/Credits"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "CONVERGE"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Version" type="Label" parent="Body/Content/Credits"]
+modulate = Color(1, 1, 1, 0.72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Description" type="Label" parent="Body/Content/Credits"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "ABOUT_DESCRIPTION"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Creator" type="VBoxContainer" parent="Body/Content/Credits"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Heading" type="Label" parent="Body/Content/Credits/Creator"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "ABOUT_CREATOR"
+autowrap_mode = 3
+
+[node name="Details" type="Label" parent="Body/Content/Credits/Creator"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "vansheng"
+autowrap_mode = 3
+
+[node name="Fonts" type="VBoxContainer" parent="Body/Content/Credits"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Heading" type="Label" parent="Body/Content/Credits/Fonts"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "ABOUT_FONTS"
+autowrap_mode = 3
+
+[node name="Details" type="Label" parent="Body/Content/Credits/Fonts"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "ABOUT_FONT_NAMES"
+autowrap_mode = 3
+
+[node name="Audio" type="VBoxContainer" parent="Body/Content/Credits"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Heading" type="Label" parent="Body/Content/Credits/Audio"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "ABOUT_AUDIO"
+autowrap_mode = 3
+
+[node name="Details" type="Label" parent="Body/Content/Credits/Audio"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "ABOUT_AUDIO_CREDIT"
+autowrap_mode = 3
+
+[node name="Licenses" type="Button" parent="Body/Content/Credits"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 18
+text = "ABOUT_LICENSES"
+flat = true
+focus_mode = 0
+
+[node name="LicenseText" type="RichTextLabel" parent="Body/Content"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_font")
+theme_override_font_sizes/normal_font_size = 16
+fit_content = true
+scroll_active = false
+
+[node name="Footer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="BackButton" type="Button" parent="Footer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "ACTION_BACK"
+flat = true
+focus_mode = 0

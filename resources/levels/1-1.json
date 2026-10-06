@@ -1,0 +1,75 @@
+{
+  "id": "1-1",
+  "chapter_id": 1,
+  "rule_version": 2,
+  "chapter_revision": 3,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green"
+  ],
+  "infer_yellow": false,
+  "board": {
+    "layout": "odd_r",
+    "rows": 1,
+    "columns": 1
+  },
+  "cells": [
+    {
+      "id": "r0c0",
+      "row": 0,
+      "col": 0,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "red",
+        "accepted_types": [
+          "red",
+          "green"
+        ]
+      }
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "zh_CN": "选中砖块后使用上/下滚轮\n或方向键切换类型",
+        "en": "Use the scroll wheel or arrow keys\nto change the selected brick’s type",
+        "zh_TW": "選中磚塊後使用上／下滾輪\n或方向鍵切換類型",
+        "ja": "選択したマスの種類はマウスホイール\nまたは方向キーで切り替えます",
+        "ko": "선택한 칸의 유형은 마우스 휠이나\n방향키로 바꿀 수 있습니다",
+        "ru": "Прокрутите колёсико или нажмите стрелки,\nчтобы изменить тип выбранного блока",
+        "fr": "Utilisez la molette ou les flèches\npour changer le type du bloc sélectionné",
+        "de": "Mit Mausrad oder Pfeiltasten\nden Typ des gewählten Blocks ändern"
+      },
+      "right": {
+        "zh_CN": "按下右键或Enter进行校验",
+        "en": "Right-click or press Enter to confirm",
+        "zh_TW": "按下右鍵或 Enter 進行校驗",
+        "ja": "右クリックまたは Enter で確認します",
+        "ko": "오른쪽 클릭 또는 Enter로 확인하세요",
+        "ru": "Нажмите правую кнопку мыши или Enter\nдля проверки",
+        "fr": "Clic droit ou Entrée pour vérifier",
+        "de": "Mit Rechtsklick oder Enter prüfen"
+      },
+      "intro": {
+        "zh_CN": "鼠标左键点击选中砖块",
+        "en": "Left-click to select a brick",
+        "zh_TW": "滑鼠左鍵點擊選中磚塊",
+        "ja": "左クリックでマスを選択します",
+        "ko": "왼쪽 클릭으로 칸을 선택하세요",
+        "ru": "Нажмите левую кнопку мыши,\nчтобы выбрать блок",
+        "fr": "Clic gauche pour sélectionner un bloc",
+        "de": "Mit Linksklick einen Block auswählen"
+      }
+    },
+    "practice": true
+  }
+}

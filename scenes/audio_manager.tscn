@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://coxighsrtpfsd"]
+
+[ext_resource type="AudioStream" uid="uid://csfvhp75tecum" path="res://assets/audio/cell_select.mp3" id="1_3asnw"]
+[ext_resource type="Script" uid="uid://dur5pvwnbq44a" path="res://scripts/autoload/audio_manager.gd" id="4_audio"]
+[ext_resource type="AudioStream" uid="uid://c7v5lp35g6ll7" path="res://assets/audio/cell_hover.mp3" id="4_ujhup"]
+[ext_resource type="AudioStream" uid="uid://hk7rr18sr8tf" path="res://assets/audio/cell_break.mp3" id="5_break"]
+[ext_resource type="AudioStream" uid="uid://c86gsui0rowrt" path="res://assets/audio/cell_wrong.mp3" id="6_wrong"]
+[ext_resource type="AudioStream" uid="uid://ebgyoqpbgcme" path="res://assets/audio/ui_hover.mp3" id="7_ui_hover"]
+[ext_resource type="AudioStream" uid="uid://t32cthsa5lxy" path="res://assets/audio/ui_click.wav" id="8_ujhup"]
+[ext_resource type="AudioStream" uid="uid://inbpfwwrraiu" path="res://assets/audio/level_complete.mp3" id="9_complete"]
+[ext_resource type="AudioStream" uid="uid://bk4o6ko8np4uo" path="res://assets/audio/bgm.wav" id="10_bgm"]
+
+[node name="AudioManager" type="Node" unique_id=158169516]
+script = ExtResource("4_audio")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1887256209]
+process_mode = 3
+stream = ExtResource("10_bgm")
+volume_db = -8.0
+bus = &"Music"
+playback_type = 1
+
+[node name="CellSelect" type="AudioStreamPlayer2D" parent="." unique_id=72872017]
+stream = ExtResource("1_3asnw")
+bus = &"SFX"
+
+[node name="CellHover" type="AudioStreamPlayer2D" parent="." unique_id=417412808]
+stream = ExtResource("4_ujhup")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="CellBreak" type="AudioStreamPlayer2D" parent="." unique_id=477260801]
+stream = ExtResource("5_break")
+bus = &"SFX"
+
+[node name="CellWrong" type="AudioStreamPlayer2D" parent="." unique_id=414271603]
+stream = ExtResource("6_wrong")
+bus = &"SFX"
+
+[node name="UIHover" type="AudioStreamPlayer" parent="." unique_id=1921523870]
+process_mode = 3
+stream = ExtResource("7_ui_hover")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="UIClick" type="AudioStreamPlayer" parent="." unique_id=1061042361]
+process_mode = 3
+stream = ExtResource("8_ujhup")
+volume_db = -8.0
+bus = &"SFX"
+
+[node name="LevelComplete" type="AudioStreamPlayer" parent="." unique_id=1358212350]
+stream = ExtResource("9_complete")
+bus = &"SFX"

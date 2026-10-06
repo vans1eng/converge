@@ -1,0 +1,128 @@
+{
+  "id": "1-6",
+  "chapter_id": 1,
+  "rule_version": 2,
+  "chapter_revision": 4,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green"
+  ],
+  "infer_yellow": false,
+  "board": {
+    "layout": "odd_r",
+    "rows": 3,
+    "columns": 3
+  },
+  "cells": [
+    {
+      "id": "r0c1",
+      "row": 0,
+      "col": 1,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "red"
+      }
+    },
+    {
+      "id": "r0c2",
+      "row": 0,
+      "col": 2,
+      "mode": "fixed",
+      "type": "green",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r1c0",
+      "row": 1,
+      "col": 0,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r1c1",
+      "row": 1,
+      "col": 1,
+      "mode": "fixed",
+      "type": "black",
+      "value": null,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r1c2",
+      "row": 1,
+      "col": 2,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r2c1",
+      "row": 2,
+      "col": 1,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "green"
+      }
+    },
+    {
+      "id": "r2c2",
+      "row": 2,
+      "col": 2,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "en": "Black bricks are walls\nThey have no number and cannot be selected",
+        "zh_CN": "黑色砖块是墙壁\n没有数字，也不能选择",
+        "zh_TW": "黑色磚塊是牆壁\n沒有數字，也不能選擇",
+        "ja": "黒いマスは壁です\n数字がなく、選択できません",
+        "ko": "검은 칸은 벽입니다\n숫자가 없으며 선택할 수 없습니다",
+        "ru": "Чёрные блоки — стены\nУ них нет числа, и их нельзя выбрать",
+        "fr": "Les blocs noirs sont des murs\nSans nombre, ils ne peuvent pas être sélectionnés",
+        "de": "Schwarze Blöcke sind Mauern\nSie haben keine Zahl und sind nicht auswählbar"
+      },
+      "right": {
+        "en": "Walls do not count as red or green bricks\nEach brick still uses its own scope",
+        "zh_CN": "墙壁不参与红绿计数\n仍按各砖的范围计算",
+        "zh_TW": "牆壁不參與紅綠計數\n仍按各磚的範圍計算",
+        "ja": "壁は赤や緑の個数に含みません\n各マスは自分の範囲で計算します",
+        "ko": "벽은 빨강과 초록 개수에 포함되지 않습니다\n각 칸은 자기 범위로 계산합니다",
+        "ru": "Стены не входят в число красных и зелёных\nКаждый блок использует свою область",
+        "fr": "Les murs ne comptent ni comme rouges ni comme verts\nChaque bloc utilise sa propre zone",
+        "de": "Mauern zählen weder als Rot noch als Grün\nJeder Block nutzt seinen eigenen Bereich"
+      }
+    },
+    "practice": false
+  }
+}

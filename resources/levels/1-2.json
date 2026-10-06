@@ -1,0 +1,102 @@
+{
+  "id": "1-2",
+  "chapter_id": 1,
+  "rule_version": 2,
+  "chapter_revision": 3,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green"
+  ],
+  "infer_yellow": false,
+  "board": {
+    "layout": "odd_r",
+    "rows": 3,
+    "columns": 5
+  },
+  "cells": [
+    {
+      "id": "r0c0",
+      "row": 0,
+      "col": 0,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c1",
+      "row": 0,
+      "col": 1,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "red"
+      }
+    },
+    {
+      "id": "r2c3",
+      "row": 2,
+      "col": 3,
+      "mode": "fixed",
+      "type": "green",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r2c4",
+      "row": 2,
+      "col": 4,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "green"
+      }
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "zh_CN": "红色数字：相邻红砖的数量\n不包括自己",
+        "en": "Red counts adjacent red bricks\nThe brick itself is excluded",
+        "zh_TW": "紅色數字：相鄰紅磚的數量\n不包括自己",
+        "ja": "赤の数字は隣接する赤いマスの数\n自分自身は含みません",
+        "ko": "빨간 숫자는 인접한 빨간 칸의 개수\n자기 자신은 제외합니다",
+        "ru": "Красное число — количество соседних\nкрасных блоков, без самого блока",
+        "fr": "Le rouge compte les blocs rouges voisins\nLe bloc lui-même est exclu",
+        "de": "Rot zählt benachbarte rote Blöcke\nDer Block selbst zählt nicht mit"
+      },
+      "right": {
+        "zh_CN": "绿色数字：相邻绿砖的数量\n不包括自己",
+        "en": "Green counts adjacent green bricks\nThe brick itself is excluded",
+        "zh_TW": "綠色數字：相鄰綠磚的數量\n不包括自己",
+        "ja": "緑の数字は隣接する緑のマスの数\n自分自身は含みません",
+        "ko": "초록 숫자는 인접한 초록 칸의 개수\n자기 자신은 제외합니다",
+        "ru": "Зелёное число — количество соседних\nзелёных блоков, без самого блока",
+        "fr": "Le vert compte les blocs verts voisins\nLe bloc lui-même est exclu",
+        "de": "Grün zählt benachbarte grüne Blöcke\nDer Block selbst zählt nicht mit"
+      }
+    },
+    "practice": false,
+    "reveal_on_selection": {
+      "left": "r0c1",
+      "right": "r2c4"
+    }
+  }
+}
