@@ -1,0 +1,93 @@
+{
+  "id": "1-20",
+  "chapter_id": 1,
+  "rule_version": 2,
+  "chapter_revision": 3,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green",
+    "purple"
+  ],
+  "infer_yellow": false,
+  "board": {
+    "layout": "odd_r",
+    "rows": 2,
+    "columns": 3
+  },
+  "cells": [
+    {
+      "id": "r0c0",
+      "row": 0,
+      "col": 0,
+      "mode": "fixed",
+      "type": "green",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c1",
+      "row": 0,
+      "col": 1,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 2,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green",
+        "purple"
+      ],
+      "answer": {
+        "type": "purple"
+      }
+    },
+    {
+      "id": "r0c2",
+      "row": 0,
+      "col": 2,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r1c1",
+      "row": 1,
+      "col": 1,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "zh_CN": "紫色数字：范围内\n红绿砖上的数字之和",
+        "en": "Purple adds the numbers\non red and green bricks in scope",
+        "zh_TW": "紫色數字：範圍內\n紅綠磚上的數字之和",
+        "ja": "紫の数字は範囲内の\n赤と緑のマスの数字の合計です",
+        "ko": "보라 숫자는 범위 내\n빨강과 초록 칸의 숫자 합입니다",
+        "ru": "Фиолетовое число — сумма чисел\nкрасных и зелёных блоков в области",
+        "fr": "Le violet additionne les nombres\ndes blocs rouges et verts dans sa zone",
+        "de": "Violett addiert die Zahlen\nroter und grüner Blöcke im Bereich"
+      },
+      "right": {
+        "zh_CN": "不加自己，也不加其他紫砖\n这个例子：1 + 1 + 0 = 2",
+        "en": "Exclude itself and other purple bricks\nHere: 1 + 1 + 0 = 2",
+        "zh_TW": "不加自己，也不加其他紫磚\n這個例子：1 + 1 + 0 = 2",
+        "ja": "自分自身と他の紫のマスは除きます\nこの例では 1 + 1 + 0 = 2",
+        "ko": "자기 자신과 다른 보라 칸은 제외합니다\n이 예에서는 1 + 1 + 0 = 2",
+        "ru": "Сам блок и другие фиолетовые не входят\nЗдесь: 1 + 1 + 0 = 2",
+        "fr": "Excluez le bloc lui-même et les autres violets\nIci : 1 + 1 + 0 = 2",
+        "de": "Sich selbst und andere violette Blöcke auslassen\nHier: 1 + 1 + 0 = 2"
+      }
+    },
+    "practice": false
+  }
+}

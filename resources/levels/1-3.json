@@ -1,0 +1,81 @@
+{
+  "id": "1-3",
+  "chapter_id": 1,
+  "rule_version": 2,
+  "chapter_revision": 3,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green"
+  ],
+  "infer_yellow": false,
+  "board": {
+    "layout": "odd_r",
+    "rows": 1,
+    "columns": 3
+  },
+  "cells": [
+    {
+      "id": "r0c0",
+      "row": 0,
+      "col": 0,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c1",
+      "row": 0,
+      "col": 1,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c2",
+      "row": 0,
+      "col": 2,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "green"
+      }
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "zh_CN": "0 表示范围内没有同色砖块",
+        "en": "Zero means no same-color bricks in scope",
+        "zh_TW": "0 表示範圍內沒有同色磚塊",
+        "ja": "0 は範囲内に同じ色のマスがないことを示します",
+        "ko": "0은 범위 내에 같은 색의 칸이 없다는 뜻입니다",
+        "ru": "0 означает, что в области нет блоков\nтого же цвета",
+        "fr": "0 signifie aucun bloc de même couleur\ndans la zone",
+        "de": "0 bedeutet: kein gleichfarbiger Block\nim Bereich"
+      },
+      "right": {
+        "zh_CN": "数字为 0 的砖块\n仍会被同色砖计数",
+        "en": "A zero brick still counts\nas one same-color brick",
+        "zh_TW": "數字為 0 的磚塊\n仍會被同色磚計數",
+        "ja": "数字が 0 のマスも\n同じ色のマスとして数えます",
+        "ko": "숫자가 0인 칸도\n같은 색의 칸 하나로 셉니다",
+        "ru": "Блок с числом 0 тоже считается\nодним блоком того же цвета",
+        "fr": "Un bloc portant 0 compte aussi\ncomme un bloc de même couleur",
+        "de": "Auch ein Block mit der Zahl 0 zählt\nals ein gleichfarbiger Block"
+      }
+    },
+    "practice": false
+  }
+}

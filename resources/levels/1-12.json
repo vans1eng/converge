@@ -1,0 +1,91 @@
+{
+  "id": "1-12",
+  "chapter_id": 1,
+  "rule_version": 2,
+  "chapter_revision": 3,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green"
+  ],
+  "infer_yellow": false,
+  "board": {
+    "layout": "odd_r",
+    "rows": 1,
+    "columns": 4
+  },
+  "cells": [
+    {
+      "id": "r0c0",
+      "row": 0,
+      "col": 0,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 3,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "red"
+      }
+    },
+    {
+      "id": "r0c1",
+      "row": 0,
+      "col": 1,
+      "mode": "fixed",
+      "type": "green",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c2",
+      "row": 0,
+      "col": 2,
+      "mode": "fixed",
+      "type": "green",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c3",
+      "row": 0,
+      "col": 3,
+      "mode": "fixed",
+      "type": "red",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "zh_CN": "r3 包括距离 1、2、3 格的砖块",
+        "en": "r3 includes bricks 1, 2 and 3 hex steps away",
+        "zh_TW": "r3 包括距離 1、2、3 格的磚塊",
+        "ja": "r3 は距離1、2、3のマスを含みます",
+        "ko": "r3는 거리 1, 2, 3칸에 있는 칸을 포함합니다",
+        "ru": "r3 включает блоки на расстоянии\n1, 2 и 3 шага по шестиугольной сетке",
+        "fr": "r3 inclut les blocs à une distance\nde 1, 2 ou 3 pas hexagonaux",
+        "de": "r3 umfasst Blöcke in 1, 2 oder 3\nHexagon-Schritten Entfernung"
+      },
+      "right": {
+        "zh_CN": "每块砖只按自己的范围计算",
+        "en": "Each brick uses its own scope",
+        "zh_TW": "每塊磚只按自己的範圍計算",
+        "ja": "各マスは自分の範囲だけで計算します",
+        "ko": "각 칸은 자기 범위만으로 계산합니다",
+        "ru": "Каждый блок считает только\nв своей области",
+        "fr": "Chaque bloc utilise sa propre zone",
+        "de": "Jeder Block nutzt seinen eigenen Bereich"
+      }
+    },
+    "practice": false
+  }
+}

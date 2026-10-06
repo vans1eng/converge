@@ -1,0 +1,123 @@
+keys,en,zh_CN,zh_TW,ja,ko,ru,fr,de
+HOME_START,START,开始,開始,スタート,시작,НАЧАТЬ,JOUER,STARTEN
+HOME_OPTIONS,OPTIONS,设置,設定,設定,설정,НАСТРОЙКИ,OPTIONS,EINSTELLUNGEN
+HOME_EXIT,EXIT,退出,離開,終了,종료,ВЫХОД,QUITTER,BEENDEN
+OPTIONS_TITLE,OPTIONS,设置,設定,設定,설정,НАСТРОЙКИ,OPTIONS,EINSTELLUNGEN
+SETTING_LANGUAGE,LANGUAGE,语言,語言,言語,언어,ЯЗЫК,LANGUE,SPRACHE
+SETTING_DISPLAY,DISPLAY,显示模式,顯示模式,表示モード,화면 모드,РЕЖИМ ЭКРАНА,AFFICHAGE,ANZEIGE
+SETTING_RESOLUTION,RESOLUTION,分辨率,解析度,解像度,해상도,РАЗРЕШЕНИЕ,RÉSOLUTION,AUFLÖSUNG
+SETTING_THEME,THEME,主题,主題,テーマ,테마,ТЕМА,THÈME,DESIGN
+SETTING_MUSIC,MUSIC,音乐,音樂,音楽,음악,МУЗЫКА,MUSIQUE,MUSIK
+SETTING_SOUND,SOUND,音效,音效,効果音,효과음,ЗВУК,SON,TON
+ACTION_BACK,BACK,返回,返回,戻る,뒤로,НАЗАД,RETOUR,ZURÜCK
+PAUSE_TITLE,PAUSE,暂停,暫停,一時停止,일시정지,ПАУЗА,PAUSE,PAUSE
+PAUSE_RESUME,RESUME,继续游戏,繼續遊戲,ゲームに戻る,게임 계속하기,ПРОДОЛЖИТЬ,REPRENDRE,FORTSETZEN
+PAUSE_BACK_TO_MAIN,BACK TO MAIN,返回主界面,返回主畫面,メイン画面へ,메인 화면으로,В ГЛАВНОЕ МЕНЮ,MENU PRINCIPAL,ZUM HAUPTMENÜ
+VALUE_ENGLISH,ENGLISH,英语,英語,英語,영어,АНГЛИЙСКИЙ,ANGLAIS,ENGLISCH
+VALUE_CHINESE,SIMPLIFIED CHINESE,简体中文,簡體中文,簡体字中国語,중국어(간체),КИТАЙСКИЙ (УПРОЩ.),CHINOIS SIMPLIFIÉ,CHINESISCH (VEREINFACHT)
+VALUE_FULLSCREEN,FULL SCREEN,全屏,全螢幕,フルスクリーン,전체 화면,ПОЛНЫЙ ЭКРАН,PLEIN ÉCRAN,VOLLBILD
+VALUE_WINDOWED,WINDOWED,窗口,視窗,ウィンドウ,창 모드,ОКОННЫЙ,FENÊTRÉ,FENSTER
+VALUE_BORDERLESS,BORDERLESS,无边框,無邊框,ボーダーレス,테두리 없음,БЕЗ РАМОК,SANS BORDURE,RAHMENLOS
+VALUE_LIGHT,LIGHT,亮色,淺色,ライト,라이트,СВЕТЛАЯ,CLAIR,HELL
+VALUE_DARK,DARK,暗色,深色,ダーク,다크,ТЁМНАЯ,SOMBRE,DUNKEL
+VALUE_ON,ON,开,開,オン,켜기,ВКЛ.,ACTIVÉ,AN
+VALUE_OFF,OFF,关,關,オフ,끄기,ВЫКЛ.,DÉSACTIVÉ,AUS
+LEVEL_SELECT_TITLE,LEVEL SELECT,关卡选择,選擇關卡,レベル選択,레벨 선택,ВЫБОР УРОВНЯ,CHOIX DU NIVEAU,LEVELAUSWAHL
+LEGEND_TITLE,BRICK GUIDE,砖块说明,磚塊說明,ブリックガイド,브릭 안내,ПРАВИЛА БЛОКОВ,GUIDE DES BLOCS,BLOCKREGELN
+LEGEND_SCOPE,Numbers are visible from the start. A brick never counts itself.,数字开局公开；砖块不计算自己。,數字開局公開；磚塊不計算自己。,数字は最初から公開され、自分自身は数えません。,숫자는 처음부터 공개되며 자기 자신은 세지 않습니다.,Все числа видны с начала. Сам блок не учитывается.,Les nombres sont visibles dès le départ. Le bloc lui-même est exclu.,Alle Zahlen sind von Anfang an sichtbar. Der Block selbst zählt nicht mit.
+LEGEND_RED,Red: count red cells in radius,红色：半径内红砖数量,紅色：半徑內紅磚數量,赤：半径内の赤の数,빨강: 반경 내 빨간 칸 수,Красный: число красных блоков в радиусе,Rouge : nombre de blocs rouges dans le rayon,Rot: Anzahl roter Blöcke im Radius
+LEGEND_ORANGE,■ ORANGE: non-black neighbours,■ 橙色：周围非黑色砖数量,■ 橙色：周圍非黑色磚數量,■ オレンジ：周囲の黒以外のブリック数,■ 주황: 주변의 검은색이 아닌 브릭 수,"■ ОРАНЖЕВЫЙ: соседние блоки, кроме чёрных",■ ORANGE : voisins non noirs,■ ORANGE: nicht schwarze Nachbarn
+LEGEND_YELLOW,"Yellow: sum red/green numbers along six rays; walls stop rays, gaps do not",黄色：六方向红绿数字之和；遇墙停止，空缺跳过,黃色：六方向紅綠數字之和；遇牆停止，空缺跳過,黄：6方向の赤と緑の合計。壁で止まり、空白は通過,"노랑: 6방향 빨강·초록 합. 벽은 차단, 빈칸은 통과","Жёлтый: сумма чисел красных и зелёных блоков по шести лучам; стены прерывают лучи, пробелы — нет","Jaune : somme des nombres rouges et verts sur six axes orientés ; les murs les arrêtent, les espaces vides non","Gelb: Summe roter und grüner Zahlen entlang sechs Strahlen; Mauern stoppen sie, Lücken nicht"
+LEGEND_GREEN,Green: count green cells in radius,绿色：半径内绿砖数量,綠色：半徑內綠磚數量,緑：半径内の緑の数,초록: 반경 내 초록 칸 수,Зелёный: число зелёных блоков в радиусе,Vert : nombre de blocs verts dans le rayon,Grün: Anzahl grüner Blöcke im Radius
+LEGEND_CYAN,■ CYAN: opposite-pair sum,■ 青色：相对两格之和,■ 青色：相對兩格之和,■ シアン：向かい合う2マスの合計,■ 청록: 마주 보는 두 칸의 합,■ ГОЛУБОЙ: сумма противоположной пары,■ CYAN : somme de la paire opposée,■ TÜRKIS: Summe des gegenüberliegenden Paars
+LEGEND_BLUE,■ BLUE: same non-black neighbour value,■ 蓝色：周围非黑格同值,■ 藍色：周圍非黑色磚同值,■ 青：周囲の黒以外のブリックが同じ値,■ 파랑: 주변의 검은색이 아닌 브릭은 같은 값,"■ СИНИЙ: одинаковые числа у соседей, кроме чёрных",■ BLEU : même valeur chez les voisins non noirs,■ BLAU: gleicher Wert bei nicht schwarzen Nachbarn
+LEGEND_PURPLE,Purple: sum red/green numbers in radius,紫色：半径内红绿砖的数字之和,紫色：半徑內紅綠磚的數字之和,紫：半径内の赤と緑の数値の合計,보라: 반경 내 빨강·초록 숫자의 합,Фиолетовый: сумма чисел красных и зелёных блоков в радиусе,Violet : somme des nombres rouges et verts dans le rayon,Violett: Summe roter und grüner Zahlen im Radius
+LEGEND_BLACK,"Wall: no number; cannot be selected or counted.
+Walls do not block radius scopes.","墙壁：没有数字，不可选择，不参与计数。
+墙壁不会阻断半径范围。","牆壁：沒有數字，不可選擇，不參與計數。
+牆壁不會阻斷半徑範圍。","壁：数字がなく、選択も計数もできません。
+半径の範囲は遮りません。","벽: 숫자가 없고 선택하거나 셀 수 없습니다.
+반경 범위를 막지 않습니다.","Стена: без числа; нельзя выбрать или посчитать.
+Стены не ограничивают область радиуса.","Mur : sans nombre ; ni sélectionné, ni compté.
+Les murs ne bloquent pas les zones de rayon.","Mauer: ohne Zahl; weder auswählbar noch zählbar.
+Mauern blockieren keine Radiusbereiche."
+HUD_REMAINING,Remaining %d bricks,剩余 %d 个待校验砖块,剩餘 %d 個待驗證磚塊,残り %d ブリック,남은 브릭 %d개,Осталось блоков: %d,%d blocs restants,Noch %d Blöcke
+RESULT_TITLE,LEVEL COMPLETE,关卡完成,關卡完成,レベルクリア,레벨 클리어,УРОВЕНЬ ПРОЙДЕН,NIVEAU TERMINÉ,LEVEL GESCHAFFT
+RESULT_LEVEL,LEVEL %s,第 %s 关,第 %s 關,レベル %s,레벨 %s,УРОВЕНЬ %s,NIVEAU %s,LEVEL %s
+RESULT_TIME,Time: %s,用时：%s,用時：%s,クリア時間：%s,소요 시간: %s,Время: %s,Temps : %s,Zeit: %s
+RESULT_MISTAKES,Mistakes: %d,失误次数：%d,失誤次數：%d,ミス：%d,실수: %d,Ошибки: %d,Erreurs : %d,Fehler: %d
+RESULT_NEXT,NEXT LEVEL,下一关,下一關,次のレベル,다음 레벨,СЛЕДУЮЩИЙ УРОВЕНЬ,NIVEAU SUIVANT,NÄCHSTES LEVEL
+RESULT_HOME,BACK TO MAIN,返回主界面,返回主畫面,メイン画面へ,메인 화면으로,В ГЛАВНОЕ МЕНЮ,MENU PRINCIPAL,ZUM HAUPTMENÜ
+VALUE_JAPANESE,JAPANESE,日语,日語,日本語,일본어,ЯПОНСКИЙ,JAPONAIS,JAPANISCH
+VALUE_KOREAN,KOREAN,韩语,韓語,韓国語,한국어,КОРЕЙСКИЙ,CORÉEN,KOREANISCH
+VALUE_TRADITIONAL_CHINESE,TRADITIONAL CHINESE,繁体中文,繁體中文,繁体字中国語,중국어(번체),КИТАЙСКИЙ (ТРАД.),CHINOIS TRADITIONNEL,CHINESISCH (TRADITIONELL)
+COLOR_RED,Red,红色,紅色,赤,빨강,Красный,Rouge,Rot
+COLOR_GREEN,Green,绿色,綠色,緑,초록,Зелёный,Vert,Grün
+COLOR_PURPLE,Purple,紫色,紫色,紫,보라,Фиолетовый,Violet,Violett
+COLOR_YELLOW,Yellow,黄色,黃色,黄,노랑,Жёлтый,Jaune,Gelb
+HUD_MISTAKES,Mistakes %d,失误 %d 次,失誤 %d 次,ミス %d 回,실수 %d회,Ошибки: %d,Erreurs : %d,Fehler: %d
+LEGEND_INPUT,"Left-click: select · Arrows/wheel: change type
+Enter/right-click: check · Backspace: clear
+Click a known brick: show/hide its scope","左键选中 · 方向键／滚轮切换类型
+Enter／右键校验 · Backspace 清除
+点击已知砖块可开关范围显示","左鍵選中 · 方向鍵／滾輪切換類型
+Enter／右鍵校驗 · Backspace 清除
+點擊已知磚塊可開關範圍顯示","左クリック：選択 · 矢印／ホイール：種類変更
+Enter／右クリック：確認 · Backspace：解除
+既知のマスをクリック：範囲の表示切替","좌클릭: 선택 · 방향키/휠: 종류 변경
+Enter/우클릭: 확인 · Backspace: 지우기
+알려진 칸 클릭: 범위 표시 전환","Левая кнопка: выбор · Стрелки/колесо: смена типа
+Enter/правая кнопка: проверка · Backspace: очистка
+Нажмите известный блок: показать/скрыть область","Clic gauche : sélectionner · Flèches/molette : changer
+Entrée/clic droit : vérifier · Backspace : effacer
+Cliquez un bloc connu : afficher/masquer sa zone","Linksklick: auswählen · Pfeile/Mausrad: Typ wechseln
+Enter/Rechtsklick: prüfen · Backspace: löschen
+Bekannten Block anklicken: Bereich ein-/ausblenden"
+VALUE_RUSSIAN,RUSSIAN,俄语,俄語,ロシア語,러시아어,РУССКИЙ,RUSSE,RUSSISCH
+VALUE_FRENCH,FRENCH,法语,法語,フランス語,프랑스어,ФРАНЦУЗСКИЙ,FRANÇAIS,FRANZÖSISCH
+VALUE_GERMAN,GERMAN,德语,德語,ドイツ語,독일어,НЕМЕЦКИЙ,ALLEMAND,DEUTSCH
+TUTORIAL_YELLOW_1,Click the yellow brick to see its three axes (six directions).,点击黄色砖，查看三条轴线（六个方向）。,點擊黃色磚，查看三條軸線（六個方向）。,黄色のマスをクリックして3軸（6方向）を確認。,노란 칸을 클릭해 세 축(여섯 방향)을 확인하세요.,Нажмите жёлтый блок: он охватывает три оси (шесть направлений).,Cliquez sur le bloc jaune pour voir ses trois axes (six directions).,Klicke auf den gelben Block: Er erfasst drei Achsen (sechs Richtungen).
+TUTORIAL_YELLOW_2,Yellow adds red and green numbers along its axes; it does not count bricks.,黄色累加轴线上红砖与绿砖的数字，不是砖块数量。,黃色累加軸線上紅磚與綠磚的數字，不是磚塊數量。,黄色は軸上の赤と緑の数値を足します。マスの個数ではありません。,노랑은 축 위 빨강과 초록의 숫자를 더합니다. 칸 수가 아닙니다.,"Жёлтый складывает числа красных и зелёных блоков на осях, а не считает блоки.","Le jaune additionne les nombres rouges et verts sur ses axes, pas les blocs.",Gelb addiert rote und grüne Zahlen auf seinen Achsen; es zählt keine Blöcke.
+TUTORIAL_YELLOW_3,Yellow rays cross empty spaces and continue to the next brick.,黄色轴线会跨过空位，继续读取后面的砖块。,黃色軸線會跨過空位，繼續讀取後面的磚塊。,黄色の軸は空白を通過し、その先のマスまで続きます。,노란 축은 빈칸을 지나 다음 칸까지 이어집니다.,Жёлтые лучи проходят через пробелы к следующим блокам.,Les rayons jaunes traversent les espaces vides et continuent vers les blocs suivants.,Gelbe Strahlen überqueren Lücken und laufen zum nächsten Block weiter.
+TUTORIAL_YELLOW_4,A black wall stops only the ray it touches. Bricks behind it do not contribute.,黑墙只截断所在方向的轴线，墙后的砖块不计入黄色。,黑牆只截斷所在方向的軸線，牆後的磚塊不計入黃色。,黒い壁はその方向だけを遮り、壁の先のマスは合計に含みません。,검은 벽은 해당 방향만 막습니다. 벽 뒤의 칸은 합에 포함되지 않습니다.,Чёрная стена прерывает только свой луч. Блоки за ней не входят в сумму.,Un mur noir arrête seulement le rayon qui le touche. Les blocs derrière ne comptent pas.,Eine schwarze Mauer stoppt nur ihren Strahl. Blöcke dahinter tragen nichts zur Summe bei.
+TUTORIAL_YELLOW_5,Yellow is now a possible answer. Compare its axes with the purple radius.,现在可以选择黄色：比较黄色的轴线与紫色的半径范围。,現在可以選擇黃色：比較黃色的軸線與紫色的半徑範圍。,黄色も選べます。黄色の軸と紫の半径を比べてみましょう。,이제 노랑도 선택할 수 있습니다. 노란 축과 보라의 반경을 비교하세요.,Теперь можно выбрать жёлтый. Сравните его оси с радиусом фиолетового.,Le jaune devient une réponse possible. Comparez ses axes au rayon du violet.,Gelb ist jetzt eine mögliche Antwort. Vergleiche seine Achsen mit dem violetten Radius.
+CHAPTER_1,CHAPTER 1,第一章,第一章,第1章,제1장,ГЛАВА 1,CHAPITRE 1,KAPITEL 1
+CHAPTER_2,CHAPTER 2,第二章,第二章,第2章,제2장,ГЛАВА 2,CHAPITRE 2,KAPITEL 2
+HOME_ABOUT,ABOUT,关于,關於,このゲームについて,정보,ОБ ИГРЕ,À PROPOS,ÜBER DAS SPIEL
+ABOUT_VERSION,Demo %s,Demo %s,Demo %s,Demo %s,Demo %s,Demo %s,Demo %s,Demo %s
+ABOUT_DESCRIPTION,A hexagonal logic puzzle about colors and numbers.,一款围绕颜色与数字的六边形逻辑解谜游戏。,一款圍繞顏色與數字的六邊形邏輯解謎遊戲。,色と数字を使った六角形のロジックパズル。,색과 숫자로 풀어가는 육각형 논리 퍼즐.,"Логическая головоломка с шестиугольниками, цветами и числами.",Un jeu de logique hexagonal autour des couleurs et des nombres.,"Ein Logikrätsel mit Sechsecken, Farben und Zahlen."
+ABOUT_CREATOR,DESIGN & DEVELOPMENT,设计与开发,設計與開發,デザイン / 開発,디자인 및 개발,ДИЗАЙН И РАЗРАБОТКА,CONCEPTION ET DÉVELOPPEMENT,DESIGN UND ENTWICKLUNG
+ABOUT_FONTS,FONTS,字体,字體,フォント,글꼴,ШРИФТЫ,POLICES,SCHRIFTEN
+ABOUT_FONT_NAMES,MiSans Light\nNoto Sans KR,MiSans Light\nNoto Sans KR,MiSans Light\nNoto Sans KR,MiSans Light\nNoto Sans KR,MiSans Light\nNoto Sans KR,MiSans Light\nNoto Sans KR,MiSans Light\nNoto Sans KR,MiSans Light\nNoto Sans KR
+ABOUT_AUDIO,MUSIC & SOUND,音乐与音效,音樂與音效,音楽 / 効果音,음악 및 효과음,МУЗЫКА И ЗВУК,MUSIQUE ET EFFETS SONORES,MUSIK UND SOUND
+ABOUT_AUDIO_CREDIT,vansheng,vansheng,vansheng,vansheng,vansheng,vansheng,vansheng,vansheng
+ABOUT_LICENSES,THIRD-PARTY LICENSES,第三方许可,第三方授權,サードパーティーライセンス,외부 라이선스,СТОРОННИЕ ЛИЦЕНЗИИ,LICENCES TIERCES,DRITTANBIETERLIZENZEN
+LEGEND_RADIUS_2,r2: includes the first and second rings.,r2：包括第一圈和第二圈。,r2：包括第一圈和第二圈。,r2：第1リングと第2リングを含みます。,r2: 첫 번째와 두 번째 고리를 포함합니다.,r2: первое и второе кольца.,r2 : inclut les deux premiers anneaux.,r2: umfasst den ersten und zweiten Ring.
+LEGEND_RADIUS_3,"r3: includes the first, second and third rings.",r3：包括第一圈、第二圈和第三圈。,r3：包括第一圈、第二圈和第三圈。,r3：第1、第2、第3リングを含みます。,"r3: 첫 번째, 두 번째, 세 번째 고리를 포함합니다.","r3: первое, второе и третье кольца.",r3 : inclut les trois premiers anneaux.,"r3: umfasst den ersten, zweiten und dritten Ring."
+LEGEND_BLACK_RAYS,"Wall: no number; cannot be selected or counted.
+Stops yellow rays, but does not block radius scopes.","墙壁：没有数字，不可选择，不参与计数。
+截断黄色轴线，但不阻断半径范围。","牆壁：沒有數字，不可選擇，不參與計數。
+截斷黃色軸線，但不阻斷半徑範圍。","壁：数字がなく、選択も計数もできません。
+黄色の直線を遮りますが、半径の範囲は遮りません。","벽: 숫자가 없고 선택하거나 셀 수 없습니다.
+노랑 직선은 막지만 반경 범위는 막지 않습니다.","Стена: без числа; нельзя выбрать или посчитать.
+Прерывает жёлтые лучи, но не область радиуса.","Mur : sans nombre ; ni sélectionné, ni compté.
+Arrête les rayons jaunes, mais pas les zones de rayon.","Mauer: ohne Zahl; weder auswählbar noch zählbar.
+Stoppt gelbe Strahlen, aber keine Radiusbereiche."
+TUTORIAL_WALL_LEFT,"Black bricks are walls
+They have no number and cannot be selected","黑色砖块是墙壁
+没有数字，也不能选择","黑色磚塊是牆壁
+沒有數字，也不能選擇","黒いマスは壁です
+数字がなく、選択できません","검은 칸은 벽입니다
+숫자가 없으며 선택할 수 없습니다","Чёрные блоки — стены
+У них нет числа, и их нельзя выбрать","Les blocs noirs sont des murs
+Sans nombre, ils ne peuvent pas être sélectionnés","Schwarze Blöcke sind Mauern
+Sie haben keine Zahl und sind nicht auswählbar"
+TUTORIAL_WALL_RIGHT,"Walls do not count as red or green bricks
+Each brick still uses its own scope","墙壁不参与红绿计数
+仍按各砖的范围计算","牆壁不參與紅綠計數
+仍按各磚的範圍計算","壁は赤や緑の個数に含みません
+各マスは自分の範囲で計算します","벽은 빨강과 초록 개수에 포함되지 않습니다
+각 칸은 자기 범위로 계산합니다","Стены не входят в число красных и зелёных
+Каждый блок использует свою область","Les murs ne comptent ni comme rouges ni comme verts
+Chaque bloc utilise sa propre zone","Mauern zählen weder als Rot noch als Grün
+Jeder Block nutzt seinen eigenen Bereich"

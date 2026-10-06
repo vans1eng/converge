@@ -1,0 +1,275 @@
+{
+  "id": "1-21",
+  "chapter_id": 1,
+  "rule_version": 2,
+  "chapter_revision": 4,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green",
+    "purple"
+  ],
+  "infer_yellow": false,
+  "board": {
+    "layout": "odd_r",
+    "rows": 5,
+    "columns": 5
+  },
+  "cells": [
+    {
+      "id": "r0c1",
+      "row": 0,
+      "col": 1,
+      "mode": "fixed",
+      "type": "green",
+      "value": 2,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c2",
+      "row": 0,
+      "col": 2,
+      "mode": "fixed",
+      "type": "red",
+      "value": 2,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c3",
+      "row": 0,
+      "col": 3,
+      "mode": "fixed",
+      "type": "red",
+      "value": 3,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r1c0",
+      "row": 1,
+      "col": 0,
+      "mode": "fixed",
+      "type": "green",
+      "value": 2,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r1c1",
+      "row": 1,
+      "col": 1,
+      "mode": "fixed",
+      "type": "green",
+      "value": 2,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r1c2",
+      "row": 1,
+      "col": 2,
+      "mode": "fixed",
+      "type": "red",
+      "value": 3,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r1c3",
+      "row": 1,
+      "col": 3,
+      "mode": "fixed",
+      "type": "red",
+      "value": 3,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r2c0",
+      "row": 2,
+      "col": 0,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r2c1",
+      "row": 2,
+      "col": 1,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r2c2",
+      "row": 2,
+      "col": 2,
+      "mode": "fixed",
+      "type": "black",
+      "value": null,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r2c3",
+      "row": 2,
+      "col": 3,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 7,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green",
+        "purple"
+      ],
+      "answer": {
+        "type": "purple"
+      }
+    },
+    {
+      "id": "r2c4",
+      "row": 2,
+      "col": 4,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r3c0",
+      "row": 3,
+      "col": 0,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 3,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green",
+        "purple"
+      ],
+      "answer": {
+        "type": "purple"
+      }
+    },
+    {
+      "id": "r3c1",
+      "row": 3,
+      "col": 1,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 3,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green",
+        "purple"
+      ],
+      "answer": {
+        "type": "purple"
+      }
+    },
+    {
+      "id": "r3c2",
+      "row": 3,
+      "col": 2,
+      "mode": "fixed",
+      "type": "red",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r3c3",
+      "row": 3,
+      "col": 3,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green",
+        "purple"
+      ],
+      "answer": {
+        "type": "purple"
+      }
+    },
+    {
+      "id": "r4c1",
+      "row": 4,
+      "col": 1,
+      "mode": "fixed",
+      "type": "green",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r4c2",
+      "row": 4,
+      "col": 2,
+      "mode": "fixed",
+      "type": "green",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r4c3",
+      "row": 4,
+      "col": 3,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green",
+        "purple"
+      ],
+      "answer": {
+        "type": "purple"
+      }
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "zh_CN": "红绿数砖块，紫色加数字",
+        "en": "Red and green count bricks\nPurple adds numbers",
+        "zh_TW": "紅綠數磚塊，紫色加數字",
+        "ja": "赤と緑はマスを数え\n紫は数字を足します",
+        "ko": "빨강과 초록은 칸을 세고\n보라는 숫자를 더합니다",
+        "ru": "Красный и зелёный считают блоки\nФиолетовый складывает числа",
+        "fr": "Rouge et vert comptent les blocs\nViolet additionne les nombres",
+        "de": "Rot und Grün zählen Blöcke\nViolett addiert Zahlen"
+      },
+      "right": {
+        "zh_CN": "数字 0 被计数时算一块\n被求和时贡献 0",
+        "en": "Zero counts as one brick\nbut contributes zero to a sum",
+        "zh_TW": "數字 0 被計數時算一塊\n被求和時貢獻 0",
+        "ja": "0 のマスも個数では1個\n合計には0を加えます",
+        "ko": "0은 칸을 셀 때 하나로 세지만\n합에는 0을 더합니다",
+        "ru": "0 считается одним блоком,\nно добавляет 0 к сумме",
+        "fr": "0 compte comme un bloc\nmais ajoute 0 à une somme",
+        "de": "0 zählt als ein Block,\nträgt aber 0 zur Summe bei"
+      }
+    },
+    "practice": false
+  }
+}

@@ -1,0 +1,443 @@
+[gd_scene format=3 uid="uid://cnwt8ss5xju8h"]
+
+[ext_resource type="Script" uid="uid://ctctxuv617tct" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://cnbm1cxuqq7jc" path="res://scripts/controllers/level_controller.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://dwcjna85tssks" path="res://scripts/controllers/board_controller.gd" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://b7hfmkbl1odov" path="res://scripts/controllers/input_controller.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://d3ieslhh3dh7x" path="res://scripts/ui/hex_board_view.gd" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://ye01hlv8npb3" path="res://scripts/controllers/hud_controller.gd" id="5_tbgi4"]
+[ext_resource type="FontFile" uid="uid://fe14v67iior5" path="res://assets/fonts/MiSans-Light.ttf" id="6_font"]
+[ext_resource type="Script" uid="uid://5kwc130nenxh" path="res://scripts/ui/pause_menu.gd" id="7_pause"]
+[ext_resource type="PackedScene" uid="uid://c78m60mybp7e6" path="res://scenes/level_complete.tscn" id="8_complete"]
+
+[sub_resource type="StyleBoxFlat" id="StyleGuideButtonNormal"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.91, 0.91, 0.93, 0.55)
+corner_radius_top_left = 17
+corner_radius_top_right = 17
+corner_radius_bottom_right = 17
+corner_radius_bottom_left = 17
+
+[sub_resource type="StyleBoxFlat" id="StyleGuideButtonHover"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.91, 0.91, 0.93, 1)
+corner_radius_top_left = 17
+corner_radius_top_right = 17
+corner_radius_bottom_right = 17
+corner_radius_bottom_left = 17
+
+[node name="Main" type="Node2D" unique_id=1925847968]
+script = ExtResource("1_main")
+
+[node name="LevelController" type="Node" parent="." unique_id=1560489976]
+script = ExtResource("1_o5qli")
+
+[node name="BoardController" type="Node" parent="." unique_id=239325491]
+script = ExtResource("2_jyhfs")
+board_view_path = NodePath("../HexBoard")
+level_controller_path = NodePath("../LevelController")
+
+[node name="InputController" type="Node" parent="." unique_id=873881798]
+script = ExtResource("3_tbgi4")
+board_controller_path = NodePath("../BoardController")
+
+[node name="HexBoard" type="Node2D" parent="." unique_id=35608663]
+script = ExtResource("4_tefeu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2046279639]
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=1248679224]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_tbgi4")
+title_label_path = NodePath("VBoxContainer/LevelTitle")
+timer_label_path = NodePath("TimerLabel")
+status_label_path = NodePath("VBoxContainer/StatusMessage")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=44792159]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control2" type="Control" parent="CanvasLayer/HUD/VBoxContainer" unique_id=364082508]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LevelTitle" type="Label" parent="CanvasLayer/HUD/VBoxContainer" unique_id=1531978929]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/HUD/VBoxContainer" unique_id=816100897]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TutorialHint" type="Label" parent="CanvasLayer/HUD/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 3.0
+offset_bottom = 26.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+
+[node name="StatusSpacer" type="Control" parent="CanvasLayer/HUD/VBoxContainer" unique_id=2130801338]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="StatusMessage" type="RichTextLabel" parent="CanvasLayer/HUD/VBoxContainer" unique_id=1035453166]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("6_font")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+
+[node name="MistakesLabel" type="Label" parent="CanvasLayer/HUD" unique_id=1041552307]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 30.0
+offset_right = 260.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 16
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/HUD" unique_id=2116451661]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = 28.0
+offset_right = -28.0
+offset_bottom = 68.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "00:00"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GuideButton" type="Button" parent="CanvasLayer/HUD" unique_id=299301573]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 28.0
+offset_right = 62.0
+offset_bottom = 62.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.909804, 0.905882, 0.92549, 1)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleGuideButtonNormal")
+theme_override_styles/pressed = SubResource("StyleGuideButtonNormal")
+theme_override_styles/hover = SubResource("StyleGuideButtonHover")
+text = "?"
+
+[node name="LegendPanel" type="PanelContainer" parent="CanvasLayer/HUD" unique_id=1200214805]
+visible = false
+layout_mode = 0
+offset_left = 28.0
+offset_top = 72.0
+offset_right = 28.0
+offset_bottom = 72.0
+
+[node name="Legend" type="VBoxContainer" parent="CanvasLayer/HUD/LegendPanel" unique_id=915918266]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend" unique_id=555459462]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.909804, 0.905882, 0.92549, 1)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 18
+text = "LEGEND_TITLE"
+
+[node name="Scope" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend" unique_id=1512669114]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 13
+text = "LEGEND_SCOPE"
+
+[node name="Radius2" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 13
+text = "LEGEND_RADIUS_2"
+
+[node name="Radius3" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 13
+text = "LEGEND_RADIUS_3"
+
+[node name="Red" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend" unique_id=1199447253]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.572549, 0.592157, 1)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 15
+text = "LEGEND_RED"
+
+[node name="Yellow" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend" unique_id=296824992]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.964706, 0.937255, 0.52549, 1)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 15
+text = "LEGEND_YELLOW"
+
+[node name="Green" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend" unique_id=960450151]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.937255, 0.658824, 1)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 15
+text = "LEGEND_GREEN"
+
+[node name="Purple" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend" unique_id=954359225]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.666667, 0.588235, 0.92549, 1)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 15
+text = "LEGEND_PURPLE"
+
+[node name="InputHelp" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend" unique_id=942068450]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 13
+text = "LEGEND_INPUT"
+
+[node name="Black" type="HBoxContainer" parent="CanvasLayer/HUD/LegendPanel/Legend" unique_id=1609871595]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Swatch" type="Panel" parent="CanvasLayer/HUD/LegendPanel/Legend/Black" unique_id=1846318541]
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend/Black" unique_id=234412269]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 15
+text = "LEGEND_BLACK"
+
+[node name="LevelComplete" parent="CanvasLayer" unique_id=1158869613 instance=ExtResource("8_complete")]
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer" unique_id=867111465]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_pause")
+
+[node name="Background" type="ColorRect" parent="CanvasLayer/PauseMenu" unique_id=513269471]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.168627, 0.168627, 0.203922, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PauseMenu" unique_id=1941753741]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer" unique_id=1178531907]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1891797766]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 48
+text = "PAUSE_TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopSpacer" type="Control" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1075936910]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Language" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=2108879785]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Language" unique_id=1537014419]
+custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "SETTING_LANGUAGE"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Language" unique_id=1864460115]
+custom_minimum_size = Vector2(810, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 18
+flat = true
+
+[node name="Display" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=531034994]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Display" unique_id=971667030]
+custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "SETTING_DISPLAY"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Display" unique_id=854232053]
+custom_minimum_size = Vector2(810, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 18
+flat = true
+
+[node name="Resolution" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=186124361]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Resolution" unique_id=1289605964]
+custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "SETTING_RESOLUTION"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Resolution" unique_id=1281421565]
+custom_minimum_size = Vector2(810, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 18
+flat = true
+
+[node name="Theme" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1204122773]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Theme" unique_id=2057477956]
+custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "SETTING_THEME"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Theme" unique_id=1898523843]
+custom_minimum_size = Vector2(810, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 18
+flat = true
+
+[node name="Music" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=2116483392]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Music" unique_id=1631135234]
+custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "SETTING_MUSIC"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Music" unique_id=1740480391]
+custom_minimum_size = Vector2(810, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 18
+flat = true
+
+[node name="Sound" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1928241747]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Sound" unique_id=1471116367]
+custom_minimum_size = Vector2(440, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "SETTING_SOUND"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Sound" unique_id=770766357]
+custom_minimum_size = Vector2(810, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 18
+flat = true
+
+[node name="BottomSpacer" type="Control" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1510661598]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Footer" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1197793620]
+layout_mode = 2
+theme_override_constants/separation = 96
+alignment = 1
+
+[node name="BackToMainButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Footer" unique_id=241989312]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "PAUSE_BACK_TO_MAIN"
+flat = true
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Footer" unique_id=591916776]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "PAUSE_RESUME"
+flat = true

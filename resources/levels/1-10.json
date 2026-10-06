@@ -1,0 +1,81 @@
+{
+  "id": "1-10",
+  "chapter_id": 1,
+  "rule_version": 2,
+  "chapter_revision": 3,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green"
+  ],
+  "infer_yellow": false,
+  "board": {
+    "layout": "odd_r",
+    "rows": 1,
+    "columns": 3
+  },
+  "cells": [
+    {
+      "id": "r0c0",
+      "row": 0,
+      "col": 0,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 2,
+      "revealed": true,
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "red"
+      }
+    },
+    {
+      "id": "r0c1",
+      "row": 0,
+      "col": 1,
+      "mode": "fixed",
+      "type": "green",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c2",
+      "row": 0,
+      "col": 2,
+      "mode": "fixed",
+      "type": "red",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "zh_CN": "r2 包括第一圈和第二圈\n仍然不包括自己",
+        "en": "r2 includes the first and second rings\nThe brick itself is excluded",
+        "zh_TW": "r2 包括第一圈和第二圈\n仍然不包括自己",
+        "ja": "r2 は第1リングと第2リングを含みます\n自分自身は含みません",
+        "ko": "r2는 첫 번째와 두 번째 고리를 포함합니다\n자기 자신은 제외합니다",
+        "ru": "r2 включает первое и второе кольца\nСам блок не учитывается",
+        "fr": "r2 inclut les deux premiers anneaux\nLe bloc lui-même est exclu",
+        "de": "r2 umfasst den ersten und zweiten Ring\nDer Block selbst zählt nicht mit"
+      },
+      "right": {
+        "zh_CN": "点击砖块可查看范围\n空位不会截断范围",
+        "en": "Click a brick to see its scope\nEmpty positions do not stop it",
+        "zh_TW": "點擊磚塊可查看範圍\n空位不會截斷範圍",
+        "ja": "マスをクリックすると範囲を表示します\n空白は範囲を遮りません",
+        "ko": "칸을 클릭하면 범위가 표시됩니다\n빈칸은 범위를 끊지 않습니다",
+        "ru": "Нажмите блок, чтобы увидеть область\nПустые места её не прерывают",
+        "fr": "Cliquez sur un bloc pour voir sa zone\nLes espaces vides ne l’arrêtent pas",
+        "de": "Klicke auf einen Block, um seinen Bereich zu sehen\nLücken unterbrechen ihn nicht"
+      }
+    },
+    "practice": false
+  }
+}

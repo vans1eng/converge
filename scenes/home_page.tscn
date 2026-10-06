@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cxb0sfsedohyq"]
+
+[ext_resource type="FontFile" uid="uid://fe14v67iior5" path="res://assets/fonts/MiSans-Light.ttf" id="1_2e0ks"]
+[ext_resource type="Script" uid="uid://cyw3ovuuptg4j" path="res://scripts/home_page.gd" id="2_home"]
+
+[sub_resource type="FontVariation" id="FontVariation_title"]
+base_font = ExtResource("1_2e0ks")
+spacing_glyph = 10
+
+[node name="Home" type="Control" unique_id=1083678770]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_home")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1744192814]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=632708795]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1358222880]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_title")
+theme_override_font_sizes/font_size = 64
+text = "CONVERGE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer" unique_id=896391738]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="btn_start" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1199484927]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_2e0ks")
+theme_override_font_sizes/font_size = 32
+text = "HOME_START"
+flat = true
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer" unique_id=265887993]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="btn_options" type="Button" parent="MarginContainer/VBoxContainer" unique_id=307007336]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_2e0ks")
+theme_override_font_sizes/font_size = 32
+text = "HOME_OPTIONS"
+flat = true
+
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer" unique_id=801107272]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="btn_about" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_2e0ks")
+theme_override_font_sizes/font_size = 32
+text = "HOME_ABOUT"
+flat = true
+
+[node name="AboutSpacer" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="btn_exit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=344335938]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_2e0ks")
+theme_override_font_sizes/font_size = 32
+text = "HOME_EXIT"
+flat = true

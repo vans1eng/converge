@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cg2am7vp1ghc6"]
+
+[ext_resource type="FontFile" uid="uid://fe14v67iior5" path="res://assets/fonts/MiSans-Light.ttf" id="1_font"]
+[ext_resource type="Script" uid="uid://bf505heycylu" path="res://scripts/level_select.gd" id="2_script"]
+
+[node name="LevelSelect" type="Control" unique_id=1646860058]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_script")
+
+[node name="Title" type="Label" parent="." unique_id=1736285571]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 45.0
+offset_bottom = 125.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 42
+text = "CHAPTER_1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FooterLayout" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FooterLayout"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleSpace" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopGap" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SettingSpace1" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SettingSpace2" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SettingSpace3" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SettingSpace4" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SettingSpace5" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SettingSpace6" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BottomGap" type="Control" parent="FooterLayout/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BackButton" type="Button" parent="FooterLayout/VBoxContainer" unique_id=539869973]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 24
+text = "ACTION_BACK"
+flat = true
