@@ -64,9 +64,18 @@ func _draw() -> void:
 			var label := _label_for(cell)
 			if not label.is_empty():
 				var scope_radius := int(cell.get("scope_radius", 1))
-				var text_y := _radius * (0.12 if scope_radius > 1 else 0.22)
+				var font_size := int(_radius * 0.63)
+				var text_y := (CELL_FONT.get_ascent(font_size) - CELL_FONT.get_descent(font_size)) * 0.5
+				if scope_radius > 3:
+					text_y = _radius * 0.12
 				draw_string(CELL_FONT, Vector2(position.x - _radius, position.y + text_y), label, HORIZONTAL_ALIGNMENT_CENTER, _radius * 2.0, _radius * 0.63, palette.cell_text)
-				if scope_radius > 1:
+				if scope_radius <= 3:
+					for index in scope_radius - 1:
+						var inset := maxf(1.5, _radius * 0.065) * (index + 1)
+						var border := _hex_points(position, inset)
+						border.append(border[0])
+						draw_polyline(border, palette.cell_text, maxf(0.8, _radius * 0.025), true)
+				else:
 					draw_string(CELL_FONT, Vector2(position.x - _radius, position.y + _radius * 0.66), "r%d" % scope_radius, HORIZONTAL_ALIGNMENT_CENTER, _radius * 2.0, maxf(10.0, _radius * 0.30), palette.cell_text)
 
 
@@ -94,10 +103,10 @@ func _cell_position(row: int, col: int) -> Vector2:
 	return _origin + Vector2(sqrt(3.0) * _radius * (col + 0.5 * (row & 1)), 1.5 * _radius * row)
 
 
-func _hex_points(center: Vector2) -> PackedVector2Array:
+func _hex_points(center: Vector2, inset := 0.0) -> PackedVector2Array:
 	var points := PackedVector2Array()
 	for index in 6:
-		points.append(center + Vector2.from_angle(deg_to_rad(60.0 * index - 30.0)) * (_radius - 1.5))
+		points.append(center + Vector2.from_angle(deg_to_rad(60.0 * index - 30.0)) * maxf(0.0, _radius - 1.5 - inset))
 	return points
 
 

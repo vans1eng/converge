@@ -11,8 +11,8 @@ func validate(level: LevelDefinition) -> bool:
 		return false
 	if level.id.is_empty() or level.layout != "odd_r" or level.rows <= 0 or level.columns <= 0 or level.cells.is_empty():
 		issues.append("Invalid level identity or board dimensions.")
-	if not level.allowed_colors.is_empty() and level.allowed_colors not in [["red", "green"], ["red", "green", "purple"], ["red", "green", "purple", "yellow"]]:
-		issues.append("Invalid chapter color palette.")
+	if level.allowed_colors != ["red", "green"] or level.infer_yellow:
+		issues.append("Only red and green may be inferred; purple/yellow are fixed clues.")
 	var ids := {}
 	var positions := {}
 	for cell in level.cells:
@@ -33,11 +33,10 @@ func validate(level: LevelDefinition) -> bool:
 			if cell.value == null or not (cell.value is int or cell.value is float) or float(cell.value) < 0 or float(cell.value) != floorf(float(cell.value)):
 				issues.append("Color cells need public nonnegative integers: %s" % cell.id)
 		if cell.mode == CellDefinition.MODE_CANDIDATE:
-			var expected: Array = Array(level.allowed_colors) if not level.allowed_colors.is_empty() else ["red", "green", "purple"]
-			if level.infer_yellow and cell.scope_radius == 1 and "yellow" not in expected:
-				expected.append("yellow")
-			if cell.candidate_types != expected or cell.answer_type not in cell.candidate_types:
-				issues.append("Invalid color candidates: %s" % cell.id)
+			if cell.candidate_types != CellDefinition.ANSWER_TYPES or cell.answer_type not in CellDefinition.ANSWER_TYPES:
+				issues.append("Candidates must be red/green: %s" % cell.id)
+		if cell.effective_type() in [CellDefinition.TYPE_PURPLE, CellDefinition.TYPE_YELLOW] and cell.mode != CellDefinition.MODE_FIXED:
+			issues.append("Purple/yellow must be fixed clues: %s" % cell.id)
 		if not cell.accepted_answer_types.is_empty():
 			if not bool(level.tutorial.get("practice", false)) or level.cells.size() != 1 or cell.mode != CellDefinition.MODE_CANDIDATE or cell.value != 0 or cell.scope_radius != 1 or cell.candidate_types != ["red", "green"] or cell.accepted_answer_types != ["red", "green"]:
 				issues.append("Multiple accepted colors are only valid for the single-brick input tutorial.")

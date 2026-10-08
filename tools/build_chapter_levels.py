@@ -15,7 +15,7 @@ def scopes(c,cells,yellow=False):
  rows=max(o['row'] for o in cells)+1; cols=max(o['col'] for o in cells)+1
  for dq,dr in DIRS:
   x,y=q,r
-  while True:
+  for distance in range(1,c.get('scope_radius',1)+1):
    x+=dq;y+=dr
    if y<0 or y>=rows or x+y//2<0 or x+y//2>=cols: break
    i=positions.get((x,y))
@@ -23,48 +23,53 @@ def scopes(c,cells,yellow=False):
     if typ(cells[i])=='black': break
     result.append(i)
  return result
+def axis_pairs(c,cells):
+ positions={axial(o):i for i,o in enumerate(cells)}
+ q,r=axial(c); result=[]
+ for dq,dr in DIRS[:3]:
+  for distance in range(1,c.get('scope_radius',1)+1):
+   first=positions.get((q+dq*distance,r+dr*distance))
+   second=positions.get((q-dq*distance,r-dr*distance))
+   if any(i is not None and typ(cells[i])=='black' for i in (first,second)):break
+   if first is not None and second is not None:result.append((first,second))
+ return result
+
 def compute(cells):
  for c in cells:
-  t=typ(c)
-  c['value']=None if t=='black' else sum(typ(cells[i])==t for i in scopes(c,cells)) if t in COLORS[:2] else 0
- for c in cells:
-  if typ(c) in ['purple','yellow']:
-   c['value']=sum(cells[i]['value'] for i in scopes(c,cells,typ(c)=='yellow') if typ(cells[i]) in COLORS[:2])
-def solutions(cells,infer):
- domains=[set(c.get('candidate_types',[typ(c)])) for c in cells]
- total=Counter(typ(c) for c in cells); normal=[scopes(c,cells) for c in cells]; rays=[scopes(c,cells,True) for c in cells]
- def propagate(ds):
-  changed=True
-  while changed:
-   changed=False
-   for t in COLORS+['yellow']:
-    fixed=sum(d=={t} for d in ds); possible=sum(t in d for d in ds)
-    if fixed>total[t] or possible<total[t]: return False
-    for d in ds:
-     if len(d)>1 and t in d:
-      if fixed==total[t]: d.remove(t);changed=True
-      elif possible==total[t]: d.intersection_update({t});changed=True
-   for i,c in enumerate(cells):
-    if typ(c)=='black':continue
-    for t in list(ds[i]):
-     ids=rays[i] if t=='yellow' else normal[i]
-     if t in COLORS[:2]:
-      lo=sum(ds[j]=={t} for j in ids);hi=sum(t in ds[j] for j in ids)
-     else:
-      lo=sum(cells[j]['value'] for j in ids if ds[j]<=set(COLORS[:2]));hi=sum(cells[j]['value'] for j in ids if ds[j]&set(COLORS[:2]))
-     if not lo<=c['value']<=hi:
-      ds[i].remove(t);changed=True
-    if not ds[i]:return False
-  return True
- found=[]
- def search(ds):
-  if len(found)>=2 or not propagate(ds):return
-  choices=[i for i,d in enumerate(ds) if len(d)>1]
-  if not choices:found.append([next(iter(d)) for d in ds]);return
-  i=min(choices,key=lambda i:len(ds[i]))
-  for t in sorted(ds[i]):
-   cp=[d.copy() for d in ds];cp[i]={t};search(cp)
- search(domains);return found
+  t=typ(c); ids=scopes(c,cells)
+  if t=='black':value=None
+  elif t in COLORS[:2]:value=sum(typ(cells[i])==t for i in ids)
+  elif t=='purple':value=abs(sum((1 if typ(cells[i])=='red' else -1 if typ(cells[i])=='green' else 0) for i in ids))
+  else:value=sum({typ(cells[a]),typ(cells[b])}=={'red','green'} for a,b in axis_pairs(c,cells))
+  if c['mode'] in ('hidden','red_input'):c['answer']['value']=value
+  else:c['value']=value
+
+def clue_possible(color,value,ids,pairs,domains):
+ if color in COLORS[:2]:
+  return sum(domains[j]=={color} for j in ids)<=value<=sum(color in domains[j] for j in ids)
+ if color=='purple':
+  differences={0}
+  for j in ids:
+   contributions={1 if t=='red' else -1 if t=='green' else 0 for t in domains[j]}
+   differences={a+b for a in differences for b in contributions}
+  return value in {abs(n) for n in differences}
+ lo=hi=0
+ for a,b in pairs:
+  possible={int({x,y}=={'red','green'}) for x in domains[a] for y in domains[b]}
+  lo+=min(possible);hi+=max(possible)
+ return lo<=value<=hi
+
+def oversized_purple(cells):
+ """Use the actual clue radius and exclude walls, exactly like red/green counts."""
+ return [c for c in cells if typ(c)=='purple' and c['value']>len(scopes(c,cells))]
+
+def balance_purple(cells):
+ """Difference clues always fit their scope; no recoloring is needed."""
+ compute(cells)
+ return True
+def solutions(cells,infer=False):
+ from puzzle_logic import ColorPuzzle
+ return ColorPuzzle(cells).solutions()
 
 def shape(kind,n):
  points=[]
@@ -89,49 +94,22 @@ def make(points,chapter,number,name,seed,targets,infer=False,special=None):
   for i in anchors:cells[i]['type']='yellow'
  if special:special(cells)
  compute(cells)
+ if not balance_purple(cells):raise ValueError('Cannot balance purple clues')
  candidates=list(range(len(cells)));rng.shuffle(candidates)
- if infer:candidates.sort(key=lambda i:typ(cells[i])!='yellow')
  hidden=0
  for i in candidates:
   c=cells[i];t=typ(c)
-  if t=='black' or (t=='yellow' and not infer):continue
-  c.update(mode='candidate',type='neutral',answer={'type':t},candidate_types=COLORS+(['yellow'] if infer else []))
+  if t not in ['red','green']:continue
+  c.update(mode='candidate',type='neutral',answer={'type':t},candidate_types=['red','green'])
   if len(solutions(cells,infer))!=1:
    c.update(mode='fixed',type=t);c.pop('answer');c.pop('candidate_types')
   else:hidden+=1
   if hidden>=targets:break
  assert hidden>0 and len(solutions(cells,infer))==1
- return dict(id=f'{chapter}-{number}',chapter_id=chapter,rule_version=2,infer_yellow=infer,board=dict(layout='odd_r',rows=max(c['row'] for c in cells)+1,columns=max(c['col'] for c in cells)+1),cells=cells)
+ return dict(id=f'{chapter}-{number}',chapter_id=chapter,rule_version=3,infer_yellow=False,allowed_colors=['red','green'],board=dict(layout='odd_r',rows=max(c['row'] for c in cells)+1,columns=max(c['col'] for c in cells)+1),cells=cells)
 
 def build():
- originals=[]
- for p in sorted(ROOT.glob('*.json'), key=lambda p: tuple(map(int, p.stem.split('-')))):
-  d=json.loads(p.read_text())
-  if 'generated_chapter' not in d: originals.append((p,d))
- plain=[(p,d) for p,d in originals if not any(typ(c)=='yellow' for c in d['cells'])];yellow=[(p,d) for p,d in originals if any(typ(c)=='yellow' for c in d['cells'])]
- for ch,items,start in [(1,plain,1),(2,yellow,6)]:
-  for i,(p,d) in enumerate(items,start):
-   d.pop('name',None)
-   d['id']=f'{ch}-{i}';d['chapter_id']=ch
-   target=ROOT/f"{d['id']}.json"
-   if p != target:p.unlink()
-   target.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
- generated=[]
- # Compact, deliberately constrained tutorials; later chapters keep richer silhouettes.
- specs=[('hex',1,'三轴初见'),('diamond',2,'求和而非计数'),('ring',2,'跨越空位'),('hex',2,'墙壁截断'),('flower',2,'找出黄色')]
- for i,(kind,n,name) in enumerate(specs,1):
-  def special(cells):
-   if i==4:
-    anchor=next(c for c in cells if c['type']=='yellow');neighbors=[c for c in cells if c['row']==anchor['row'] and c['col']>anchor['col']]
-    if neighbors:neighbors[0]['type']='black'
-  generated.append(make(shape(kind,n),2,i,name,700+i,1 if i<3 else 2 if i<5 else 3,i==5,special))
- silhouettes=[('diamond',3,'菱光'),('flower',3,'六瓣'),('ring',3,'光环'),('hourglass',3,'沙漏'),('wings',3,'蝶翼'),('star',3,'星芒'),('crescent',3,'弦月'),('hex',3,'蜂巢'),('diamond',4,'晶面'),('flower',4,'绽放'),('ring',4,'回环'),('hourglass',4,'流沙'),('wings',4,'展翼'),('star',4,'星冠'),('flower',4,'花庭')]
- for ch,start in [(1,len(plain)+1),(2,6+len(yellow))]:
-  for k,num in enumerate(range(start,31)):
-   kind,n,name=silhouettes[k];generated.append(make(shape(kind,n),ch,num,name,1000*ch+num,round(len(shape(kind,n))*(0.65+0.01*k)),ch==2))
- for d in generated:
-  d['generated_chapter']=True
-  (ROOT/f"{d['id']}.json").write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
- print(f'Preserved {len(originals)} boards; generated {len(generated)} uniquely solvable boards.')
- for d in generated:print(d['id'],len(d['cells']),sum(c['mode']=='candidate' for c in d['cells']))
+ from redesign_clue_levels import build as redesign
+ return redesign()
+
 if __name__=='__main__':build()

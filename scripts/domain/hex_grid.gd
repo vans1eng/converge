@@ -54,14 +54,16 @@ func cell_at_direction_distance(cell: CellDefinition, direction_index: int, dist
 	return get_cell(position.x, position.y)
 
 
-func axis_cells(cell: CellDefinition, direction_index: int) -> Array[CellDefinition]:
+func axis_cells(cell: CellDefinition, direction_index: int, radius: int = 0) -> Array[CellDefinition]:
 	var result: Array[CellDefinition] = []
 	var origin: Vector2i = HexCoordinate.offset_to_axial(cell.row, cell.col)
 	var direction: Vector2i = HexCoordinate.DIRECTIONS[direction_index]
 
 	for direction_sign in [1, -1]:
 		var current: Vector2i = origin
-		while true:
+		var distance := 0
+		while radius <= 0 or distance < radius:
+			distance += 1
 			current += direction * direction_sign
 			var offset: Vector2i = HexCoordinate.axial_to_offset(current)
 			if offset.x < 0 or offset.x >= _rows or offset.y < 0 or offset.y >= _columns:

@@ -29,7 +29,13 @@ func verify_selected() -> void:
 	if board_state == null or board_state.selected_cell_id.is_empty():
 		return
 	var cell_id := board_state.selected_cell_id
-	var result := AnswerVerifier.verify(board_state.get_definition(cell_id), board_state.get_runtime(cell_id))
+	verify_color(cell_id, board_state.get_runtime(cell_id).candidate_pick)
+
+
+func verify_color(cell_id: String, color: String) -> void:
+	if board_state == null:
+		return
+	var result := AnswerVerifier.verify_color(board_state.get_definition(cell_id), board_state.get_runtime(cell_id), color)
 	if result.reason != "":
 		return
 
@@ -37,7 +43,9 @@ func verify_selected() -> void:
 	runtime.wrong = not result.ok
 	if result.ok:
 		runtime.solved = true
-		board_state.clear_selection()
+		runtime.candidate_pick = color
+		if board_state.selected_cell_id == cell_id:
+			board_state.clear_selection()
 		cell_verified.emit(cell_id, true)
 		if board_state.is_complete():
 			level_completed.emit()

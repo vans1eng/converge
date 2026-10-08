@@ -19,6 +19,17 @@ func _run() -> void:
 		counts[entry.chapter_id] += 1
 		var level := LevelRepository.new().load_level(entry.id)
 		assert(validator.validate(level), "%s: %s" % [entry.id, validator.issues])
+		# Purple differences cannot exceed the number of bricks in scope.
+		var grid := level.create_grid()
+		for cell in level.cells:
+			if cell.effective_type() == CellDefinition.TYPE_PURPLE:
+				assert(ClueRules.numeric_value(cell) <= ClueRules.scope(cell, grid).size(), "%s/%s: purple exceeds scope capacity" % [entry.id, cell.id])
+		assert(level.allowed_colors == ["red", "green"] and not level.infer_yellow)
+		for cell in level.cells:
+			if cell.is_editable():
+				assert(cell.candidate_types == ["red", "green"] and cell.answer_type in ["red", "green"])
+			if cell.effective_type() in ["purple", "yellow"]:
+				assert(cell.mode == CellDefinition.MODE_FIXED)
 		var yellow := level.cells.any(func(c): return c.effective_type() == "yellow")
 		assert(yellow == (level.chapter_id == 2))
 	assert(counts == {1: 30, 2: 30})

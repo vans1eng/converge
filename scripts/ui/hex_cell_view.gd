@@ -205,14 +205,20 @@ func _draw() -> void:
 		draw_colored_polygon(points, Color(hover_mask.r, hover_mask.g, hover_mask.b, state_mask_opacity))
 	var text := _display_text()
 	if not text.is_empty():
-		var text_center_y := -grid_radius * 0.24 if definition.scope_radius > 1 else (-grid_radius * 0.1 if definition.is_editable() and not runtime.solved else 0.0)
+		var text_center_y := -grid_radius * 0.24 if definition.scope_radius > 3 else (-grid_radius * 0.1 if definition.is_editable() and not runtime.solved else 0.0)
 		var font_size := int(grid_radius * 0.66)
 		var baseline := text_center_y + (CELL_FONT.get_ascent(font_size) - CELL_FONT.get_descent(font_size)) * 0.5
 		draw_string(CELL_FONT, Vector2(-radius, baseline), text, HORIZONTAL_ALIGNMENT_CENTER, radius * 2.0, font_size, _palette().cell_text)
 	if definition.scope_radius > 1 and intelligence_visible and not definition.is_black():
-		var font_size := int(grid_radius * 0.26)
-		var baseline := grid_radius * 0.24 + (CELL_FONT.get_ascent(font_size) - CELL_FONT.get_descent(font_size)) * 0.5
-		draw_string(CELL_FONT, Vector2(-radius, baseline), "r%d" % definition.scope_radius, HORIZONTAL_ALIGNMENT_CENTER, radius * 2.0, font_size, _palette().cell_text)
+		if definition.scope_radius <= 3:
+			for index in definition.scope_radius - 1:
+				var border := _hex_points(maxf(1.5, grid_radius * 0.065) * (index + 1))
+				border.append(border[0])
+				draw_polyline(border, _palette().cell_text, maxf(0.8, grid_radius * 0.025), true)
+		else:
+			var font_size := int(grid_radius * 0.26)
+			var baseline := grid_radius * 0.24 + (CELL_FONT.get_ascent(font_size) - CELL_FONT.get_descent(font_size)) * 0.5
+			draw_string(CELL_FONT, Vector2(-radius, baseline), "r%d" % definition.scope_radius, HORIZONTAL_ALIGNMENT_CENTER, radius * 2.0, font_size, _palette().cell_text)
 	if error_flash_opacity > 0.0:
 		var flash_color := _palette().red
 		flash_color.a = error_flash_opacity

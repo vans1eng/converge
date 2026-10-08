@@ -22,3 +22,12 @@ static func verify(definition: CellDefinition, runtime: CellRuntimeState) -> Dic
 		"ok": not runtime.player_black and not runtime.pending_black and int(runtime.player_value) == int(definition.answer_value),
 		"reason": "",
 	}
+
+
+static func verify_color(definition: CellDefinition, runtime: CellRuntimeState, color: String) -> Dictionary:
+	if definition == null or runtime == null or definition.mode != CellDefinition.MODE_CANDIDATE or runtime.solved:
+		return {"ok": false, "reason": "Cell cannot be verified."}
+	if color not in CellDefinition.ANSWER_TYPES or color not in definition.candidate_types:
+		return {"ok": false, "reason": "Only red/green answers are supported."}
+	var accepted := definition.accepted_answer_types
+	return {"ok": color in accepted if not accepted.is_empty() else color == definition.answer_type, "reason": ""}

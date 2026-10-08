@@ -14,6 +14,7 @@ signal exit_finished
 var radius := 32.0
 
 var board_state: BoardState
+var gameplay_input_enabled := true
 var _cell_views: Dictionary = {}
 var _hovered_cell_id := ""
 var _neighbor_masks_enabled: Dictionary = {}
@@ -261,7 +262,7 @@ func play_error(cell_id: String) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if board_state == null or _entrance_active or _exit_active or not visible:
+	if not gameplay_input_enabled or board_state == null or _entrance_active or _exit_active or not visible:
 		return
 	if event is InputEventMouseMotion:
 		var cell_id := _cell_at(event.position)
@@ -273,9 +274,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				board_state.focused_cell_id = cell_id
 				cell_hovered.emit(cell_id)
 			refresh()
-	elif event is InputEventMouseButton and event.pressed:
+	elif event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE]:
 		var cell_id := _cell_at(event.position)
-		if cell_id.is_empty() and event.button_index == MOUSE_BUTTON_LEFT:
+		if cell_id.is_empty() and event.button_index == MOUSE_BUTTON_MIDDLE:
 			board_state.clear_selection()
 			refresh()
 			get_viewport().set_input_as_handled()
@@ -287,7 +288,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				cell_clicked.emit(cell_id, event.button_index)
 				get_viewport().set_input_as_handled()
 				return
-			if event.button_index == MOUSE_BUTTON_LEFT and not clicked_definition.is_black():
+			if event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE] and not clicked_definition.is_black():
 				if _neighbor_masks_enabled.has(cell_id):
 					_neighbor_masks_enabled.erase(cell_id)
 				else:

@@ -1,15 +1,25 @@
 {
   "id": "1-27",
   "chapter_id": 1,
-  "rule_version": 2,
-  "chapter_revision": 4,
+  "rule_version": 3,
+  "chapter_revision": 6,
   "generated_chapter": true,
   "allowed_colors": [
     "red",
-    "green",
-    "purple"
+    "green"
   ],
   "infer_yellow": false,
+  "design": {
+    "concept": "purple_nested_scopes",
+    "featured_clue": "purple",
+    "logic_rounds": 3,
+    "clue_deductions": 3,
+    "unique_solution": true,
+    "featured_clues_required": true,
+    "seed": 727000,
+    "silhouette": "crescent",
+    "obstacle": "crescent"
+  },
   "board": {
     "layout": "odd_r",
     "rows": 9,
@@ -20,19 +30,11 @@
       "id": "r0c2",
       "row": 0,
       "col": 2,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 5,
-      "scope_radius": 2,
-      "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+      "mode": "fixed",
+      "type": "red",
+      "value": 3,
+      "scope_radius": 1,
+      "revealed": true
     },
     {
       "id": "r0c3",
@@ -40,17 +42,16 @@
       "col": 3,
       "mode": "candidate",
       "type": "neutral",
-      "value": 26,
-      "scope_radius": 2,
+      "value": 3,
+      "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "red"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "purple"
-      }
+        "green"
+      ]
     },
     {
       "id": "r0c4",
@@ -58,35 +59,26 @@
       "col": 4,
       "mode": "candidate",
       "type": "neutral",
-      "value": 5,
-      "scope_radius": 3,
+      "value": 1,
+      "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "red"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+        "green"
+      ]
     },
     {
       "id": "r0c5",
       "row": 0,
       "col": 5,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+      "mode": "fixed",
+      "type": "purple",
+      "value": 5,
+      "scope_radius": 3,
+      "revealed": true
     },
     {
       "id": "r0c6",
@@ -94,17 +86,16 @@
       "col": 6,
       "mode": "candidate",
       "type": "neutral",
-      "value": 1,
+      "value": 0,
       "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "red"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "purple"
-      }
+        "green"
+      ]
     },
     {
       "id": "r1c1",
@@ -112,17 +103,16 @@
       "col": 1,
       "mode": "candidate",
       "type": "neutral",
-      "value": 5,
-      "scope_radius": 3,
+      "value": 3,
+      "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "red"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+        "green"
+      ]
     },
     {
       "id": "r1c2",
@@ -130,35 +120,26 @@
       "col": 2,
       "mode": "candidate",
       "type": "neutral",
-      "value": 5,
-      "scope_radius": 2,
+      "value": 4,
+      "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "red"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+        "green"
+      ]
     },
     {
       "id": "r2c1",
       "row": 2,
       "col": 1,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 2,
-      "scope_radius": 1,
-      "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+      "mode": "fixed",
+      "type": "purple",
+      "value": 7,
+      "scope_radius": 3,
+      "revealed": true
     },
     {
       "id": "r2c2",
@@ -166,17 +147,16 @@
       "col": 2,
       "mode": "candidate",
       "type": "neutral",
-      "value": 5,
-      "scope_radius": 3,
+      "value": 3,
+      "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "red"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+        "green"
+      ]
     },
     {
       "id": "r3c0",
@@ -194,17 +174,16 @@
       "col": 1,
       "mode": "candidate",
       "type": "neutral",
-      "value": 7,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "red"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "purple"
-      }
+        "green"
+      ]
     },
     {
       "id": "r4c0",
@@ -242,35 +221,26 @@
       "col": 1,
       "mode": "candidate",
       "type": "neutral",
-      "value": 1,
-      "scope_radius": 3,
+      "value": 0,
+      "scope_radius": 1,
       "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
       "answer": {
         "type": "red"
-      }
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
     },
     {
       "id": "r6c1",
       "row": 6,
       "col": 1,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 3,
-      "scope_radius": 3,
-      "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+      "mode": "fixed",
+      "type": "purple",
+      "value": 1,
+      "scope_radius": 2,
+      "revealed": true
     },
     {
       "id": "r6c2",
@@ -278,44 +248,35 @@
       "col": 2,
       "mode": "candidate",
       "type": "neutral",
-      "value": 11,
+      "value": 0,
       "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "green"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "purple"
-      }
+        "green"
+      ]
     },
     {
       "id": "r7c1",
       "row": 7,
       "col": 1,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 3,
-      "scope_radius": 1,
-      "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+      "mode": "fixed",
+      "type": "purple",
+      "value": 2,
+      "scope_radius": 2,
+      "revealed": true
     },
     {
       "id": "r7c2",
       "row": 7,
       "col": 2,
       "mode": "fixed",
-      "type": "green",
-      "value": 4,
-      "scope_radius": 3,
+      "type": "purple",
+      "value": 1,
+      "scope_radius": 2,
       "revealed": true
     },
     {
@@ -324,17 +285,16 @@
       "col": 2,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
       "answer": {
         "type": "green"
-      }
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
     },
     {
       "id": "r8c3",
@@ -342,17 +302,16 @@
       "col": 3,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
-      "scope_radius": 3,
+      "value": 1,
+      "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "green"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "red"
-      }
+        "green"
+      ]
     },
     {
       "id": "r8c4",
@@ -361,16 +320,15 @@
       "mode": "candidate",
       "type": "neutral",
       "value": 1,
-      "scope_radius": 2,
+      "scope_radius": 1,
       "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
       "answer": {
         "type": "red"
-      }
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
     },
     {
       "id": "r8c5",
@@ -378,35 +336,26 @@
       "col": 5,
       "mode": "candidate",
       "type": "neutral",
-      "value": 3,
-      "scope_radius": 3,
+      "value": 2,
+      "scope_radius": 1,
       "revealed": true,
+      "answer": {
+        "type": "red"
+      },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+        "green"
+      ]
     },
     {
       "id": "r8c6",
       "row": 8,
       "col": 6,
-      "mode": "candidate",
-      "type": "neutral",
+      "mode": "fixed",
+      "type": "red",
       "value": 1,
       "scope_radius": 1,
-      "revealed": true,
-      "candidate_types": [
-        "red",
-        "green",
-        "purple"
-      ],
-      "answer": {
-        "type": "green"
-      }
+      "revealed": true
     }
   ]
 }

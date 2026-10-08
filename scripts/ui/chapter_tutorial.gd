@@ -4,6 +4,7 @@ extends Control
 # layout space, capture input, or move/scale the board.
 const FONT := preload("res://assets/fonts/MiSans-Light.ttf")
 const REVEAL_DELAY := 0.5
+const REVEAL_INTERVAL := 0.3
 const REVEAL_DURATION := 0.65
 const RISE_DISTANCE := 10.0
 const TEXT_OPACITY := 0.55
@@ -27,7 +28,7 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for index in 3:
 		var label := Label.new()
-		label.name = ["SwitchHint", "ConfirmHint", "SelectHint"][index]
+		label.name = ["RedCheckHint", "GreenCheckHint", "HypothesisHint"][index]
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		label.add_theme_font_override("font", FONT)
 		label.add_theme_font_size_override("font_size", 16)
@@ -58,7 +59,12 @@ func show_state(state: BoardState) -> void:
 		_update_text()
 		if visible:
 			if _level.id == "1-1":
-				_reveal(2)
+				_reveal(0)
+				_reveal(1, REVEAL_INTERVAL)
+				_reveal(2, REVEAL_INTERVAL * 2)
+			elif _level.id == "1-2":
+				_reveal(0)
+				_reveal(1, REVEAL_INTERVAL)
 			elif not _level.tutorial.has("reveal_on_selection"):
 				_reveal(0)
 				_reveal(1)
@@ -96,15 +102,9 @@ func _check_progress() -> void:
 			if not _state.selected_cell_id.is_empty() and _state.selected_cell_id == str(selection_triggers.get(side, "")):
 				_reveal(index)
 		return
-	if _level.id != "1-1": return
-	var definition := _state.get_definition(_state.selected_cell_id)
-	var runtime := _state.get_runtime(_state.selected_cell_id)
-	if definition == null or runtime == null or runtime.solved: return
-	_reveal(0)
-	if not runtime.candidate_pick.is_empty(): _reveal(1)
 
 
-func _reveal(index: int) -> void:
+func _reveal(index: int, extra_delay: float = 0.0) -> void:
 	if _revealed[index]: return
 	_revealed[index] = true
 	_motions[index] = RISE_DISTANCE
@@ -112,8 +112,8 @@ func _reveal(index: int) -> void:
 	label.modulate.a = 0.0
 	_place_labels()
 	var tween := create_tween().set_parallel(true)
-	tween.tween_property(label, "modulate:a", 1.0, REVEAL_DURATION).set_delay(REVEAL_DELAY).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_method(_set_motion.bind(index), RISE_DISTANCE, 0.0, REVEAL_DURATION).set_delay(REVEAL_DELAY).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(label, "modulate:a", 1.0, REVEAL_DURATION).set_delay(REVEAL_DELAY + extra_delay).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_method(_set_motion.bind(index), RISE_DISTANCE, 0.0, REVEAL_DURATION).set_delay(REVEAL_DELAY + extra_delay).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	_tweens.append(tween)
 
 

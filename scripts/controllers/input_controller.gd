@@ -10,6 +10,10 @@ var gameplay_input_enabled := true
 
 func set_gameplay_input_enabled(enabled: bool) -> void:
 	gameplay_input_enabled = enabled
+	if board_controller != null:
+		board_controller.gameplay_input_enabled = enabled
+		if board_controller.board_view != null:
+			board_controller.board_view.gameplay_input_enabled = enabled
 
 
 func _input(event: InputEvent) -> void:

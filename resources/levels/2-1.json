@@ -1,8 +1,22 @@
 {
   "id": "2-1",
   "chapter_id": 2,
-  "rule_version": 2,
+  "rule_version": 3,
+  "chapter_revision": 6,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green"
+  ],
   "infer_yellow": false,
+  "design": {
+    "concept": "yellow_opposite_pairs",
+    "featured_clue": "yellow",
+    "logic_rounds": 2,
+    "clue_deductions": 2,
+    "unique_solution": true,
+    "featured_clues_required": true
+  },
   "board": {
     "layout": "odd_r",
     "rows": 3,
@@ -10,22 +24,22 @@
   },
   "cells": [
     {
-      "id": "r0c1",
+      "id": "r0c2",
       "row": 0,
-      "col": 1,
+      "col": 2,
       "mode": "fixed",
       "type": "green",
-      "value": 1,
+      "value": 0,
       "scope_radius": 1,
       "revealed": true
     },
     {
-      "id": "r0c2",
-      "row": 0,
-      "col": 2,
+      "id": "r1c0",
+      "row": 1,
+      "col": 0,
       "mode": "candidate",
       "type": "neutral",
-      "value": 1,
+      "value": 0,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -33,19 +47,8 @@
       },
       "candidate_types": [
         "red",
-        "green",
-        "purple"
+        "green"
       ]
-    },
-    {
-      "id": "r1c0",
-      "row": 1,
-      "col": 0,
-      "mode": "fixed",
-      "type": "red",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true
     },
     {
       "id": "r1c1",
@@ -71,22 +74,18 @@
       "id": "r2c1",
       "row": 2,
       "col": 1,
-      "mode": "fixed",
-      "type": "green",
+      "mode": "candidate",
+      "type": "neutral",
       "value": 0,
       "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r2c2",
-      "row": 2,
-      "col": 2,
-      "mode": "fixed",
-      "type": "purple",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true
+      "revealed": true,
+      "answer": {
+        "type": "red"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
     }
-  ],
-  "generated_chapter": true
+  ]
 }

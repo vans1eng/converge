@@ -32,7 +32,7 @@ func show_board_state(state: BoardState) -> void:
 		var palette: GameColorPalette = ThemeManager.get_palette()
 		var colors := {"red": palette.red, "green": palette.green, "purple": palette.purple, "yellow": palette.yellow}
 		var segments: PackedStringArray = []
-		for type in CellDefinition.COLOR_TYPES:
+		for type in CellDefinition.ANSWER_TYPES:
 			if not state.level.allowed_colors.is_empty() and type not in state.level.allowed_colors:
 				continue
 			var total := 0
@@ -42,8 +42,6 @@ func show_board_state(state: BoardState) -> void:
 					total += 1
 					if cell.mode == CellDefinition.MODE_FIXED or state.get_runtime(cell.id).solved:
 						confirmed += 1
-			if type == "yellow" and total == 0 and not state.level.infer_yellow:
-				continue
 			segments.append("[color=#%s]%s %d/%d[/color]" % [colors[type].to_html(false), tr("COLOR_" + type.to_upper()), confirmed, total])
 		if bool(state.level.tutorial.get("practice", false)):
 			segments = PackedStringArray()

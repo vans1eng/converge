@@ -8,6 +8,7 @@ signal verification_requested
 @export var level_controller_path: NodePath
 
 var board_state: BoardState
+var gameplay_input_enabled := true
 @onready var board_view: HexBoardView = get_node_or_null(board_view_path)
 @onready var level_controller: LevelController = get_node_or_null(level_controller_path)
 
@@ -64,7 +65,7 @@ func change_selected_value(delta: int) -> void:
 func pick_selected_color(type: String) -> void:
 	var definition := _selected_definition()
 	var runtime := _selected_runtime()
-	if definition == null or runtime == null or runtime.solved or type not in definition.candidate_types:
+	if definition == null or runtime == null or runtime.solved or type not in CellDefinition.ANSWER_TYPES or type not in definition.candidate_types:
 		return
 	runtime.candidate_pick = type
 	runtime.wrong = false
@@ -105,10 +106,16 @@ func refresh_view() -> void:
 
 
 func _on_cell_clicked(cell_id: String, button_index: int) -> void:
-	if button_index == MOUSE_BUTTON_LEFT:
+	if not gameplay_input_enabled or get_tree().paused or board_state == null:
+		return
+	if board_view != null and (board_view._entrance_active or board_view._exit_active or not board_view.visible):
+		return
+	if button_index == MOUSE_BUTTON_MIDDLE:
 		select_cell(cell_id)
-	elif button_index == MOUSE_BUTTON_RIGHT and board_state.selected_cell_id == cell_id:
-		request_verification()
+	elif button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT] and level_controller != null:
+		var color := CellDefinition.TYPE_RED if button_index == MOUSE_BUTTON_LEFT else CellDefinition.TYPE_GREEN
+		# Verify the clicked brick, independently of any selected hypothesis.
+		level_controller.verify_color(cell_id, color)
 
 
 func _on_cell_hovered(_cell_id: String) -> void:

@@ -27,11 +27,11 @@ LEGEND_TITLE,BRICK GUIDE,砖块说明,磚塊說明,ブリックガイド,브릭 
 LEGEND_SCOPE,Numbers are visible from the start. A brick never counts itself.,数字开局公开；砖块不计算自己。,數字開局公開；磚塊不計算自己。,数字は最初から公開され、自分自身は数えません。,숫자는 처음부터 공개되며 자기 자신은 세지 않습니다.,Все числа видны с начала. Сам блок не учитывается.,Les nombres sont visibles dès le départ. Le bloc lui-même est exclu.,Alle Zahlen sind von Anfang an sichtbar. Der Block selbst zählt nicht mit.
 LEGEND_RED,Red: count red cells in radius,红色：半径内红砖数量,紅色：半徑內紅磚數量,赤：半径内の赤の数,빨강: 반경 내 빨간 칸 수,Красный: число красных блоков в радиусе,Rouge : nombre de blocs rouges dans le rayon,Rot: Anzahl roter Blöcke im Radius
 LEGEND_ORANGE,■ ORANGE: non-black neighbours,■ 橙色：周围非黑色砖数量,■ 橙色：周圍非黑色磚數量,■ オレンジ：周囲の黒以外のブリック数,■ 주황: 주변의 검은색이 아닌 브릭 수,"■ ОРАНЖЕВЫЙ: соседние блоки, кроме чёрных",■ ORANGE : voisins non noirs,■ ORANGE: nicht schwarze Nachbarn
-LEGEND_YELLOW,"Yellow: sum red/green numbers along six rays; walls stop rays, gaps do not",黄色：六方向红绿数字之和；遇墙停止，空缺跳过,黃色：六方向紅綠數字之和；遇牆停止，空缺跳過,黄：6方向の赤と緑の合計。壁で止まり、空白は通過,"노랑: 6방향 빨강·초록 합. 벽은 차단, 빈칸은 통과","Жёлтый: сумма чисел красных и зелёных блоков по шести лучам; стены прерывают лучи, пробелы — нет","Jaune : somme des nombres rouges et verts sur six axes orientés ; les murs les arrêtent, les espaces vides non","Gelb: Summe roter und grüner Zahlen entlang sechs Strahlen; Mauern stoppen sie, Lücken nicht"
+LEGEND_YELLOW,Yellow: opposite red–green pairs at equal distance on three axes within r; walls block,黄色：r 范围内三轴对称红绿配对数；遇墙截断,黃色：r 範圍內三軸對稱紅綠配對數；遇牆截斷,黄：r以内の3軸で等距離の対向する赤と緑のペア数。壁で遮断,노랑: r 범위 세 축에서 같은 거리의 반대편 빨강·초록 쌍 수. 벽은 차단,Жёлтый: противоположные красно-зелёные пары на равном расстоянии по трём осям в пределах r; стены блокируют,Jaune : paires rouge-vert opposées à distance égale sur trois axes dans r ; les murs bloquent,Gelb: Gegenüberliegende rot-grüne Paare im gleichen Abstand auf drei Achsen innerhalb r; Mauern blockieren
 LEGEND_GREEN,Green: count green cells in radius,绿色：半径内绿砖数量,綠色：半徑內綠磚數量,緑：半径内の緑の数,초록: 반경 내 초록 칸 수,Зелёный: число зелёных блоков в радиусе,Vert : nombre de blocs verts dans le rayon,Grün: Anzahl grüner Blöcke im Radius
 LEGEND_CYAN,■ CYAN: opposite-pair sum,■ 青色：相对两格之和,■ 青色：相對兩格之和,■ シアン：向かい合う2マスの合計,■ 청록: 마주 보는 두 칸의 합,■ ГОЛУБОЙ: сумма противоположной пары,■ CYAN : somme de la paire opposée,■ TÜRKIS: Summe des gegenüberliegenden Paars
 LEGEND_BLUE,■ BLUE: same non-black neighbour value,■ 蓝色：周围非黑格同值,■ 藍色：周圍非黑色磚同值,■ 青：周囲の黒以外のブリックが同じ値,■ 파랑: 주변의 검은색이 아닌 브릭은 같은 값,"■ СИНИЙ: одинаковые числа у соседей, кроме чёрных",■ BLEU : même valeur chez les voisins non noirs,■ BLAU: gleicher Wert bei nicht schwarzen Nachbarn
-LEGEND_PURPLE,Purple: sum red/green numbers in radius,紫色：半径内红绿砖的数字之和,紫色：半徑內紅綠磚的數字之和,紫：半径内の赤と緑の数値の合計,보라: 반경 내 빨강·초록 숫자의 합,Фиолетовый: сумма чисел красных и зелёных блоков в радиусе,Violet : somme des nombres rouges et verts dans le rayon,Violett: Summe roter und grüner Zahlen im Radius
+LEGEND_PURPLE,Purple: absolute difference between red and green brick counts in radius,紫色：半径内红砖与绿砖数量之差的绝对值,紫色：半徑內紅磚與綠磚數量之差的絕對值,紫：半径内の赤と緑のマスの個数の差の絶対値,보라: 반경 내 빨강과 초록 칸 수 차이의 절댓값,Фиолетовый: модуль разности количества красных и зелёных блоков в радиусе,Violet : valeur absolue de la différence des nombres de blocs rouges et verts dans le rayon,Violett: Absoluter Unterschied der Anzahl roter und grüner Blöcke im Radius
 LEGEND_BLACK,"Wall: no number; cannot be selected or counted.
 Walls do not block radius scopes.","墙壁：没有数字，不可选择，不参与计数。
 墙壁不会阻断半径范围。","牆壁：沒有數字，不可選擇，不參與計數。
@@ -56,31 +56,31 @@ COLOR_GREEN,Green,绿色,綠色,緑,초록,Зелёный,Vert,Grün
 COLOR_PURPLE,Purple,紫色,紫色,紫,보라,Фиолетовый,Violet,Violett
 COLOR_YELLOW,Yellow,黄色,黃色,黄,노랑,Жёлтый,Jaune,Gelb
 HUD_MISTAKES,Mistakes %d,失误 %d 次,失誤 %d 次,ミス %d 回,실수 %d회,Ошибки: %d,Erreurs : %d,Fehler: %d
-LEGEND_INPUT,"Left-click: select · Arrows/wheel: change type
-Enter/right-click: check
-Click a known brick: show/hide its scope","左键选中 · 方向键／滚轮切换类型
-Enter／右键校验
-点击已知砖块可开关范围显示","左鍵選中 · 方向鍵／滾輪切換類型
-Enter／右鍵校驗
-點擊已知磚塊可開關範圍顯示","左クリック：選択 · 矢印／ホイール：種類変更
-Enter／右クリック：確認
-既知のマスをクリック：範囲の表示切替","좌클릭: 선택 · 방향키/휠: 종류 변경
-Enter/우클릭: 확인
-알려진 칸 클릭: 범위 표시 전환","Левая кнопка: выбор · Стрелки/колесо: смена типа
-Enter/правая кнопка: проверка
-Нажмите известный блок: показать/скрыть область","Clic gauche : sélectionner · Flèches/molette : changer
-Entrée/clic droit : vérifier
-Cliquez un bloc connu : afficher/masquer sa zone","Linksklick: auswählen · Pfeile/Mausrad: Typ wechseln
-Enter/Rechtsklick: prüfen
-Bekannten Block anklicken: Bereich ein-/ausblenden"
+LEGEND_INPUT,"Left-click: check red · Right-click: check green
+Middle-click: select · Wheel: hypothesize and view scope
+Click a known brick to toggle its scope · R: restart","左键检验红色 · 右键检验绿色
+中键选中 · 滚轮切换假设并查看范围
+点击已知砖块开关范围 · R 重玩","左鍵檢驗紅色 · 右鍵檢驗綠色
+中鍵選中 · 滾輪切換假設並查看範圍
+點擊已知磚塊開關範圍 · R 重玩","左クリック：赤を確認 · 右クリック：緑を確認
+中クリック：選択 · ホイール：仮定と範囲表示
+既知のマス：範囲の表示切替 · R：やり直し","좌클릭: 빨강 확인 · 우클릭: 초록 확인
+가운데 클릭: 선택 · 휠: 색 가정과 범위 확인
+알려진 칸 클릭: 범위 표시 전환 · R: 재시작","Левая кнопка: проверить красный · Правая: зелёный
+Средняя кнопка: выбрать · Колесо: гипотеза и область
+Нажмите известный блок: показать область · R: заново","Clic gauche : vérifier rouge · Clic droit : vérifier vert
+Clic du milieu : sélectionner · Molette : hypothèse et zone
+Bloc connu : afficher sa zone · R : recommencer","Linksklick: Rot prüfen · Rechtsklick: Grün prüfen
+Mittelklick: auswählen · Mausrad: Vermutung und Bereich
+Bekannter Block: Bereich anzeigen · R: neu starten"
 VALUE_RUSSIAN,RUSSIAN,俄语,俄語,ロシア語,러시아어,РУССКИЙ,RUSSE,RUSSISCH
 VALUE_FRENCH,FRENCH,法语,法語,フランス語,프랑스어,ФРАНЦУЗСКИЙ,FRANÇAIS,FRANZÖSISCH
 VALUE_GERMAN,GERMAN,德语,德語,ドイツ語,독일어,НЕМЕЦКИЙ,ALLEMAND,DEUTSCH
 TUTORIAL_YELLOW_1,Click the yellow brick to see its three axes (six directions).,点击黄色砖，查看三条轴线（六个方向）。,點擊黃色磚，查看三條軸線（六個方向）。,黄色のマスをクリックして3軸（6方向）を確認。,노란 칸을 클릭해 세 축(여섯 방향)을 확인하세요.,Нажмите жёлтый блок: он охватывает три оси (шесть направлений).,Cliquez sur le bloc jaune pour voir ses trois axes (six directions).,Klicke auf den gelben Block: Er erfasst drei Achsen (sechs Richtungen).
-TUTORIAL_YELLOW_2,Yellow adds red and green numbers along its axes; it does not count bricks.,黄色累加轴线上红砖与绿砖的数字，不是砖块数量。,黃色累加軸線上紅磚與綠磚的數字，不是磚塊數量。,黄色は軸上の赤と緑の数値を足します。マスの個数ではありません。,노랑은 축 위 빨강과 초록의 숫자를 더합니다. 칸 수가 아닙니다.,"Жёлтый складывает числа красных и зелёных блоков на осях, а не считает блоки.","Le jaune additionne les nombres rouges et verts sur ses axes, pas les blocs.",Gelb addiert rote und grüne Zahlen auf seinen Achsen; es zählt keine Blöcke.
-TUTORIAL_YELLOW_3,Yellow rays cross empty spaces and continue to the next brick.,黄色轴线会跨过空位，继续读取后面的砖块。,黃色軸線會跨過空位，繼續讀取後面的磚塊。,黄色の軸は空白を通過し、その先のマスまで続きます。,노란 축은 빈칸을 지나 다음 칸까지 이어집니다.,Жёлтые лучи проходят через пробелы к следующим блокам.,Les rayons jaunes traversent les espaces vides et continuent vers les blocs suivants.,Gelbe Strahlen überqueren Lücken und laufen zum nächsten Block weiter.
-TUTORIAL_YELLOW_4,A black wall stops only the ray it touches. Bricks behind it do not contribute.,黑墙只截断所在方向的轴线，墙后的砖块不计入黄色。,黑牆只截斷所在方向的軸線，牆後的磚塊不計入黃色。,黒い壁はその方向だけを遮り、壁の先のマスは合計に含みません。,검은 벽은 해당 방향만 막습니다. 벽 뒤의 칸은 합에 포함되지 않습니다.,Чёрная стена прерывает только свой луч. Блоки за ней не входят в сумму.,Un mur noir arrête seulement le rayon qui le touche. Les blocs derrière ne comptent pas.,Eine schwarze Mauer stoppt nur ihren Strahl. Blöcke dahinter tragen nichts zur Summe bei.
-TUTORIAL_YELLOW_5,Yellow is now a possible answer. Compare its axes with the purple radius.,现在可以选择黄色：比较黄色的轴线与紫色的半径范围。,現在可以選擇黃色：比較黃色的軸線與紫色的半徑範圍。,黄色も選べます。黄色の軸と紫の半径を比べてみましょう。,이제 노랑도 선택할 수 있습니다. 노란 축과 보라의 반경을 비교하세요.,Теперь можно выбрать жёлтый. Сравните его оси с радиусом фиолетового.,Le jaune devient une réponse possible. Comparez ses axes au rayon du violet.,Gelb ist jetzt eine mögliche Antwort. Vergleiche seine Achsen mit dem violetten Radius.
+TUTORIAL_YELLOW_2,"Each opposite red–green pair at equal distance adds 1. With r2, three axes allow up to 6 pairs.",同一轴线两侧等距的一红一绿计 1；r2 三轴最多 6 对。,同一軸線兩側等距的一紅一綠計 1；r2 三軸最多 6 對。,同じ軸の等距離で向かい合う赤と緑は1。r2なら3軸で最大6ペア。,같은 축에서 같은 거리의 반대편 빨강·초록 쌍은 1. r2는 세 축에서 최대 6쌍입니다.,Противоположная красно-зелёная пара на равном расстоянии даёт 1. При r2 на трёх осях максимум 6 пар.,"Chaque paire rouge-vert opposée à distance égale vaut 1. Avec r2, les trois axes permettent 6 paires au maximum.",Jedes gegenüberliegende rot-grüne Paar im gleichen Abstand zählt 1. Bei r2 sind auf drei Achsen höchstens 6 Paare möglich.
+TUTORIAL_YELLOW_3,Gaps and purple/yellow bricks do not count or block axes. Pairing uses equal grid distances within r.,空位、紫砖和黄砖不计数也不阻断轴线；仍按 r 内相同网格距离配对。,空位、紫磚和黃磚不計數也不阻斷軸線；仍按 r 內相同網格距離配對。,空白・紫・黄は数えず、軸も遮りません。r以内の等しいグリッド距離でペアにします。,빈칸·보라·노랑은 세지 않고 축을 막지 않습니다. r 안의 같은 격자 거리로 짝을 만듭니다.,"Пробелы, фиолетовые и жёлтые блоки не считаются и не блокируют оси. Пары имеют равное расстояние в сетке в пределах r.",Les espaces vides et blocs violets ou jaunes ne comptent pas et ne bloquent pas les axes. Les paires gardent la même distance sur la grille dans r.,Lücken sowie violette und gelbe Blöcke zählen nicht und blockieren keine Achsen. Paare haben den gleichen Gitterabstand innerhalb r.
+TUTORIAL_YELLOW_4,A black wall stops only the ray it touches. Bricks behind it do not contribute.,黑墙只截断所在方向的轴线，墙后的砖块不计入黄色。,黑牆只截斷所在方向的軸線，牆後的磚塊不計入黃色。,黒い壁はその方向だけを遮り、壁の先のマスはペアに含みません。,검은 벽은 해당 방향만 막습니다. 벽 뒤의 칸은 쌍에 포함되지 않습니다.,Чёрная стена прерывает только свой луч. Блоки за ней не участвуют в парах.,Un mur noir arrête seulement le rayon qui le touche. Les blocs derrière ne comptent pas.,Eine schwarze Mauer stoppt nur ihren Strahl. Blöcke dahinter zählen nicht als Paare.
+TUTORIAL_YELLOW_5,Purple and yellow are fixed clues. Purple does not block yellow axes; infer only red and green.,紫色和黄色都是固定线索；紫砖不阻断黄色轴线，只需推断红绿。,紫色和黃色都是固定線索；紫磚不阻斷黃色軸線，只需推斷紅綠。,紫と黄は固定のヒント。紫は黄の軸を遮りません。赤と緑だけを推理します。,보라와 노랑은 고정 단서입니다. 보라는 노란 축을 막지 않으며 빨강·초록만 추론합니다.,Фиолетовый и жёлтый — заданные подсказки. Фиолетовый не блокирует жёлтые оси. Определяйте только красный и зелёный.,Violet et jaune sont des indices fixes. Le violet ne bloque pas les axes jaunes. Déduisez seulement rouge et vert.,Violett und Gelb sind feste Hinweise. Violett blockiert keine gelben Achsen. Bestimme nur Rot und Grün.
 CHAPTER_1,CHAPTER 1,第一章,第一章,第1章,제1장,ГЛАВА 1,CHAPITRE 1,KAPITEL 1
 CHAPTER_2,CHAPTER 2,第二章,第二章,第2章,제2장,ГЛАВА 2,CHAPITRE 2,KAPITEL 2
 HOME_ABOUT,ABOUT,关于,關於,このゲームについて,정보,ОБ ИГРЕ,À PROPOS,ÜBER DAS SPIEL
@@ -124,3 +124,93 @@ Jeder Block nutzt seinen eigenen Bereich"
 
 PAUSE_RESTART,RESTART,重新开始,重新開始,やり直す,다시 시작,ЗАНОВО,RECOMMENCER,NEUSTART
 RESTART_HINT,Restart (R),重开关卡（R）,重開關卡（R）,やり直す (R),다시 시작 (R),Заново (R),Recommencer (R),Neustart (R)
+
+TUTORIAL_PURPLE_BALANCE,"Purple shows the absolute difference
+between red and green brick counts","紫色数字是范围内
+红砖与绿砖数量之差的绝对值","紫色數字是範圍內
+紅磚與綠磚數量之差的絕對值","紫は範囲内の赤と緑の
+マスの個数の差の絶対値です","보라는 범위 내 빨강과 초록
+칸 수 차이의 절댓값입니다","Фиолетовый показывает модуль разности
+количества красных и зелёных блоков","Le violet indique la valeur absolue
+de la différence des nombres de blocs rouges et verts","Violett zeigt den absoluten Unterschied
+der Anzahl roter und grüner Blöcke"
+
+TUTORIAL_FIXED_CLUES,"Infer only red and green
+Purple stays fixed as a clue","只需推断红色与绿色
+紫色是固定线索","只需推斷紅色與綠色
+紫色是固定線索","推理するのは赤と緑だけ
+紫は固定のヒントです","빨강과 초록만 추론하세요
+보라는 고정 단서입니다","Определяйте только красный и зелёный
+Фиолетовый — заданная подсказка","Déduisez seulement le rouge et le vert
+Le violet est un indice fixe","Bestimme nur Rot und Grün
+Violett ist ein fester Hinweis"
+
+TUTORIAL_PURPLE_ABSOLUTE,"A difference of 2 can favor either color
+Use known colors to decide which","差值为 2 时，红多或绿多都可能
+结合已知颜色判断哪一边更多","差值為 2 時，紅多或綠多都可能
+結合已知顏色判斷哪一邊更多","差が2なら赤が多い場合も緑が多い場合も
+既知の色から判断しましょう","차이가 2면 어느 색이든 더 많을 수 있어요
+알려진 색으로 판단하세요","При разности 2 больше может быть любого цвета
+Используйте известные цвета","Une différence de 2 peut favoriser chaque couleur
+Utilisez les couleurs connues","Bei einer Differenz von 2 kann jede Farbe überwiegen
+Nutze bekannte Farben"
+
+TUTORIAL_PURPLE_ZERO_BRICK,"A brick with number 0 still counts as one
+Purple uses colors, not printed numbers","数字为 0 的红绿砖仍算一块
+紫色只看颜色，不看砖上的数字","數字為 0 的紅綠磚仍算一塊
+紫色只看顏色，不看磚上的數字","数字が0の赤や緑も1マスと数えます
+紫は数字ではなく色を使います","숫자가 0인 빨강·초록도 한 칸으로 셉니다
+보라는 숫자가 아닌 색을 봅니다","Красный или зелёный блок с 0 всё равно считается
+Фиолетовый использует цвета, а не числа","Un bloc rouge ou vert portant 0 compte quand même
+Le violet utilise les couleurs, pas les nombres","Ein roter oder grüner Block mit 0 zählt trotzdem
+Violett nutzt Farben, nicht Zahlen"
+
+TUTORIAL_PURPLE_R2,"Purple r2 counts red and green bricks
+in the first two rings, then takes their difference","紫色 r2 统计两圈内的红绿砖数量
+再计算数量差的绝对值","紫色 r2 統計兩圈內的紅綠磚數量
+再計算數量差的絕對值","紫のr2は2リング内の赤と緑を数え
+個数の差の絶対値を求めます","보라 r2는 두 고리의 빨강·초록을 세고
+칸 수 차이의 절댓값을 구합니다","Фиолетовый r2 считает блоки в двух кольцах
+и берёт модуль разности красных и зелёных","Violet r2 compte les blocs dans deux anneaux
+et prend la valeur absolue de leur différence","Violett r2 zählt Blöcke in zwei Ringen
+und nimmt den absoluten Unterschied"
+
+TUTORIAL_PURPLE_WALL,"Walls do not count or block purple scopes
+Bricks behind a wall still contribute","墙壁不计数，也不阻断紫色范围
+墙后的红绿砖仍参与数量差","牆壁不計數，也不阻斷紫色範圍
+牆後的紅綠磚仍參與數量差","壁は数えず、紫の範囲も遮りません
+壁の先の赤と緑も数えます","벽은 세지 않고 보라 범위를 막지 않아요
+벽 뒤의 빨강·초록도 셉니다","Стены не считаются и не блокируют фиолетовый
+Блоки за стеной тоже учитываются","Les murs ne comptent pas et ne bloquent pas le violet
+Les blocs derrière comptent aussi","Mauern zählen nicht und blockieren Violett nicht
+Blöcke dahinter zählen ebenfalls"
+
+TUTORIAL_MOUSE_RED,"Left-click a gray brick
+to check red immediately","左键点击灰色砖块
+直接检验红色","左鍵點擊灰色磚塊
+直接檢驗紅色","灰色のマスを左クリック
+赤かどうかをすぐ確認","회색 칸을 좌클릭하면
+빨강인지 바로 확인합니다","Нажмите серый блок левой кнопкой
+для проверки красного цвета","Cliquez un bloc gris avec le bouton gauche
+pour vérifier le rouge directement","Klicke links auf einen grauen Block
+um Rot direkt zu prüfen"
+
+TUTORIAL_MOUSE_GREEN,"Right-click a gray brick
+to check green immediately","右键点击灰色砖块
+直接检验绿色","右鍵點擊灰色磚塊
+直接檢驗綠色","灰色のマスを右クリック
+緑かどうかをすぐ確認","회색 칸을 우클릭하면
+초록인지 바로 확인합니다","Нажмите серый блок правой кнопкой
+для проверки зелёного цвета","Cliquez un bloc gris avec le bouton droit
+pour vérifier le vert directement","Klicke rechts auf einen grauen Block
+um Grün direkt zu prüfen"
+
+TUTORIAL_MOUSE_HYPOTHESIS,"Middle-click to select · Wheel to hypothesize
+and inspect the scope · R to restart","中键选中，滚轮切换假设并查看范围
+按 R 键重玩本关","中鍵選中，滾輪切換假設並查看範圍
+按 R 鍵重玩本關","中クリックで選択、ホイールで仮定と範囲確認
+Rキーでやり直し","가운데 클릭으로 선택, 휠로 색 가정과 범위 확인
+R키로 다시 시작","Средняя кнопка: выбор, колесо: гипотеза и область
+R: начать заново","Clic du milieu : sélectionner, molette : hypothèse et zone
+R : recommencer","Mittelklick: auswählen, Mausrad: Vermutung und Bereich
+R: neu starten"

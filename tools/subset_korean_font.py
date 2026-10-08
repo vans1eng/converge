@@ -15,12 +15,20 @@ from fontTools.varLib.instancer import instantiateVariableFont
 root = Path(__file__).resolve().parents[1]
 rows = list(csv.reader((root / 'localization/translations.csv').open()))
 column = rows[0].index('ko')
-text = ''.join(row[column] for row in rows[1:])
+text = ''.join(row[column] for row in rows[1:] if row)
 # Floating tutorials are stored in level JSON rather than the translation CSV.
 for path in (root / 'resources/levels').glob('*.json'):
     level = json.loads(path.read_text())
     for hint in level.get('tutorial', {}).get('floating', {}).values():
         text += hint.get('ko', '')
+# Also cover new characters absent from the primary font in every locale.
+primary_chars = TTFont(root / 'assets/fonts/MiSans-Light.ttf').getBestCmap()
+all_text = ''.join(value for row in rows[1:] for value in row[1:])
+for path in (root / 'resources/levels').glob('*.json'):
+    level = json.loads(path.read_text())
+    for hint in level.get('tutorial', {}).get('floating', {}).values():
+        all_text += ''.join(hint.values())
+text += ''.join(char for char in set(all_text) if ord(char) not in primary_chars)
 text += '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ‹›−×·/?:%'
 font = TTFont(sys.argv[1])
 if 'fvar' in font:

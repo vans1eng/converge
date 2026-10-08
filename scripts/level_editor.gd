@@ -1,7 +1,7 @@
 extends Control
 
 const TILE_TYPES := ["red", "green", "purple", "yellow", "black"]
-const ANSWER_TYPES := ["red", "green", "purple", "yellow"]
+const ANSWER_TYPES := ["red", "green"]
 
 var columns := 6
 var rows := 4
@@ -81,7 +81,7 @@ func _build_ui() -> void:
 	_heading(left, "统计")
 	stats = _hint(left, "")
 	_heading(left, "操作说明")
-	_hint(left, "点击空格创建砖块。\n点击已有砖块，在右侧配置。\n候选砖保留当前候选类型规则。\n线索数值在导出时自动计算。\n作用圈数沿用当前规则。\n` 返回主菜单。")
+	_hint(left, "点击空格创建砖块。\n点击已有砖块，在右侧配置。\n候选砖只推断红色或绿色。\n紫色和黄色请设为固定线索。\n线索数值在导出时自动计算。\n作用圈数沿用当前规则。\n` 返回主菜单。")
 	var spacer := Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	left.add_child(spacer)
@@ -148,7 +148,8 @@ func _build_ui() -> void:
 	candidate_row.add_child(candidate_a)
 	candidate_b = OptionButton.new()
 	candidate_row.add_child(candidate_b)
-	_fill_options(candidate_a, ["红绿", "红绿紫", "红绿紫黄"])
+	_fill_options(candidate_a, ["红绿"])
+	candidate_a.disabled = true
 	candidate_b.hide()
 	answer_row = _field(right, "确定答案")
 	answer_row.name = "AnswerRow"
@@ -399,8 +400,8 @@ func _show_properties() -> void:
 	_select_text(type_select, str(cell.get("type", "red")))
 	value_spin.value = float(cell.get("value", cell.get("answer", {}).get("value", 1)))
 	scope_radius_spin.value = float(cell.get("scope_radius", 1))
-	var candidates: Array = cell.get("candidate_types", ["red", "green", "purple"])
-	candidate_a.select(2 if "yellow" in candidates else 1 if "purple" in candidates else 0)
+	var candidates: Array = ANSWER_TYPES
+	candidate_a.select(0)
 	var mode := str(cell.get("mode", "fixed"))
 	var answer_items: Array = candidates if mode == "candidate" else []
 	answer_select.clear()
@@ -436,9 +437,6 @@ func _apply_properties() -> void:
 		cell.type = "neutral"
 		cell.scope_radius = int(scope_radius_spin.value)
 		cell.candidate_types = ["red", "green"]
-		if candidate_a.selected >= 1: cell.candidate_types.append("purple")
-		if candidate_a.selected == 2 and cell.scope_radius == 1:
-			cell.candidate_types.append("yellow")
 		var picked := answer_select.get_item_text(answer_select.selected) if answer_select.selected >= 0 else "red"
 		cell.answer = {"type": picked if picked in cell.candidate_types else "red"}
 		cell.value = int(value_spin.value)
@@ -477,6 +475,7 @@ func _export_json() -> void:
 	var data := loaded_metadata.duplicate(true)
 	data.erase("name")
 	data.id = level_id
+	data.rule_version = 3
 	data.board = {"layout": "odd_r", "columns": columns, "rows": rows}
 	data.cells = []
 	for row in rows:
@@ -485,14 +484,12 @@ func _export_json() -> void:
 			if not cell.is_empty(): data.cells.append(cell)
 	var level := LevelDefinition.from_dictionary(data)
 	ClueRules.compute_values(level)
-	data.infer_yellow = level.infer_yellow
+	data.infer_yellow = false
+	data.allowed_colors = ANSWER_TYPES.duplicate()
 	for index in level.cells.size():
 		data.cells[index].value = level.cells[index].value
 		if level.cells[index].mode == "candidate":
-			var candidates: Array = Array(level.allowed_colors) if not level.allowed_colors.is_empty() else data.cells[index].get("candidate_types", ["red", "green", "purple"])
-			if level.infer_yellow and level.cells[index].scope_radius == 1 and "yellow" not in candidates:
-				candidates.append("yellow")
-			data.cells[index].candidate_types = candidates
+			data.cells[index].candidate_types = ANSWER_TYPES.duplicate()
 	level = LevelDefinition.from_dictionary(data)
 	var validator := LevelValidator.new()
 	if not validator.validate(level):
