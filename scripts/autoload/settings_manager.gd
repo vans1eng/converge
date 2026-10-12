@@ -11,14 +11,19 @@ const KOREAN_FONT := preload("res://assets/fonts/NotoSansKR-UI.ttf")
 const SETTINGS_FONT_SIZES := [18, 24, 48]
 const SETTINGS_TEXT_KEYS := [
 	"OPTIONS_TITLE", "ACTION_BACK", "PAUSE_TITLE", "PAUSE_RESUME", "PAUSE_BACK_TO_MAIN",
-	"SETTING_LANGUAGE", "SETTING_DISPLAY", "SETTING_RESOLUTION", "SETTING_THEME",
+	"SETTING_CONTROL", "VALUE_CAREFUL", "VALUE_FAST", "SETTING_LANGUAGE", "SETTING_DISPLAY", "SETTING_RESOLUTION", "SETTING_THEME",
 	"SETTING_MUSIC", "SETTING_SOUND", "VALUE_ENGLISH", "VALUE_CHINESE",
 	"VALUE_TRADITIONAL_CHINESE", "VALUE_JAPANESE", "VALUE_KOREAN",
 	"VALUE_RUSSIAN", "VALUE_FRENCH", "VALUE_GERMAN",
 	"VALUE_FULLSCREEN", "VALUE_WINDOWED", "VALUE_BORDERLESS", "VALUE_DARK",
 	"VALUE_LIGHT", "VALUE_ON", "VALUE_OFF",
 ]
-const LANGUAGES := ["en", "zh_CN", "zh_TW", "ja", "ko", "ru", "fr", "de"]
+const CONTROL_HINT_KEYS := [
+	"LEGEND_INPUT", "LEGEND_INPUT_CAREFUL", "TUTORIAL_MOUSE_RED",
+	"TUTORIAL_MOUSE_GREEN", "TUTORIAL_MOUSE_HYPOTHESIS", "TUTORIAL_CAREFUL_LEFT",
+	"TUTORIAL_CAREFUL_RIGHT", "TUTORIAL_CAREFUL_INTRO", "TUTORIAL_CONTROL_MODE",
+]
+const LANGUAGES := ["zh_CN", "zh_TW", "en", "ja", "ko", "ru", "fr", "de"]
 const LANGUAGE_LABELS := {
 	"en": "VALUE_ENGLISH",
 	"zh_CN": "VALUE_CHINESE",
@@ -38,6 +43,7 @@ const RESOLUTIONS := [
 	Vector2i(3840, 2160),
 ]
 
+var control_mode := "careful"
 var language := "en"
 var display_mode := "windowed"
 var resolution := DEFAULT_RESOLUTION
@@ -140,12 +146,25 @@ func warm_settings_fonts() -> void:
 		canvas.texts.append("0123456789 X")
 		for key in SETTINGS_TEXT_KEYS:
 			canvas.texts.append(str(translation.get_message(key)))
+		canvas.font_sizes = SETTINGS_FONT_SIZES
 		cover.color = ThemeManager.get_palette().background
+		canvas.queue_redraw()
+		await RenderingServer.frame_post_draw
+		# Prepare both gameplay modes before the first pause-menu toggle.
+		canvas.texts.clear()
+		for key in CONTROL_HINT_KEYS:
+			canvas.texts.append(str(translation.get_message(key)))
+		canvas.font_sizes = [13, 14, 16]
 		canvas.queue_redraw()
 		await RenderingServer.frame_post_draw
 	layer.queue_free()
 	_settings_fonts_warming = false
 	_settings_fonts_ready = true
+
+
+func toggle_control_mode() -> void:
+	control_mode = "fast" if control_mode == "careful" else "careful"
+	_save_and_emit()
 
 
 func cycle_language() -> void:
@@ -244,6 +263,9 @@ static func initial_language(config: ConfigFile, system_locale: String) -> Strin
 func _load_settings() -> void:
 	var config := ConfigFile.new()
 	config.load(SETTINGS_PATH)
+	control_mode = str(config.get_value("input", "control_mode", "careful"))
+	if control_mode not in ["careful", "fast"]:
+		control_mode = "careful"
 	language = initial_language(config, OS.get_locale())
 	if str(config.get_value("localization", "language", "")) not in LANGUAGES:
 		_save_pending = true
@@ -275,6 +297,8 @@ func _exit_tree() -> void:
 func _save_settings() -> void:
 	var config := ConfigFile.new()
 	config.load(SETTINGS_PATH)
+	# Loading preserves unrelated config keys; save the current in-memory mode.
+	config.set_value("input", "control_mode", control_mode)
 	config.set_value("localization", "language", language)
 	config.set_value("display", "mode", display_mode)
 	config.set_value("display", "width", resolution.x)

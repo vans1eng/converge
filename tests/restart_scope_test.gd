@@ -11,8 +11,7 @@ func _run() -> void:
 	get_tree().root.add_child(main)
 	get_tree().current_scene = main
 	await main.board_controller.board_view.entrance_finished
-	main.current_level_index = main.LEVEL_IDS.find("1-21")
-	main._load_current_level()
+	assert(main.level_controller.load_level("2-4"))
 	var board: HexBoardView = main.board_controller.board_view
 	await board.entrance_finished
 	var state: BoardState = main.level_controller.board_state
@@ -44,16 +43,13 @@ func _run() -> void:
 	assert(view._fill_color() == view._brick_color(target.answer_type))
 	assert(view._target_state_mask_opacity() == HexCellView.SOLVED_MASK_OPACITY)
 	state.mistakes = 3
-	state.elapsed_seconds = 83.0
 	var old_state := state
 	# The HUD button resets data before outgoing bricks finish shrinking.
 	main.restart_button.pressed.emit()
 	assert(main._restart_active and board._exit_active)
 	assert(main.level_controller.board_state != old_state)
 	assert(main.level_controller.board_state.mistakes == 0)
-	assert(main.level_controller.board_state.elapsed_seconds == 0.0)
 	assert(board.board_state == old_state)
-	assert(main.hud_controller.timer_label.text == "00:00")
 	main._restart_level() # repeated requests must not start another transition
 	await board.entrance_finished
 	await get_tree().process_frame
@@ -83,7 +79,6 @@ func _run() -> void:
 	key.pressed = true
 	main._unhandled_input(key)
 	assert(main._restart_active and board._exit_active)
-	assert(main.level_controller.board_state.elapsed_seconds == 0.0)
 	await board.entrance_finished
 	await get_tree().process_frame
 	assert(not main._restart_active and main.input_controller.gameplay_input_enabled)

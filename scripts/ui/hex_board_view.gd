@@ -10,6 +10,7 @@ signal exit_finished
 @export var max_radius := 36.0
 @export var min_radius := 16.0
 @export var board_margin := 72.0
+@export var board_vertical_padding := 50.0
 
 var radius := 32.0
 
@@ -202,7 +203,7 @@ func _calculate_radius(level: LevelDefinition) -> float:
 	# Keep sizing based on declared bounds; horizontal placement uses occupied cells.
 	var body_rect := _body_rect()
 	var available_width: float = maxf(1.0, body_rect.size.x - board_margin * 2.0)
-	var available_height: float = maxf(1.0, body_rect.size.y - board_margin * 2.0)
+	var available_height: float = maxf(1.0, body_rect.size.y)
 	var width_factor: float = sqrt(3.0) * (level.columns + 0.5)
 	var height_factor: float = 1.5 * (level.rows - 1) + 2.0
 	return clamp(min(available_width / width_factor, available_height / height_factor), min_radius, max_radius)
@@ -214,11 +215,12 @@ func _body_rect() -> Rect2:
 	if scene == null:
 		return viewport_rect
 	var title := scene.get_node_or_null("CanvasLayer/HUD/VBoxContainer/LevelTitle") as Control
-	var status := scene.get_node_or_null("CanvasLayer/HUD/VBoxContainer/StatusMessage") as Control
+	var status := scene.get_node_or_null("CanvasLayer/HUD/StatusMessage") as Control
 	if title == null or status == null:
 		return viewport_rect
-	var header_bottom := title.get_global_rect().end.y + 48.0
-	var footer_top := status.get_global_rect().position.y
+	# Equal padding keeps the board centered between the title and footer.
+	var header_bottom := title.get_global_rect().end.y + board_vertical_padding
+	var footer_top := status.get_global_rect().position.y - board_vertical_padding
 	return Rect2(0.0, header_bottom, viewport_rect.size.x, maxf(1.0, footer_top - header_bottom))
 
 
@@ -238,7 +240,7 @@ func refresh() -> void:
 		var assist_type := _active_assist_type(definition)
 		var preview := definition.is_editable() and not view.runtime.solved and definition.id == board_state.selected_cell_id and not view.runtime.candidate_pick.is_empty()
 		var known := not definition.is_editable() or view.runtime.solved
-		var enabled := not definition.is_black() and (preview or (known and board_state.selected_cell_id.is_empty() and _neighbor_masks_enabled.has(definition.id)))
+		var enabled := board_state.is_intelligence_visible(definition) and definition.is_number_visible(view.runtime.solved) and (preview or (known and board_state.selected_cell_id.is_empty() and _neighbor_masks_enabled.has(definition.id)))
 		# Hidden assists need no geometry. Reuse it until the color or radius changes.
 		if enabled and assist_type in CellDefinition.COLOR_TYPES:
 			if _overlay_geometry_keys.get(definition.id, "") != assist_type:
@@ -276,7 +278,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			refresh()
 	elif event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE]:
 		var cell_id := _cell_at(event.position)
-		if cell_id.is_empty() and event.button_index == MOUSE_BUTTON_MIDDLE:
+		if cell_id.is_empty() and event.button_index == (MOUSE_BUTTON_LEFT if SettingsManager.control_mode == "careful" else MOUSE_BUTTON_MIDDLE):
 			board_state.clear_selection()
 			refresh()
 			get_viewport().set_input_as_handled()
@@ -288,7 +290,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				cell_clicked.emit(cell_id, event.button_index)
 				get_viewport().set_input_as_handled()
 				return
-			if event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE] and not clicked_definition.is_black():
+			if (event.button_index == MOUSE_BUTTON_LEFT or (SettingsManager.control_mode == "fast" and event.button_index == MOUSE_BUTTON_MIDDLE)) and board_state.is_intelligence_visible(clicked_definition) and clicked_definition.is_number_visible(board_state.get_runtime(cell_id).solved):
 				if _neighbor_masks_enabled.has(cell_id):
 					_neighbor_masks_enabled.erase(cell_id)
 				else:

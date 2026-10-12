@@ -1,98 +1,109 @@
 {
-  "id": "1-2",
-  "chapter_id": 1,
-  "rule_version": 2,
-  "chapter_revision": 3,
-  "generated_chapter": true,
-  "allowed_colors": [
-    "red",
-    "green"
-  ],
-  "infer_yellow": false,
-  "board": {
-    "layout": "odd_r",
-    "rows": 3,
-    "columns": 5
-  },
-  "cells": [
-    {
-      "id": "r0c0",
-      "row": 0,
-      "col": 0,
-      "mode": "fixed",
-      "type": "red",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r0c1",
-      "row": 0,
-      "col": 1,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "candidate_types": [
-        "red",
-        "green"
-      ],
-      "answer": {
-        "type": "red"
-      }
-    },
-    {
-      "id": "r2c3",
-      "row": 2,
-      "col": 3,
-      "mode": "fixed",
-      "type": "green",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r2c4",
-      "row": 2,
-      "col": 4,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "candidate_types": [
-        "red",
-        "green"
-      ],
-      "answer": {
-        "type": "green"
-      }
-    }
-  ],
-  "tutorial": {
-    "floating": {
-      "left": {
-        "zh_CN": "红色砖块表示\n周围红色砖块的数量",
-        "zh_TW": "紅色磚塊表示\n周圍紅色磚塊的數量",
-        "en": "Red bricks show the number\nof surrounding red bricks",
-        "ja": "赤いマスの数字は\n周囲の赤いマスの数です",
-        "ko": "빨간 칸의 숫자는\n주변 빨간 칸의 개수입니다",
-        "ru": "Красный блок показывает число\nкрасных блоков вокруг него",
-        "fr": "Un bloc rouge indique le nombre\nde blocs rouges autour de lui",
-        "de": "Rote Blöcke zeigen die Anzahl\nder roten Blöcke in ihrer Umgebung"
-      },
-      "right": {
-        "zh_CN": "绿色砖块表示\n周围绿色砖块的数量",
-        "zh_TW": "綠色磚塊表示\n周圍綠色磚塊的數量",
-        "en": "Green bricks show the number\nof surrounding green bricks",
-        "ja": "緑のマスの数字は\n周囲の緑のマスの数です",
-        "ko": "초록 칸의 숫자는\n주변 초록 칸의 개수입니다",
-        "ru": "Зелёный блок показывает число\nзелёных блоков вокруг него",
-        "fr": "Un bloc vert indique le nombre\nde blocs verts autour de lui",
-        "de": "Grüne Blöcke zeigen die Anzahl\nder grünen Blöcke in ihrer Umgebung"
-      }
-    },
-    "practice": false
-  }
+	"allowed_colors": [
+		"red",
+		"green"
+	],
+	"board": {
+		"columns": 5,
+		"layout": "odd_r",
+		"rows": 3
+	},
+	"cells": [
+		{
+			"col": 0,
+			"hidden": true,
+			"id": "r0c0",
+			"mode": "fixed",
+			"row": 0,
+			"scope_radius": 1,
+			"type": "red",
+			"value": 1
+		},
+		{
+			"answer": {
+				"type": "red"
+			},
+			"candidate_types": [
+				"red",
+				"green"
+			],
+			"col": 1.0,
+			"id": "r0c1",
+			"mode": "candidate",
+			"row": 0.0,
+			"scope_radius": 1.0,
+			"type": "neutral",
+			"value": 1
+		},
+		{
+			"col": 3,
+			"hidden": true,
+			"id": "r2c3",
+			"mode": "fixed",
+			"row": 2,
+			"scope_radius": 1,
+			"type": "green",
+			"value": 1
+		},
+		{
+			"answer": {
+				"type": "green"
+			},
+			"candidate_types": [
+				"red",
+				"green"
+			],
+			"col": 4.0,
+			"id": "r2c4",
+			"mode": "candidate",
+			"row": 2.0,
+			"scope_radius": 1.0,
+			"type": "neutral",
+			"value": 1
+		}
+	],
+	"chapter_id": 1.0,
+	"id": "1-2",
+	"infer_yellow": false,
+	"rule_version": 3,
+	"source_id": "simple-toy:1-2",
+	"tutorial": {
+		"floating": {
+			"left": {
+				"de": "Rot zählt benachbarte rote Blöcke\nDer Block selbst zählt nicht mit",
+				"en": "Red counts adjacent red bricks\nThe brick itself is excluded",
+				"fr": "Le rouge compte les blocs rouges voisins\nLe bloc lui-même est exclu",
+				"ja": "赤の数字は隣接する赤いマスの数\n自分自身は含みません",
+				"ko": "빨간 숫자는 인접한 빨간 칸의 개수\n자기 자신은 제외합니다",
+				"ru": "Красное число — количество соседних\nкрасных блоков, без самого блока",
+				"zh_CN": "红色数字：相邻红砖的数量\n不包括自己",
+				"zh_TW": "紅色數字：相鄰紅磚的數量\n不包括自己"
+			},
+			"right": {
+				"de": "Grün zählt benachbarte grüne Blöcke\nDer Block selbst zählt nicht mit",
+				"en": "Green counts adjacent green bricks\nThe brick itself is excluded",
+				"fr": "Le vert compte les blocs verts voisins\nLe bloc lui-même est exclu",
+				"ja": "緑の数字は隣接する緑のマスの数\n自分自身は含みません",
+				"ko": "초록 숫자는 인접한 초록 칸의 개수\n자기 자신은 제외합니다",
+				"ru": "Зелёное число — количество соседних\nзелёных блоков, без самого блока",
+				"zh_CN": "绿色数字：相邻绿砖的数量\n不包括自己",
+				"zh_TW": "綠色數字：相鄰綠磚的數量\n不包括自己"
+			},
+			"bottom": {
+				"zh_CN": "底部显示各颜色已确认的砖块数 / 总数\n两者之差就是还需找出的数量",
+				"zh_TW": "底部顯示各顏色已確認的磚塊數 / 總數\n兩者之差就是還需找出的數量",
+				"en": "The bottom shows confirmed bricks / total for each color\nThe difference is how many you still need to find",
+				"ja": "画面下部は色ごとの確定したマス数 / 総数\nその差が、まだ見つける必要のある数です",
+				"ko": "하단에는 색별로 확인된 칸 수 / 전체 칸 수가 표시됩니다\n두 수의 차이가 앞으로 찾아야 할 개수입니다",
+				"ru": "Внизу: подтверждённые блоки / всего для каждого цвета\nРазница — сколько ещё нужно найти",
+				"fr": "En bas : blocs confirmés / total pour chaque couleur\nLa différence indique combien il reste à trouver",
+				"de": "Unten stehen bestätigte Blöcke / Gesamtzahl je Farbe\nDie Differenz zeigt, wie viele noch zu finden sind"
+			}
+		},
+		"practice": false,
+		"reveal_on_selection": {
+			"left": "r0c1",
+			"right": "r2c4"
+		}
+	}
 }

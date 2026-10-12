@@ -4,7 +4,6 @@ class_name BoardState
 var level: LevelDefinition
 var cells: Dictionary = {}
 var mistakes := 0
-var elapsed_seconds := 0.0
 var selected_cell_id := ""
 var focused_cell_id := ""
 
@@ -20,7 +19,6 @@ func setup(level_definition: LevelDefinition) -> void:
 	for cell in level.cells:
 		cells[cell.id] = CellRuntimeState.new()
 	mistakes = 0
-	elapsed_seconds = 0.0
 	selected_cell_id = ""
 	focused_cell_id = ""
 

@@ -61,6 +61,12 @@ func _draw() -> void:
 					_outline(inner, Color(palette.cell_text, 0.55), 1.0, true)
 			if selected == Vector2i(col, row):
 				_outline(points, palette.main_text, 2.5)
+			if not bool(cell.get("hidden", false)) and not str(cell.get("direction", "")).is_empty():
+				var mark := HexCellView.arrow_points(_radius - 1.5, CellDefinition.DIRECTIONS.find(str(cell.direction)))
+				for index in mark.size(): mark[index] += position
+				draw_colored_polygon(mark, palette.cell_text)
+			if bool(cell.get("keep_hidden", false)) or (cell.get("mode", "fixed") == "fixed" and bool(cell.get("hidden", false))):
+				draw_string(CELL_FONT, position + Vector2(-_radius * 0.42, -_radius * 0.45), "!", HORIZONTAL_ALIGNMENT_LEFT, -1, maxi(8, int(_radius * 0.3)), palette.cell_text)
 			var label := _label_for(cell)
 			if not label.is_empty():
 				var scope_radius := int(cell.get("scope_radius", 1))
@@ -151,6 +157,8 @@ func _label_for(cell: Dictionary) -> String:
 		return "?"
 	if mode == "red_input":
 		return "?"
+	if bool(cell.get("hidden", false)):
+		return ""
 	if mode == "candidate":
 		return str(int(cell.get("value", 0)))
 	var tile_type := str(cell.get("type", "red"))

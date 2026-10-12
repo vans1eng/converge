@@ -74,3 +74,22 @@ func axis_cells(cell: CellDefinition, direction_index: int, radius: int = 0) -> 
 					break
 				result.append(axis_cell)
 	return result
+
+
+func direction_cells(cell: CellDefinition, direction_index: int) -> Array[CellDefinition]:
+	var result: Array[CellDefinition] = []
+	if direction_index < 0 or direction_index >= 6:
+		return result
+	var current := HexCoordinate.offset_to_axial(cell.row, cell.col)
+	while true:
+		current += HexCoordinate.DIRECTIONS[direction_index]
+		var offset := HexCoordinate.axial_to_offset(current)
+		if offset.x < 0 or offset.x >= _rows or offset.y < 0 or offset.y >= _columns:
+			break
+		var other := get_cell(offset.x, offset.y)
+		if other == null:
+			continue
+		if other.is_black():
+			break
+		result.append(other)
+	return result

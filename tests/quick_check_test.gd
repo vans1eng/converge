@@ -15,7 +15,7 @@ func _run() -> void:
 	game.level_controller.level_completed.disconnect(game._on_level_completed)
 	var board: HexBoardView = game.board_controller.board_view
 	await board.entrance_finished
-	assert(game.level_controller.load_level("1-25"))
+	assert(game.level_controller.load_level("2-41"))
 	await board.entrance_finished
 	var state: BoardState = game.level_controller.board_state
 	var red: CellDefinition

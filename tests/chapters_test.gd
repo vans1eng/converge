@@ -8,7 +8,7 @@ func _run() -> void:
 	AudioManager.bgm.stop()
 	AudioManager.set_sound_enabled(false)
 	var catalog := LevelRepository.get_catalog()
-	assert(catalog.size() == 60)
+	assert(catalog.size() == 66)
 	var counts := {1: 0, 2: 0}
 	var ids := {}
 	var validator := LevelValidator.new()
@@ -31,10 +31,10 @@ func _run() -> void:
 			if cell.effective_type() in ["purple", "yellow"]:
 				assert(cell.mode == CellDefinition.MODE_FIXED)
 		var yellow := level.cells.any(func(c): return c.effective_type() == "yellow")
-		assert(yellow == (level.chapter_id == 2))
-	assert(counts == {1: 30, 2: 30})
+		assert(not yellow or level.chapter_id == 2)
+	assert(counts == {1: 20, 2: 46})
 	for chapter in [1, 2]:
-		for number in range(1, 31):
+		for number in range(1, (20 if chapter == 1 else 46) + 1):
 			assert(ids.has("%d-%d" % [chapter, number]))
 	var save_path := "user://demo_progress_test.cfg"
 	DirAccess.remove_absolute(save_path)
@@ -43,9 +43,9 @@ func _run() -> void:
 	assert(not progress.is_completed("1-1"))
 	assert(not progress.is_unlocked("1-2"))
 	assert(not progress.is_unlocked("2-1"))
-	assert(progress.complete_level("1-2", 1.0, 0) == ERR_INVALID_PARAMETER)
-	assert(LevelRepository.get_playable_level_ids().size() == 30)
-	assert(LevelRepository.get_playable_level_ids()[-1] == "1-30")
+	assert(progress.complete_level("1-2", 0) == ERR_INVALID_PARAMETER)
+	assert(LevelRepository.get_playable_level_ids().size() == 20)
+	assert(LevelRepository.get_playable_level_ids()[-1] == "1-20")
 	TranslationServer.set_locale("en")
 	# Stale chapter metadata must not expose chapter two in the demo.
 	get_tree().set_meta("selected_chapter", 2)
@@ -68,7 +68,7 @@ func _run() -> void:
 	assert(not page._is_transitioning)
 	assert(page.back_button.mouse_filter == Control.MOUSE_FILTER_STOP)
 	assert(page._cell_tweens.all(func(tween): return not tween.is_running()))
-	assert(page._levels.size() == 30 and page.title_label.text == "CHAPTER 1")
+	assert(page._levels.size() == 20 and page.title_label.text == "CHAPTER 1")
 	assert(page._cell_scales.all(func(value): return is_equal_approx(value, 1.0)))
 	assert(page.find_children("*", "Button", true, false).size() == 1)
 	assert(page._level_at(page._cell_center(0)) == 0)
@@ -116,7 +116,7 @@ func _run() -> void:
 	var saved := ConfigFile.new()
 	assert(saved.load(save_path) == OK)
 	assert(saved.get_value("last_mistakes", "1-1") == 0)
-	assert(saved.get_value("last_time_seconds", "1-1") > 0.0)
+	assert(not saved.has_section("last_time_seconds"))
 	await get_tree().create_timer(2.0).timeout
 	assert(game.waiting_for_next_level and game.level_complete.continue_button.visible)
 	game.level_complete.continue_button.pressed.emit()
@@ -137,14 +137,14 @@ func _run() -> void:
 	page.queue_free()
 	await get_tree().process_frame
 	# Replays replace statistics without clearing completion or later progress.
-	assert(restored.complete_level("1-1", 5.5, 2) == OK)
+	assert(restored.complete_level("1-1", 2) == OK)
 	assert(saved.load(save_path) == OK)
-	assert(saved.get_value("last_time_seconds", "1-1") == 5.5)
+	assert(not saved.has_section("last_time_seconds"))
 	assert(saved.get_value("last_mistakes", "1-1") == 2)
-	for n in range(2, 31):
-		assert(restored.complete_level("1-%d" % n, 10.0, 0) == OK)
+	for n in range(2, 21):
+		assert(restored.complete_level("1-%d" % n, 0) == OK)
 	assert(not restored.is_unlocked("2-1"))
-	get_tree().set_meta("selected_level", "1-30")
+	get_tree().set_meta("selected_level", "1-20")
 	game = load("res://scenes/main.tscn").instantiate()
 	game._progress = PlayerProgress.new(save_path)
 	get_tree().root.add_child(game)
@@ -154,7 +154,7 @@ func _run() -> void:
 	await get_tree().create_timer(2.0).timeout
 	assert(game.waiting_for_next_level)
 	assert(not game.level_complete.continue_button.visible)
-	assert(game.level_controller.board_state.level.id == "1-30")
+	assert(game.level_controller.board_state.level.id == "1-20")
 	game.queue_free()
 	await get_tree().process_frame
 	# Older filename-based saves retain completion and unlock the next level.
@@ -168,9 +168,9 @@ func _run() -> void:
 	assert(migrated.is_completed("1-1") and migrated.is_unlocked("1-2"))
 	assert(not migrated.is_unlocked("1-3"))
 	assert(saved.load(save_path) == OK)
-	assert(saved.get_value("completed", "2-12"))
-	assert(saved.get_value("last_time_seconds", "2-12") == 42.0)
-	assert(saved.get_value("last_mistakes", "2-12") == 3)
+	assert(saved.get_value("completed", "2-28"))
+	assert(saved.get_value("last_time_seconds", "2-28") == 42.0)
+	assert(saved.get_value("last_mistakes", "2-28") == 3)
 	assert(not saved.has_section_key("completed", "level_026"))
 	assert(not saved.has_section_key("completed", "level_001"))
 	DirAccess.remove_absolute(save_path)

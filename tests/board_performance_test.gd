@@ -8,7 +8,7 @@ func _ready() -> void:
 func _run() -> void:
 	var board := HexBoardView.new()
 	add_child(board)
-	for level_id in ["1-25", "2-25"]:
+	for level_id in ["1-18", "2-41"]:
 		var level := LevelRepository.new().load_level(level_id)
 		assert(level != null)
 		var state := BoardState.new(level)
@@ -42,7 +42,7 @@ func _run() -> void:
 	# A level replaced while the first render is pending must never start its old entrance.
 	var started_ids: Array[String] = []
 	board.entrance_started.connect(func(): started_ids.append(board.board_state.level.id))
-	board.show_board(BoardState.new(LevelRepository.new().load_level("1-25")))
+	board.show_board(BoardState.new(LevelRepository.new().load_level("1-18")))
 	await get_tree().process_frame
 	board.show_board(BoardState.new(LevelRepository.new().load_level("1-1")))
 	await board.entrance_finished
@@ -57,7 +57,7 @@ func _run() -> void:
 func _check_assists(board: HexBoardView, state: BoardState) -> void:
 	var candidate: CellDefinition
 	for cell in state.level.cells:
-		if cell.is_editable():
+		if cell.is_editable() and cell.is_number_visible():
 			candidate = cell
 			break
 	assert(candidate != null)

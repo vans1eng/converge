@@ -1,5 +1,7 @@
 extends Node2D
 
+const GAME_CONFIG := preload("res://scripts/data/game_config.gd")
+
 var selected_level := "1-1"
 var LEVEL_IDS: Array[String] = LevelRepository.get_playable_level_ids()
 var _progress := PlayerProgress.new()
@@ -13,16 +15,21 @@ var _progress := PlayerProgress.new()
 @onready var restart_button: Button = $CanvasLayer/HUD/RestartButton
 @onready var guide_button: Button = $CanvasLayer/HUD/GuideButton
 @onready var legend_panel: PanelContainer = $CanvasLayer/HUD/LegendPanel
+@onready var previous_level_button: Button = $CanvasLayer/HUD/VBoxContainer/LevelTitle/PreviousLevelButton
+@onready var next_level_button: Button = $CanvasLayer/HUD/VBoxContainer/LevelTitle/NextLevelButton
 
 var current_level_index := 0
 var waiting_for_next_level := false
-var _timer_running := false
 var _restart_active := false
 var _hud_entrance_duration := 0.2
 
 
 func _ready() -> void:
 	legend_panel.hide()
+	previous_level_button.visible = GAME_CONFIG.DEV_MODE
+	next_level_button.visible = GAME_CONFIG.DEV_MODE
+	previous_level_button.pressed.connect(_switch_dev_level.bind(-1))
+	next_level_button.pressed.connect(_switch_dev_level.bind(1))
 	restart_button.pressed.connect(_restart_level)
 	pause_menu.restart_requested.connect(func(): _restart_level(true))
 	guide_button.pressed.connect(_toggle_legend)
@@ -30,7 +37,8 @@ func _ready() -> void:
 	guide_button.pressed.connect(AudioManager.play_ui_click)
 	level_complete.continue_requested.connect(_advance_after_completion)
 	level_complete.back_requested.connect(_return_home_after_completion)
-	SettingsManager.settings_changed.connect(_queue_legend_size_update)
+	level_complete.replay_requested.connect(_replay_after_completion)
+	SettingsManager.settings_changed.connect(_refresh_control_hints)
 	# HUD is above the board; only theme its controls, so its background stays transparent.
 	# Keep level loading independent from the optional theme autoload.
 	var theme_manager := get_node_or_null("/root/ThemeManager")
@@ -55,6 +63,25 @@ func _ready() -> void:
 	_queue_legend_size_update()
 
 
+func _update_dev_navigation() -> void:
+	var board := board_controller.board_view
+	var busy := _restart_active or waiting_for_next_level or get_tree().paused or board._entrance_active or board._exit_active or level_controller.board_state == null or level_controller.board_state.is_complete()
+	previous_level_button.disabled = not GAME_CONFIG.DEV_MODE or busy or current_level_index <= 0
+	next_level_button.disabled = not GAME_CONFIG.DEV_MODE or busy or current_level_index >= LEVEL_IDS.size() - 1
+
+
+func _switch_dev_level(direction: int) -> void:
+	_update_dev_navigation()
+	if direction not in [-1, 1] or not GAME_CONFIG.DEV_MODE:
+		return
+	if (previous_level_button.disabled if direction < 0 else next_level_button.disabled):
+		return
+	current_level_index += direction
+	get_tree().set_meta("selected_level", LEVEL_IDS[current_level_index])
+	legend_panel.hide()
+	_load_current_level(true)
+
+
 func _toggle_legend() -> void:
 	legend_panel.visible = not legend_panel.visible
 	if legend_panel.visible:
@@ -64,11 +91,20 @@ func _toggle_legend() -> void:
 func _update_legend_features(state: BoardState) -> void:
 	var features := LevelRepository.get_introduced_features(state.level)
 	var legend := $CanvasLayer/HUD/LegendPanel/Legend
-	var rows := {"Red": "red", "Green": "green", "Purple": "purple", "Yellow": "yellow", "Black": "black", "Radius2": "r2", "Radius3": "r3"}
+	var rows := {"Red": "red", "Green": "green", "Purple": "purple", "Yellow": "yellow", "Black": "black", "Radius2": "r2", "Radius3": "r3", "Arrow": "arrow"}
 	for entry in rows:
 		legend.get_node(entry).visible = features.has(rows[entry])
-	legend.get_node("Black/Label").text = "LEGEND_BLACK_RAYS" if features.has("yellow") else "LEGEND_BLACK"
+	legend.get_node("Black/Label").text = "LEGEND_BLACK_RAYS" if features.has("yellow") or features.has("arrow") else "LEGEND_BLACK"
+	_refresh_control_hints()
 	_queue_legend_size_update()
+
+
+func _refresh_control_hints() -> void:
+	var help := $CanvasLayer/HUD/LegendPanel/Legend/InputHelp as Label
+	var key := "LEGEND_INPUT_CAREFUL" if SettingsManager.control_mode == "careful" else "LEGEND_INPUT"
+	if help.text != key:
+		help.text = key
+		_queue_legend_size_update()
 
 
 func _queue_legend_size_update() -> void:
@@ -100,12 +136,13 @@ func _restart_level(from_pause := false) -> void:
 	if _restart_active or waiting_for_next_level or level_controller.board_state == null or level_controller.board_state.is_complete() or board._entrance_active or board._exit_active or not hud_controller.visible or (not from_pause and pause_menu.visible):
 		return
 	_restart_active = true
-	_timer_running = false
+	_update_dev_navigation()
 	input_controller.set_gameplay_input_enabled(false)
 	restart_button.disabled = true
 	legend_panel.hide()
+	var tutorial_fade: Tween = hud_controller.chapter_tutorial.fade_out_for_restart(from_pause) if hud_controller.chapter_tutorial != null else null
 	if from_pause:
-		# Keep the outgoing bricks hidden as the pause background fades away.
+		# Keep outgoing bricks and tutorial text hidden while the pause menu fades.
 		board.hide()
 		await pause_menu.close()
 		if not level_controller.load_level(LEVEL_IDS[current_level_index]):
@@ -118,9 +155,10 @@ func _restart_level(from_pause := false) -> void:
 			_finish_restart()
 			return
 		board_controller.board_state = level_controller.board_state
-		hud_controller.show_board_state(level_controller.board_state)
+		hud_controller.show_board_state(level_controller.board_state, false)
 		board.play_exit_wave()
 		await board.exit_finished
+		if tutorial_fade != null and tutorial_fade.is_running(): await tutorial_fade.finished
 		level_controller.level_loaded.emit(level_controller.board_state)
 	await board.entrance_finished
 	_finish_restart()
@@ -130,7 +168,7 @@ func _finish_restart() -> void:
 	input_controller.set_gameplay_input_enabled(true)
 	_restart_active = false
 	restart_button.disabled = false
-	_timer_running = true
+	_update_dev_navigation()
 
 
 func _advance_after_completion() -> void:
@@ -145,6 +183,13 @@ func _advance_after_completion() -> void:
 		_load_current_level(true)
 	else:
 		get_tree().change_scene_to_file("res://scenes/home_page.tscn")
+
+
+func _replay_after_completion() -> void:
+	if not waiting_for_next_level: return
+	waiting_for_next_level = false
+	await level_complete.fade_out()
+	_load_current_level(true)
 
 
 func _return_home_after_completion() -> void:
@@ -162,34 +207,28 @@ func _load_current_level(fade_hud := false) -> void:
 		return
 	waiting_for_next_level = false
 	get_tree().set_meta("selected_chapter", int(LEVEL_IDS[current_level_index].get_slice("-", 0)))
-	_timer_running = false
 	level_complete.hide()
 	hud_controller.show()
 	hud_controller.modulate.a = 0.0
 	_hud_entrance_duration = 0.32 if fade_hud else 0.2
 	input_controller.set_gameplay_input_enabled(false)
-	_timer_running = level_controller.load_level(LEVEL_IDS[current_level_index])
+	level_controller.load_level(LEVEL_IDS[current_level_index])
+	_update_dev_navigation()
 
 
 func _on_board_entrance_started() -> void:
 	create_tween().tween_property(hud_controller, "modulate:a", 1.0, _hud_entrance_duration).set_trans(Tween.TRANS_SINE)
 
 
-func _process(delta: float) -> void:
-	if not _timer_running or get_tree().paused or level_controller.board_state == null:
-		return
-	level_controller.board_state.elapsed_seconds += delta
-	hud_controller.show_elapsed_time(level_controller.board_state.elapsed_seconds)
-
-
 func _on_board_entrance_finished() -> void:
 	input_controller.set_gameplay_input_enabled(true)
+	_update_dev_navigation()
 
 
 func _on_level_completed() -> void:
-	_timer_running = false
+	_update_dev_navigation()
 	var state := level_controller.board_state
-	_progress.complete_level(LEVEL_IDS[current_level_index], state.elapsed_seconds, state.mistakes)
+	_progress.complete_level(LEVEL_IDS[current_level_index], state.mistakes)
 	input_controller.set_gameplay_input_enabled(false)
 	_show_completion_sequence()
 
@@ -204,7 +243,7 @@ func _show_completion_sequence() -> void:
 	await hud_fade.finished
 	hud_controller.hide()
 	var state := level_controller.board_state
-	level_complete.show_result(LEVEL_IDS[current_level_index], state.elapsed_seconds, state.mistakes, current_level_index + 1 < LEVEL_IDS.size())
+	level_complete.show_result(LEVEL_IDS[current_level_index], state.mistakes, current_level_index + 1 < LEVEL_IDS.size())
 	waiting_for_next_level = true
 
 
@@ -244,10 +283,10 @@ func _apply_palette(_is_dark_theme: bool) -> void:
 	swatch_style.border_width_right = 1
 	swatch_style.border_width_bottom = 1
 	$CanvasLayer/HUD/LegendPanel/Legend/Black/Swatch.add_theme_stylebox_override("panel", swatch_style)
-	$CanvasLayer/HUD/TimerLabel.add_theme_color_override("font_color", palette.main_text)
+	$CanvasLayer/HUD/MistakesLabel.add_theme_color_override("font_color", palette.main_text)
 	$CanvasLayer/HUD/VBoxContainer/LevelTitle.add_theme_color_override("font_color", palette.main_text)
 	$CanvasLayer/HUD/VBoxContainer/Control/TutorialHint.add_theme_color_override("font_color", palette.main_text)
-	$CanvasLayer/HUD/VBoxContainer/StatusMessage.add_theme_color_override("default_color", palette.main_text)
+	$CanvasLayer/HUD/StatusMessage.add_theme_color_override("default_color", palette.main_text)
 	var guide_style := StyleBoxFlat.new()
 	guide_style.bg_color = Color.TRANSPARENT
 	guide_style.border_color = Color(palette.main_text.r, palette.main_text.g, palette.main_text.b, 0.55)

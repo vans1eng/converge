@@ -3,6 +3,8 @@ class_name LevelRepository
 
 const LEVEL_DIRECTORY := "res://resources/levels"
 const DEMO_CHAPTER_ID := 1
+const DEMO_LEVEL_COUNT := 23
+const GAME_CONFIG := preload("res://scripts/data/game_config.gd")
 static var _catalog_cache: Array[Dictionary] = []
 static var _catalog_loaded := false
 static var _guide_features_cache: Dictionary = {}
@@ -53,6 +55,8 @@ static func get_introduced_features(level: LevelDefinition) -> Dictionary:
 static func _collect_guide_features(level: LevelDefinition, features: Dictionary) -> void:
 	for cell in level.cells:
 		features[cell.effective_type()] = true
+		if not cell.direction.is_empty():
+			features["arrow"] = true
 		for color in cell.candidate_types:
 			features[color] = true
 		if cell.scope_radius >= 2:
@@ -69,7 +73,9 @@ static func get_level_ids() -> Array[String]:
 
 
 static func get_playable_catalog() -> Array[Dictionary]:
-	return get_catalog().filter(func(entry): return entry.chapter_id == DEMO_CHAPTER_ID)
+	if GAME_CONFIG.DEV_MODE:
+		return get_catalog()
+	return get_catalog().filter(func(entry): return entry.chapter_id == DEMO_CHAPTER_ID and entry.number <= DEMO_LEVEL_COUNT)
 
 
 static func get_playable_level_ids() -> Array[String]:

@@ -1,20 +1,52 @@
 {
   "id": "1-4",
   "chapter_id": 1,
-  "rule_version": 2,
-  "chapter_revision": 3,
-  "generated_chapter": true,
+  "name": "",
+  "infer_yellow": false,
   "allowed_colors": [
     "red",
     "green"
   ],
-  "infer_yellow": false,
   "board": {
     "layout": "odd_r",
-    "rows": 3,
-    "columns": 3
+    "rows": 1,
+    "columns": 4
+  },
+  "tutorial": {
+    "floating": {
+      "left": {
+        "zh_CN": "有些砖块的数字是隐藏的\n推出颜色并校验后才会显示",
+        "en": "Some bricks have hidden numbers\nThey appear once you verify their colors",
+        "zh_TW": "有些磚塊的數字是隱藏的\n推出顏色並檢驗後才會顯示",
+        "ja": "一部のマスは数字が隠れています\n色を確認すると数字が現れます",
+        "ko": "일부 칸은 숫자가 숨겨져 있습니다\n색을 확인하면 숫자가 나타납니다",
+        "ru": "У некоторых блоков числа скрыты\nОни появятся после проверки цвета",
+        "fr": "Certains blocs ont des nombres cachés\nIls apparaissent une fois leur couleur vérifiée",
+        "de": "Manche Blöcke haben verborgene Zahlen\nSie erscheinen, sobald ihre Farbe geprüft ist"
+      },
+      "right": {
+        "zh_CN": "新出现的数字就是下一步的线索\n顺着它往下推",
+        "en": "Each revealed number is your next clue\nFollow the trail",
+        "zh_TW": "新出現的數字就是下一步的線索\n順著它往下推",
+        "ja": "現れた数字が次の手がかりです\nたどって進めましょう",
+        "ko": "새로 나타난 숫자가 다음 단서입니다\n따라가며 풀어 보세요",
+        "ru": "Каждое открытое число — следующая подсказка\nИдите по следу",
+        "fr": "Chaque nombre révélé est l’indice suivant\nSuivez la piste",
+        "de": "Jede aufgedeckte Zahl ist der nächste Hinweis\nFolge der Spur"
+      }
+    },
+    "practice": false
   },
   "cells": [
+    {
+      "id": "r0c0",
+      "row": 0,
+      "col": 0,
+      "mode": "fixed",
+      "type": "red",
+      "value": 1,
+      "scope_radius": 1
+    },
     {
       "id": "r0c1",
       "row": 0,
@@ -23,88 +55,49 @@
       "type": "neutral",
       "value": 1,
       "scope_radius": 1,
-      "revealed": true,
       "candidate_types": [
         "red",
         "green"
       ],
       "answer": {
         "type": "red"
-      }
+      },
+      "hidden": true
     },
     {
       "id": "r0c2",
       "row": 0,
       "col": 2,
-      "mode": "fixed",
-      "type": "green",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r1c0",
-      "row": 1,
-      "col": 0,
-      "mode": "fixed",
-      "type": "green",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r1c1",
-      "row": 1,
-      "col": 1,
-      "mode": "fixed",
-      "type": "red",
-      "value": 4,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r1c2",
-      "row": 1,
-      "col": 2,
-      "mode": "fixed",
-      "type": "red",
-      "value": 2,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r2c1",
-      "row": 2,
-      "col": 1,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
+      "value": 1,
       "scope_radius": 1,
-      "revealed": true,
       "candidate_types": [
         "red",
         "green"
       ],
       "answer": {
-        "type": "red"
-      }
+        "type": "green"
+      },
+      "hidden": true
     },
     {
-      "id": "r2c2",
-      "row": 2,
-      "col": 2,
+      "id": "r0c3",
+      "row": 0,
+      "col": 3,
       "mode": "candidate",
       "type": "neutral",
-      "value": 3,
+      "value": 1,
       "scope_radius": 1,
-      "revealed": true,
       "candidate_types": [
         "red",
         "green"
       ],
       "answer": {
-        "type": "red"
-      }
+        "type": "green"
+      },
+      "hidden": true
     }
-  ]
+  ],
+  "source_id": "simple-toy:1-3"
 }

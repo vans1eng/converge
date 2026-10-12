@@ -3,6 +3,8 @@
 [ext_resource type="FontFile" uid="uid://fe14v67iior5" path="res://assets/fonts/MiSans-Light.ttf" id="1_2e0ks"]
 [ext_resource type="Script" uid="uid://cyw3ovuuptg4j" path="res://scripts/home_page.gd" id="2_home"]
 
+[ext_resource type="Script" path="res://scripts/ui/text_button.gd" id="text_hit_area"]
+
 [sub_resource type="FontVariation" id="FontVariation_title"]
 base_font = ExtResource("1_2e0ks")
 spacing_glyph = 10
@@ -44,9 +46,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_2e0ks")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 26
 text = "HOME_START"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer" unique_id=265887993]
 custom_minimum_size = Vector2(0, 20)
@@ -56,23 +59,25 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_2e0ks")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 26
 text = "HOME_OPTIONS"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Control3" type="Control" parent="MarginContainer/VBoxContainer" unique_id=801107272]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="btn_about" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="btn_about" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1471212274]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_2e0ks")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 26
 text = "HOME_ABOUT"
 flat = true
+script = ExtResource("text_hit_area")
 
-[node name="AboutSpacer" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="AboutSpacer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1377891040]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
@@ -80,6 +85,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_2e0ks")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 26
 text = "HOME_EXIT"
 flat = true
+script = ExtResource("text_hit_area")
+

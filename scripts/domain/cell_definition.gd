@@ -17,12 +17,17 @@ const ANSWER_TYPES := [TYPE_RED, TYPE_GREEN]
 const CLUE_TYPES := COLOR_TYPES
 const RADIUS_CLUE_TYPES := [TYPE_RED, TYPE_GREEN, TYPE_PURPLE, TYPE_YELLOW]
 
+const DIRECTIONS := ["right", "up_right", "up_left", "left", "down_left", "down_right"]
+
 var id := ""
 var row := 0
 var col := 0
 var mode := MODE_FIXED
 var type := TYPE_RED
 var value: Variant = null
+var direction := ""
+var hidden := false
+var keep_hidden := false
 var scope_radius := 1
 var initially_revealed := false
 var candidate_types: Array[String] = []
@@ -40,6 +45,9 @@ static func from_dictionary(data: Dictionary) -> CellDefinition:
 	cell.type = str(data.get("type", TYPE_RED))
 	cell.value = data.get("value", null)
 	cell.scope_radius = int(data.get("scope_radius", 1))
+	cell.direction = str(data.get("direction", ""))
+	cell.hidden = bool(data.get("hidden", false))
+	cell.keep_hidden = bool(data.get("keep_hidden", false))
 	cell.initially_revealed = bool(data.get("revealed", false))
 
 	for candidate_type in data.get("candidate_types", []):
@@ -83,3 +91,7 @@ func is_editable() -> bool:
 
 static func is_valid_type(tile_type: String) -> bool:
 	return tile_type == TYPE_RED or tile_type == TYPE_BLACK or tile_type in CLUE_TYPES
+
+
+func is_number_visible(solved: bool = false) -> bool:
+	return not is_black() and (not hidden or (is_editable() and solved and not keep_hidden))

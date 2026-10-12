@@ -37,6 +37,7 @@ var error_flash_opacity := 0.0
 var _break_shards: Array[Dictionary] = []
 var _break_elapsed := 0.0
 var _last_display_text := ""
+var _last_pick := ""
 
 
 func setup(cell_definition: CellDefinition, cell_runtime: CellRuntimeState, cell_radius: float, layout_radius: float) -> void:
@@ -60,9 +61,10 @@ func setup(cell_definition: CellDefinition, cell_runtime: CellRuntimeState, cell
 	# Scale tweens use cached draw commands; only color/dot/shard changes need processing.
 	set_process(not _current_fill.is_equal_approx(_fill_color()) or _dots_animating() or not _break_shards.is_empty())
 	var text := _display_text()
-	if initializing or geometry_changed or text != _last_display_text:
+	if initializing or geometry_changed or text != _last_display_text or runtime.candidate_pick != _last_pick:
 		queue_redraw()
 	_last_display_text = text
+	_last_pick = runtime.candidate_pick
 
 
 func refresh_palette() -> void:
@@ -205,11 +207,13 @@ func _draw() -> void:
 		draw_colored_polygon(points, Color(hover_mask.r, hover_mask.g, hover_mask.b, state_mask_opacity))
 	var text := _display_text()
 	if not text.is_empty():
-		var text_center_y := -grid_radius * 0.24 if definition.scope_radius > 3 else (-grid_radius * 0.1 if definition.is_editable() and not runtime.solved else 0.0)
+		var text_center_y := -grid_radius * 0.24 if definition.scope_radius > 3 else (-grid_radius * 0.1 if definition.is_editable() and not runtime.solved and not runtime.candidate_pick.is_empty() else 0.0)
 		var font_size := int(grid_radius * 0.66)
 		var baseline := text_center_y + (CELL_FONT.get_ascent(font_size) - CELL_FONT.get_descent(font_size)) * 0.5
 		draw_string(CELL_FONT, Vector2(-radius, baseline), text, HORIZONTAL_ALIGNMENT_CENTER, radius * 2.0, font_size, _palette().cell_text)
-	if definition.scope_radius > 1 and intelligence_visible and not definition.is_black():
+	if definition.is_number_visible(runtime.solved) and not definition.direction.is_empty():
+		draw_colored_polygon(arrow_points(radius, CellDefinition.DIRECTIONS.find(definition.direction)), _palette().cell_text)
+	if definition.scope_radius > 1 and intelligence_visible and definition.is_number_visible(runtime.solved):
 		if definition.scope_radius <= 3:
 			for index in definition.scope_radius - 1:
 				var border := _hex_points(maxf(1.5, grid_radius * 0.065) * (index + 1))
@@ -314,6 +318,8 @@ func _update_overlay_z_index() -> void:
 
 func _draw_candidate(points: PackedVector2Array) -> void:
 	draw_colored_polygon(points, _current_fill)
+	if runtime.candidate_pick.is_empty():
+		return
 	for index in definition.candidate_types.size():
 		var type := definition.candidate_types[index]
 		var mix := clampf((float(dot_scales.get(type, 1.0)) - 1.0) / (0.075 / 0.045 - 1.0), 0.0, 1.0)
@@ -383,7 +389,7 @@ func _brick_color(type: String) -> Color:
 
 
 func _display_text() -> String:
-	if not intelligence_visible:
+	if not intelligence_visible or not definition.is_number_visible(runtime.solved):
 		return ""
 	if definition.is_wildcard() and runtime.solved:
 		return _format_value(runtime.player_value)
@@ -421,3 +427,13 @@ func _point_in_polygon(point: Vector2, polygon: PackedVector2Array) -> bool:
 			inside = not inside
 		previous = current
 	return inside
+
+
+static func arrow_points(cell_radius: float, direction_index: int) -> PackedVector2Array:
+	var edge := cell_radius * sqrt(3.0) / 2.0
+	var length := cell_radius * 0.22
+	var width := cell_radius * 0.09
+	var points := PackedVector2Array()
+	for point in [Vector2(edge - length, -width / 2), Vector2(edge, -width / 2), Vector2(edge, width / 2), Vector2(edge - length, width / 2)]:
+		points.append(point.rotated(deg_to_rad(-60.0 * direction_index)))
+	return points

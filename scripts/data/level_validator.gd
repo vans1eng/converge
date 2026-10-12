@@ -26,6 +26,12 @@ func validate(level: LevelDefinition) -> bool:
 			issues.append("Invalid cell mode or color: %s" % cell.id)
 		if cell.scope_radius < 1 or cell.scope_radius > 30 or (cell.scope_radius > 1 and cell.effective_type() not in CellDefinition.RADIUS_CLUE_TYPES):
 			issues.append("Invalid radius: %s" % cell.id)
+		if not cell.direction.is_empty() and (cell.direction not in CellDefinition.DIRECTIONS or cell.effective_type() not in CellDefinition.ANSWER_TYPES or cell.scope_radius != 1):
+			issues.append("Invalid arrow: %s" % cell.id)
+		if cell.hidden and not (cell.mode == CellDefinition.MODE_CANDIDATE or (cell.mode == CellDefinition.MODE_FIXED and cell.type in CellDefinition.ANSWER_TYPES)):
+			issues.append("Only candidates and fixed red/green bricks may hide numbers: %s" % cell.id)
+		if cell.keep_hidden and (not cell.hidden or cell.mode != CellDefinition.MODE_CANDIDATE):
+			issues.append("Permanent hiding requires a hidden candidate: %s" % cell.id)
 		if cell.is_black():
 			if cell.mode != CellDefinition.MODE_FIXED or cell.value != null:
 				issues.append("Walls must be fixed and have no value: %s" % cell.id)

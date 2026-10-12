@@ -19,6 +19,10 @@ var mode_select: OptionButton
 var type_select: OptionButton
 var value_spin: SpinBox
 var scope_radius_spin: SpinBox
+var direction_select: OptionButton
+var hidden_check: CheckBox
+var keep_hidden_check: CheckBox
+var edge_dialog: ConfirmationDialog
 var candidate_a: OptionButton
 var candidate_b: OptionButton
 var answer_select: OptionButton
@@ -59,6 +63,36 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().change_scene_to_file("res://scenes/home_page.tscn")
 
 
+func _input(event: InputEvent) -> void:
+	if selected.x < 0 or not event is InputEventKey or not event.pressed or event.echo:
+		return
+	var focused := get_viewport().gui_get_focus_owner()
+	if focused is LineEdit or focused is TextEdit:
+		return
+	if event.keycode == KEY_H and hidden_check.visible:
+		if mode_select.selected == 1:
+			if keep_hidden_check.button_pressed:
+				hidden_check.set_pressed_no_signal(false)
+				keep_hidden_check.set_pressed_no_signal(false)
+			elif hidden_check.button_pressed:
+				keep_hidden_check.set_pressed_no_signal(true)
+			else:
+				hidden_check.set_pressed_no_signal(true)
+		else:
+			hidden_check.set_pressed_no_signal(not hidden_check.button_pressed)
+		_apply_properties()
+		get_viewport().set_input_as_handled()
+	elif event.keycode == KEY_A and direction_select.get_parent().visible:
+		direction_select.select((direction_select.selected + 1) % 7)
+		_apply_properties()
+		get_viewport().set_input_as_handled()
+	elif event.keycode in [KEY_1, KEY_2, KEY_3] and scope_radius_spin.get_parent().visible:
+		direction_select.select(0)
+		scope_radius_spin.value = event.keycode - KEY_1 + 1
+		_apply_properties()
+		get_viewport().set_input_as_handled()
+
+
 func _build_ui() -> void:
 	var root := HBoxContainer.new()
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -78,10 +112,20 @@ func _build_ui() -> void:
 	dimensions.add_child(col_fields)
 	columns_spin = _spin(col_fields, "列数（宽）", columns, 1, 30)
 	_hint(left, "缩小尺寸会裁掉超出范围的格子；新增格子为空，点击后创建砖块。")
+	_heading(left, "四边延伸 / 缩短")
+	for edge in ["top", "bottom", "left", "right"]:
+		var edge_row := HBoxContainer.new()
+		left.add_child(edge_row)
+		var label := _hint(edge_row, {"top": "上", "bottom": "下", "left": "左", "right": "右"}[edge])
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_button(edge_row, "+", func(): _request_resize_edge(edge, 1))
+		_button(edge_row, "−", func(): _request_resize_edge(edge, -1))
+	edge_dialog = ConfirmationDialog.new()
+	add_child(edge_dialog)
 	_heading(left, "统计")
 	stats = _hint(left, "")
 	_heading(left, "操作说明")
-	_hint(left, "点击空格创建砖块。\n点击已有砖块，在右侧配置。\n候选砖只推断红色或绿色。\n紫色和黄色请设为固定线索。\n线索数值在导出时自动计算。\n作用圈数沿用当前规则。\n` 返回主菜单。")
+	_hint(left, "点击空格创建砖块。\n点击已有砖块，在右侧配置。\n候选砖只推断红色或绿色。\n紫色和黄色请设为固定线索。\n线索数值在导出时自动计算。\nA 切换箭头，1 / 2 / 3 设置半径。\nH 切换数字隐藏状态。\n` 返回主菜单。")
 	var spacer := Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	left.add_child(spacer)
@@ -101,6 +145,7 @@ func _build_ui() -> void:
 	_button(toolbar, "新建", func(): cells.clear(); selected = Vector2i(-1, -1); loaded_metadata.clear(); level_id = "NEW LEVEL"; id_edit.text = level_id; source_label.text = ""; folder_edit.text = "user://levels"; filename_edit.text = "new_level.json"; _reset_properties(); _refresh(); status.text = "已新建关卡")
 	_button(toolbar, "打开", _open_level_dialog)
 	_button(toolbar, "导出 JSON", _export_json, true)
+	_button(toolbar, "检查唯一解", _check_unique_solution)
 	theme_button = _button(toolbar, "", func(): ThemeManager.set_dark(not ThemeManager.is_dark))
 	board_title = Label.new()
 	board_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -142,6 +187,19 @@ func _build_ui() -> void:
 	type_chips = _chips(type_row, type_select, TILE_TYPES)
 	value_spin = _spin(right, "数值（导出自动计算）", 1, 0, 999)
 	scope_radius_spin = _spin(right, "作用圈数", 1, 1, 30)
+	direction_select = _option(right, "箭头方向", ["无", "→", "↗", "↖", "←", "↙", "↘"])
+	hidden_check = CheckBox.new()
+	hidden_check.text = "隐藏数字（确认颜色后显示）"
+	right.add_child(hidden_check)
+	hidden_check.toggled.connect(func(value):
+		if not value: keep_hidden_check.set_pressed_no_signal(false)
+		_apply_properties())
+	keep_hidden_check = CheckBox.new()
+	keep_hidden_check.text = "校验后也不显示数字"
+	right.add_child(keep_hidden_check)
+	keep_hidden_check.toggled.connect(func(value):
+		if value: hidden_check.set_pressed_no_signal(true)
+		_apply_properties())
 	candidate_row = _field(right, "候选类型")
 	candidate_row.name = "CandidateRow"
 	candidate_a = OptionButton.new()
@@ -172,7 +230,7 @@ func _build_ui() -> void:
 	columns_spin.value_changed.connect(func(_v): _resize_board())
 	rows_spin.value_changed.connect(func(_v): _resize_board())
 	id_edit.text_changed.connect(func(text): level_id = text; _refresh())
-	for control in [mode_select, type_select, candidate_a, candidate_b, answer_select]:
+	for control in [mode_select, type_select, direction_select, candidate_a, candidate_b, answer_select]:
 		control.item_selected.connect(func(_index): _apply_properties())
 	value_spin.value_changed.connect(func(_v): _apply_properties())
 	scope_radius_spin.value_changed.connect(func(_v): _apply_properties())
@@ -296,12 +354,18 @@ func _apply_editor_theme() -> void:
 			editor_theme.set_stylebox(state, control, _style(input, border, 6))
 		editor_theme.set_stylebox("focus", control, _style(Color(0, 0, 0, 0), text, 6))
 		editor_theme.set_font_size("font_size", control, 13)
+	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		editor_theme.set_color(state, "CheckBox", text)
+	editor_theme.set_font_size("font_size", "CheckBox", 12)
 	editor_theme.set_stylebox("panel", "PopupMenu", _style(input, border, 6))
 	editor_theme.set_stylebox("hover", "PopupMenu", _style(button_bg, border, 4))
 	editor_theme.set_color("font_color", "PopupMenu", text)
 	editor_theme.set_color("font_hover_color", "PopupMenu", text)
 	editor_theme.set_color("caret_color", "LineEdit", text)
 	theme = editor_theme
+	for check in [hidden_check, keep_hidden_check]:
+		for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color", "font_hover_pressed_color"]:
+			check.add_theme_color_override(state, text)
 	for label in section_labels + [board_title]:
 		label.add_theme_color_override("font_color", text)
 	for index in side_panels.size():
@@ -357,7 +421,9 @@ func _sync_chips(grid: GridContainer, option: OptionButton) -> void:
 func _reset_properties() -> void:
 	selected_label.text = "在棋盘上点击一个格子进行配置。"
 	delete_button.disabled = true
-	for control in [mode_select, value_spin, scope_radius_spin]:
+	hidden_check.hide()
+	keep_hidden_check.hide()
+	for control in [mode_select, value_spin, scope_radius_spin, direction_select]:
 		control.get_parent().hide()
 	for field in [type_row, candidate_row, answer_row]:
 		field.hide()
@@ -368,6 +434,7 @@ func _fill_options(option: OptionButton, items: Array) -> void:
 
 
 func _resize_board() -> void:
+	if updating: return
 	columns = int(columns_spin.value)
 	rows = int(rows_spin.value)
 	for key in cells.keys():
@@ -386,7 +453,15 @@ func _select_cell(row: int, col: int) -> void:
 
 
 func _default_cell(row: int, col: int) -> Dictionary:
-	return {"id": "r%dc%d" % [row, col], "row": row, "col": col, "mode": "fixed", "type": "red", "value": 0}
+	var id := "r%dc%d" % [row, col]
+	var existing_ids := {}
+	for cell in cells.values(): existing_ids[str(cell.id)] = true
+	var suffix := 1
+	var unique_id := id
+	while existing_ids.has(unique_id):
+		unique_id = "%s_%d" % [id, suffix]
+		suffix += 1
+	return {"id": unique_id, "row": row, "col": col, "mode": "fixed", "type": "red", "value": 0}
 
 
 func _show_properties() -> void:
@@ -400,6 +475,9 @@ func _show_properties() -> void:
 	_select_text(type_select, str(cell.get("type", "red")))
 	value_spin.value = float(cell.get("value", cell.get("answer", {}).get("value", 1)))
 	scope_radius_spin.value = float(cell.get("scope_radius", 1))
+	direction_select.select(CellDefinition.DIRECTIONS.find(str(cell.get("direction", ""))) + 1)
+	hidden_check.set_pressed_no_signal(bool(cell.get("hidden", false)))
+	keep_hidden_check.set_pressed_no_signal(bool(cell.get("keep_hidden", false)))
 	var candidates: Array = ANSWER_TYPES
 	candidate_a.select(0)
 	var mode := str(cell.get("mode", "fixed"))
@@ -409,6 +487,11 @@ func _show_properties() -> void:
 	_select_text(answer_select, str(cell.get("answer", {}).get("type", answer_items[0] if not answer_items.is_empty() else "")))
 	type_row.visible = mode == "fixed"
 	scope_radius_spin.get_parent().visible = mode == "candidate" or str(cell.get("type", "red")) in CellDefinition.RADIUS_CLUE_TYPES
+	direction_select.get_parent().visible = mode == "candidate" or str(cell.get("type", "red")) in ANSWER_TYPES
+	scope_radius_spin.editable = direction_select.selected == 0
+	hidden_check.visible = mode == "candidate" or str(cell.get("type", "red")) in ANSWER_TYPES
+	hidden_check.text = "隐藏数字（确认颜色后显示）" if mode == "candidate" else "不显示数字（只显示颜色）"
+	keep_hidden_check.visible = mode == "candidate"
 	candidate_row.visible = mode == "candidate"
 	answer_row.visible = mode == "candidate"
 	_sync_chips(type_chips, type_select)
@@ -427,6 +510,7 @@ func _apply_properties() -> void:
 	var row := selected.y; var col := selected.x
 	var mode := mode_select.get_item_text(mode_select.selected)
 	var cell := _default_cell(row, col)
+	cell.id = cells.get(_key(row, col), {}).get("id", cell.id)
 	cell.mode = mode
 	if mode == "fixed":
 		cell.type = type_select.get_item_text(type_select.selected)
@@ -443,6 +527,14 @@ func _apply_properties() -> void:
 		var original: Dictionary = cells.get(_key(row, col), {})
 		if cell.candidate_types == ["red", "green"] and original.get("answer", {}).has("accepted_types"):
 			cell.answer.accepted_types = original.answer.accepted_types.duplicate()
+	if mode == "candidate" or cell.type in ANSWER_TYPES:
+		if direction_select.selected > 0:
+			cell.direction = CellDefinition.DIRECTIONS[direction_select.selected - 1]
+			cell.scope_radius = 1
+	if (mode == "candidate" or cell.type in ANSWER_TYPES) and hidden_check.button_pressed:
+		cell.hidden = true
+		if mode == "candidate" and keep_hidden_check.button_pressed:
+			cell.keep_hidden = true
 	cells[_key(row, col)] = cell
 	_show_properties()
 	_refresh()
@@ -510,6 +602,8 @@ func _delete_selected_cell() -> void:
 	cells.erase(_key(selected.y, selected.x))
 	selected_label.text = "已删除：第 %d 行，第 %d 列" % [selected.y + 1, selected.x + 1]
 	delete_button.disabled = true
+	hidden_check.hide()
+	keep_hidden_check.hide()
 	_reset_properties()
 	_refresh()
 
@@ -557,6 +651,116 @@ func _load_level_file(path: String) -> void:
 	filename_edit.text = path.get_file()
 	selected_label.text = "已打开：%s" % path.get_file()
 	delete_button.disabled = true
+	hidden_check.hide()
+	keep_hidden_check.hide()
 	source_label.text = path.get_file()
 	_refresh()
 	status.text = "已打开，可直接修改后导出：%s" % path
+
+
+func _on_edge(cell: Dictionary, edge: String) -> bool:
+	match edge:
+		"top": return int(cell.row) == 0
+		"bottom": return int(cell.row) == rows - 1
+		"left": return int(cell.col) == 0
+		"right": return int(cell.col) == columns - 1
+	return false
+
+
+func _request_resize_edge(edge: String, delta: int) -> void:
+	var dimension := rows if edge in ["top", "bottom"] else columns
+	if dimension + delta < 1 or dimension + delta > 30: return
+	var lost := 0
+	if delta < 0:
+		for cell in cells.values():
+			if _on_edge(cell, edge): lost += 1
+	if lost > 0:
+		for callback in edge_dialog.confirmed.get_connections():
+			edge_dialog.confirmed.disconnect(callback.callable)
+		edge_dialog.dialog_text = "这一排有 %d 块砖，缩短会删掉它们，继续吗？" % lost
+		edge_dialog.confirmed.connect(func(): _resize_edge(edge, delta), CONNECT_ONE_SHOT)
+		edge_dialog.popup_centered()
+	else:
+		_resize_edge(edge, delta)
+
+
+func _edge_position(row: int, col: int, edge: String, delta: int, alternate: bool) -> Vector2i:
+	if edge == "left": return Vector2i(col + delta, row)
+	if edge != "top": return Vector2i(col, row)
+	# Odd-r parity changes when shifting one row. Both choices are rigid
+	# half-cell translations, so adjacency and the board silhouette survive.
+	var shift := (row & 1) if delta > 0 else - (1 - (row & 1))
+	if alternate: shift += -1 if delta > 0 else 1
+	return Vector2i(col + shift, row + delta)
+
+
+func _resize_edge(edge: String, delta: int) -> void:
+	var new_rows := rows + (delta if edge in ["top", "bottom"] else 0)
+	var new_columns := columns + (delta if edge in ["left", "right"] else 0)
+	if new_rows < 1 or new_rows > 30 or new_columns < 1 or new_columns > 30: return
+	var remaining: Array[Dictionary] = []
+	for cell in cells.values():
+		if delta < 0 and _on_edge(cell, edge): continue
+		remaining.append(cell)
+	var alternate := false
+	if edge == "top":
+		for cell in remaining:
+			var pos := _edge_position(int(cell.row), int(cell.col), edge, delta, false)
+			if pos.x < 0 or pos.x >= new_columns:
+				alternate = true
+				break
+	# If neither translation fits, add room instead of dropping a brick.
+	var min_col := 0
+	var max_col := new_columns - 1
+	for cell in remaining:
+		var pos := _edge_position(int(cell.row), int(cell.col), edge, delta, alternate)
+		min_col = mini(min_col, pos.x)
+		max_col = maxi(max_col, pos.x)
+	new_columns = max_col - min_col + 1
+	if new_columns > 30:
+		status.text = "无法延伸：保持棋盘形状需要超过 30 列"
+		return
+	var next := {}
+	var next_selected := Vector2i(-1, -1)
+	for cell in remaining:
+		var old := Vector2i(int(cell.col), int(cell.row))
+		var pos := _edge_position(old.y, old.x, edge, delta, alternate)
+		pos.x -= min_col
+		var moved := cell.duplicate(true)
+		moved.row = pos.y
+		moved.col = pos.x
+		# Keep cell IDs stable; only board coordinates and dictionary keys change.
+		next[_key(pos.y, pos.x)] = moved
+		if selected == old: next_selected = pos
+	cells = next
+	selected = next_selected
+	rows = new_rows
+	columns = new_columns
+	updating = true
+	rows_spin.value = rows
+	columns_spin.value = columns
+	updating = false
+	if selected.x >= 0: _show_properties()
+	_refresh()
+
+
+func _check_unique_solution() -> void:
+	var data := loaded_metadata.duplicate(true)
+	data.id = level_id
+	data.board = {"layout": "odd_r", "columns": columns, "rows": rows}
+	data.cells = cells.values()
+	data.allowed_colors = ANSWER_TYPES.duplicate()
+	data.infer_yellow = false
+	var level := LevelDefinition.from_dictionary(data)
+	ClueRules.compute_values(level)
+	var validator := LevelValidator.new()
+	if not validator.validate(level):
+		status.text = "无法检查：" + "\n".join(validator.issues)
+		return
+	var result := PuzzleSolver.new().analyze(level)
+	if result.capped:
+		status.text = "检查达到搜索上限，尚未确认唯一解"
+	elif result.unique:
+		status.text = "唯一解：可按可见线索逐步确认全部候选砖"
+	else:
+		status.text = "未确认唯一解：还有 %d 块候选砖无法推断" % result.unresolved.size()

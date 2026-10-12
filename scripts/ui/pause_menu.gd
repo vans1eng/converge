@@ -14,6 +14,7 @@ var _is_closing := false
 @onready var restart_button: Button = $MarginContainer/VBoxContainer/Footer/RestartButton
 @onready var resume_button: Button = $MarginContainer/VBoxContainer/Footer/ResumeButton
 @onready var back_to_main_button: Button = $MarginContainer/VBoxContainer/Footer/BackToMainButton
+@onready var control_button: Button = $MarginContainer/VBoxContainer/Controls/Value
 @onready var language_button: Button = $MarginContainer/VBoxContainer/Language/Value
 @onready var display_button: Button = $MarginContainer/VBoxContainer/Display/Value
 @onready var resolution_button: Button = $MarginContainer/VBoxContainer/Resolution/Value
@@ -30,6 +31,7 @@ func _ready() -> void:
 			restart_requested.emit()
 	)
 	back_to_main_button.pressed.connect(_back_to_main)
+	control_button.pressed.connect(SettingsManager.toggle_control_mode)
 	language_button.pressed.connect(SettingsManager.cycle_language)
 	display_button.pressed.connect(SettingsManager.cycle_display_mode)
 	resolution_button.pressed.connect(SettingsManager.cycle_resolution)
@@ -52,12 +54,13 @@ func _apply_theme() -> void:
 	theme_manager.apply_to(self, false)
 	var palette: GameColorPalette = theme_manager.get_palette()
 	background.color = palette.background
-	for button in [resume_button, restart_button, back_to_main_button, language_button, display_button, resolution_button, theme_button, music_button, sound_button]:
+	for button in [resume_button, restart_button, back_to_main_button, control_button, language_button, display_button, resolution_button, theme_button, music_button, sound_button]:
 		button.add_theme_color_override("font_hover_color", Color(palette.main_text.r, palette.main_text.g, palette.main_text.b, 0.7))
 		button.add_theme_color_override("font_pressed_color", Color(palette.main_text.r, palette.main_text.g, palette.main_text.b, 0.5))
 
 
 func _refresh_values() -> void:
+	control_button.text = "VALUE_" + SettingsManager.control_mode.to_upper()
 	language_button.text = SettingsManager.language_label_key()
 	match SettingsManager.display_mode:
 		"fullscreen": display_button.text = "VALUE_FULLSCREEN"

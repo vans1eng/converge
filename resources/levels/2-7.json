@@ -1,304 +1,102 @@
 {
   "id": "2-7",
   "chapter_id": 2,
-  "rule_version": 3,
-  "chapter_revision": 6,
-  "generated_chapter": true,
+  "name": "",
+  "infer_yellow": false,
   "allowed_colors": [
     "red",
     "green"
   ],
-  "infer_yellow": false,
-  "design": {
-    "concept": "yellow_r2",
-    "featured_clue": "yellow",
-    "logic_rounds": 2,
-    "clue_deductions": 3,
-    "unique_solution": true,
-    "featured_clues_required": true,
-    "seed": 807018,
-    "silhouette": "diamond",
-    "obstacle": "none"
-  },
   "board": {
     "layout": "odd_r",
-    "rows": 5,
-    "columns": 5
+    "rows": 1,
+    "columns": 7
+  },
+  "tutorial": {
+    "floating": {
+      "left": {
+        "en": "Purple r2 counts red and green bricks\nin the first two rings, then takes their difference",
+        "zh_CN": "紫色 r2 统计两圈内的红绿砖数量\n再计算数量差的绝对值",
+        "zh_TW": "紫色 r2 統計兩圈內的紅綠磚數量\n再計算數量差的絕對值",
+        "ja": "紫のr2は2リング内の赤と緑を数え\n個数の差の絶対値を求めます",
+        "ko": "보라 r2는 두 고리의 빨강·초록을 세고\n칸 수 차이의 절댓값을 구합니다",
+        "ru": "Фиолетовый r2 считает блоки в двух кольцах\nи берёт модуль разности красных и зелёных",
+        "fr": "Violet r2 compte les blocs dans deux anneaux\net prend la valeur absolue de leur différence",
+        "de": "Violett r2 zählt Blöcke in zwei Ringen\nund nimmt den absoluten Unterschied"
+      },
+      "right": {
+        "en": "Walls do not count or block purple scopes\nBricks behind a wall still contribute",
+        "zh_CN": "墙壁不计数，也不阻断紫色范围\n墙后的红绿砖仍参与数量差",
+        "zh_TW": "牆壁不計數，也不阻斷紫色範圍\n牆後的紅綠磚仍參與數量差",
+        "ja": "壁は数えず、紫の範囲も遮りません\n壁の先の赤と緑も数えます",
+        "ko": "벽은 세지 않고 보라 범위를 막지 않아요\n벽 뒤의 빨강·초록도 셉니다",
+        "ru": "Стены не считаются и не блокируют фиолетовый\nБлоки за стеной тоже учитываются",
+        "fr": "Les murs ne comptent pas et ne bloquent pas le violet\nLes blocs derrière comptent aussi",
+        "de": "Mauern zählen nicht und blockieren Violett nicht\nBlöcke dahinter zählen ebenfalls"
+      }
+    },
+    "practice": false
   },
   "cells": [
     {
-      "id": "r0c1",
+      "id": "r0c0",
       "row": 0,
-      "col": 1,
-      "mode": "fixed",
-      "type": "green",
-      "value": 2,
+      "col": 0,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 0,
       "scope_radius": 1,
-      "revealed": true
+      "candidate_types": [
+        "red",
+        "green"
+      ],
+      "answer": {
+        "type": "green"
+      }
     },
     {
       "id": "r0c2",
       "row": 0,
       "col": 2,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 2,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
+      "mode": "fixed",
+      "type": "green",
+      "value": 0,
+      "scope_radius": 1
     },
     {
-      "id": "r0c3",
+      "id": "r0c4",
       "row": 0,
-      "col": 3,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r1c0",
-      "row": 1,
-      "col": 0,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 2,
-      "revealed": true
-    },
-    {
-      "id": "r1c1",
-      "row": 1,
-      "col": 1,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 3,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r1c2",
-      "row": 1,
-      "col": 2,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 2,
-      "scope_radius": 2,
-      "revealed": true
-    },
-    {
-      "id": "r1c3",
-      "row": 1,
-      "col": 3,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r2c0",
-      "row": 2,
-      "col": 0,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r2c1",
-      "row": 2,
-      "col": 1,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r2c2",
-      "row": 2,
-      "col": 2,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 3,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r2c3",
-      "row": 2,
-      "col": 3,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 4,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r2c4",
-      "row": 2,
       "col": 4,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 2,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r3c0",
-      "row": 3,
-      "col": 0,
       "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 2,
-      "revealed": true
-    },
-    {
-      "id": "r3c1",
-      "row": 3,
-      "col": 1,
-      "mode": "fixed",
-      "type": "yellow",
+      "type": "purple",
       "value": 0,
-      "scope_radius": 1,
-      "revealed": true
+      "scope_radius": 2
     },
     {
-      "id": "r3c2",
-      "row": 3,
-      "col": 2,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 3,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
+      "id": "r0c5",
+      "row": 0,
+      "col": 5,
+      "mode": "fixed",
+      "type": "black",
+      "value": null,
+      "scope_radius": 1
     },
     {
-      "id": "r3c3",
-      "row": 3,
-      "col": 3,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 3,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r4c1",
-      "row": 4,
-      "col": 1,
+      "id": "r0c6",
+      "row": 0,
+      "col": 6,
       "mode": "candidate",
       "type": "neutral",
       "value": 0,
       "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
       "candidate_types": [
         "red",
         "green"
-      ]
-    },
-    {
-      "id": "r4c2",
-      "row": 4,
-      "col": 2,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r4c3",
-      "row": 4,
-      "col": 3,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true,
+      ],
       "answer": {
         "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
+      }
     }
-  ]
+  ],
+  "source_id": "simple-toy:1-21"
 }

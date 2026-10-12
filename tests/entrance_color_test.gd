@@ -9,13 +9,13 @@ func _run() -> void:
 	var main: Node = load("res://scenes/main.tscn").instantiate()
 	get_tree().root.add_child(main)
 	get_tree().current_scene = main
-	# Include the larger chapter-two board even when the playable demo lists chapter one only.
-	if not main.LEVEL_IDS.has("2-25"):
-		main.LEVEL_IDS.append("2-25")
+	# Exercise purple/yellow resources as well as the playable red/green chapter.
+	for id in ["2-8", "2-41"]:
+		if not main.LEVEL_IDS.has(id): main.LEVEL_IDS.append(id)
 	var samples := 0
 	for dark in [false, true]:
 		ThemeManager.set_dark(dark, false)
-		for level_id in ["1-1", "1-6", "1-20", "1-25", "1-26", "2-25"]:
+		for level_id in ["1-1", "1-6", "1-13", "1-18", "2-8", "2-41"]:
 			main.current_level_index = main.LEVEL_IDS.find(level_id)
 			assert(main.current_level_index >= 0)
 			main._load_current_level()

@@ -1,0 +1,39 @@
+{
+  "id": "1-19",
+  "chapter_id": 1,
+  "name": "",
+  "infer_yellow": false,
+  "allowed_colors": ["red","green"],
+  "board": {"layout":"odd_r","rows":1,"columns":5},
+  "tutorial": {
+    "floating": {
+      "left": {
+        "en": "Purple shows the absolute difference\nbetween red and green brick counts",
+        "zh_CN": "紫色数字是范围内\n红砖与绿砖数量之差的绝对值",
+        "zh_TW": "紫色數字是範圍內\n紅磚與綠磚數量之差的絕對值",
+        "ja": "紫は範囲内の赤と緑の\nマスの個数の差の絶対値です",
+        "ko": "보라는 범위 내 빨강과 초록\n칸 수 차이의 절댓값입니다",
+        "ru": "Фиолетовый показывает модуль разности\nколичества красных и зелёных блоков",
+        "fr": "Le violet indique la valeur absolue\nde la différence des nombres de blocs rouges et verts",
+        "de": "Violett zeigt den absoluten Unterschied\nder Anzahl roter und grüner Blöcke"
+      },
+      "right": {
+        "en": "Infer only red and green\nPurple and yellow stay fixed as clues",
+        "zh_CN": "只需推断红色与绿色\n紫色和黄色是固定线索",
+        "zh_TW": "只需推斷紅色與綠色\n紫色和黃色是固定線索",
+        "ja": "推理するのは赤と緑だけ\n紫と黄は固定のヒントです",
+        "ko": "빨강과 초록만 추론하세요\n보라와 노랑은 고정 단서입니다",
+        "ru": "Определяйте только красный и зелёный\nФиолетовый и жёлтый — заданные подсказки",
+        "fr": "Déduisez seulement le rouge et le vert\nViolet et jaune sont des indices fixes",
+        "de": "Bestimme nur Rot und Grün\nViolett und Gelb sind feste Hinweise"
+      }
+    },
+    "practice": false
+  },
+  "cells": [
+    {"id":"r0c0","row":0,"col":0,"mode":"fixed","type":"red","value":0,"scope_radius":1},
+    {"id":"r0c1","row":0,"col":1,"mode":"fixed","type":"purple","value":0,"scope_radius":1},
+    {"id":"r0c2","row":0,"col":2,"mode":"candidate","type":"neutral","value":0,"scope_radius":1,"candidate_types":["red","green"],"answer":{"type":"green"}},
+    {"id":"r0c4","row":0,"col":4,"mode":"candidate","type":"neutral","value":0,"scope_radius":1,"candidate_types":["red","green"],"answer":{"type":"red"}}
+  ]
+}

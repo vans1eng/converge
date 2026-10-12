@@ -6,6 +6,7 @@ const PAGE_FADE_DURATION := 0.2
 var _is_transitioning := false
 
 @onready var back_button: Button = $MarginContainer/VBoxContainer/btn_back
+@onready var control_button: Button = $MarginContainer/VBoxContainer/control_container/control_value
 @onready var language_button: Button = $MarginContainer/VBoxContainer/language_container/language_value
 @onready var display_button: Button = $MarginContainer/VBoxContainer/display_container/display_value
 @onready var resolution_button: Button = $MarginContainer/VBoxContainer/resolution_container/resolution_value
@@ -18,6 +19,7 @@ func _ready() -> void:
 	SettingsManager.warm_settings_fonts()
 	modulate.a = 0.0
 	back_button.pressed.connect(_return_home)
+	control_button.pressed.connect(SettingsManager.toggle_control_mode)
 	language_button.pressed.connect(SettingsManager.cycle_language)
 	display_button.pressed.connect(SettingsManager.cycle_display_mode)
 	resolution_button.pressed.connect(SettingsManager.cycle_resolution)
@@ -36,6 +38,7 @@ func _ready() -> void:
 
 
 func _refresh_values() -> void:
+	control_button.text = "VALUE_" + SettingsManager.control_mode.to_upper()
 	language_button.text = SettingsManager.language_label_key()
 	match SettingsManager.display_mode:
 		"fullscreen": display_button.text = "VALUE_FULLSCREEN"
@@ -51,7 +54,7 @@ func _refresh_values() -> void:
 func _apply_button_state_colors() -> void:
 	var theme_manager := get_node_or_null("/root/ThemeManager")
 	var base: Color = theme_manager.get_palette().main_text if theme_manager != null else Color.WHITE
-	for button in [back_button, language_button, display_button, resolution_button, theme_button, music_button, sound_button]:
+	for button in [back_button, control_button, language_button, display_button, resolution_button, theme_button, music_button, sound_button]:
 		button.add_theme_color_override("font_hover_color", Color(base.r, base.g, base.b, 0.7))
 		button.add_theme_color_override("font_pressed_color", Color(base.r, base.g, base.b, 0.5))
 

@@ -3,6 +3,8 @@
 [ext_resource type="FontFile" path="res://assets/fonts/MiSans-Light.ttf" id="1_ln188"]
 [ext_resource type="Script" uid="uid://bm7ugh0jpyluy" path="res://scripts/options_page.gd" id="2_options"]
 
+[ext_resource type="Script" path="res://scripts/ui/text_button.gd" id="text_hit_area"]
+
 [node name="OptionsPage" type="Control" unique_id=2054740570]
 layout_mode = 3
 anchors_preset = 15
@@ -27,7 +29,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 44
 text = "OPTIONS_TITLE"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -37,11 +39,11 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="language_container" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1938274605]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/language_container" unique_id=1078272966]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 24
@@ -50,19 +52,42 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="language_value" type="Button" parent="MarginContainer/VBoxContainer/language_container" unique_id=1025880870]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 18
 text = "VALUE_ENGLISH"
 flat = true
+script = ExtResource("text_hit_area")
+
+[node name="control_container" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/control_container"]
+custom_minimum_size = Vector2(440, 52)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ln188")
+theme_override_font_sizes/font_size = 24
+text = "SETTING_CONTROL"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="control_value" type="Button" parent="MarginContainer/VBoxContainer/control_container"]
+custom_minimum_size = Vector2(810, 52)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ln188")
+theme_override_font_sizes/font_size = 18
+text = "VALUE_CAREFUL"
+flat = true
+script = ExtResource("text_hit_area")
 
 [node name="display_container" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1645229766]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/display_container" unique_id=1853041195]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 24
@@ -71,19 +96,20 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="display_value" type="Button" parent="MarginContainer/VBoxContainer/display_container" unique_id=1968458652]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 18
 text = "VALUE_FULLSCREEN"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="resolution_container" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1254412273]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/resolution_container" unique_id=1637751847]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 24
@@ -92,19 +118,20 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="resolution_value" type="Button" parent="MarginContainer/VBoxContainer/resolution_container" unique_id=883681948]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 18
 text = "1920X1080"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="theme_container" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1371849940]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/theme_container" unique_id=1387178176]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 24
@@ -113,19 +140,20 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="theme_value" type="Button" parent="MarginContainer/VBoxContainer/theme_container" unique_id=1711575129]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 18
 text = "VALUE_LIGHT"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="music_container" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=125085259]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/music_container" unique_id=850968688]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 24
@@ -134,19 +162,20 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="music_value" type="Button" parent="MarginContainer/VBoxContainer/music_container" unique_id=1104621151]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 18
 text = "VALUE_ON"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="sound_container" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1776536885]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/sound_container" unique_id=906822483]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 24
@@ -155,12 +184,13 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="sound_value" type="Button" parent="MarginContainer/VBoxContainer/sound_container" unique_id=1580868738]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 18
 text = "VALUE_OFF"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer" unique_id=481238731]
 custom_minimum_size = Vector2(0, 30)
@@ -173,3 +203,5 @@ theme_override_fonts/font = ExtResource("1_ln188")
 theme_override_font_sizes/font_size = 24
 text = "ACTION_BACK"
 flat = true
+script = ExtResource("text_hit_area")
+

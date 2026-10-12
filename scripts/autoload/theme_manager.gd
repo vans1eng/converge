@@ -61,7 +61,7 @@ func _register_button_hover(button: Button, refresh := false) -> void:
 		button.remove_theme_color_override("font_hover_color")
 		button.remove_theme_stylebox_override("normal")
 		button.remove_theme_stylebox_override("hover")
-	var base: Color = get_palette().main_text
+	var base: Color = button.get_meta("hover_base_color", get_palette().main_text)
 	var hover := Color(base.r, base.g, base.b, 0.7)
 	button.set_meta("hover_transition_base", base)
 	button.set_meta("hover_transition_target", hover)
@@ -89,6 +89,13 @@ func _register_button_hover(button: Button, refresh := false) -> void:
 		button.pressed.connect(AudioManager.play_ui_click)
 		button.set_meta("hover_transition_ready", true)
 	_set_button_hover_mix(1.0 if button.is_hovered() else 0.0, button)
+
+
+func set_button_hover_color(button: Button, color: Color) -> void:
+	button.set_meta("hover_base_color", color)
+	_register_button_hover(button, true)
+	button.add_theme_color_override("font_pressed_color", Color(color, 0.5))
+	button.add_theme_color_override("font_hover_pressed_color", Color(color, 0.5))
 
 
 func _animate_button_hover(button: Button, hovered: bool) -> void:

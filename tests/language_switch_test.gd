@@ -37,7 +37,7 @@ func _run() -> void:
 	TranslationServer.set_locale("ko")
 	settings.settings_changed.emit()
 	_refresh_count = 0
-	for index in range(settings.LANGUAGES.size() * 5 - settings.LANGUAGES.find("ko")):
+	for index in range(settings.LANGUAGES.size() * 5 - settings.LANGUAGES.find("ko") + settings.LANGUAGES.find("en")):
 		settings.cycle_language()
 	assert(settings.language == "en")
 	await get_tree().process_frame
@@ -76,7 +76,7 @@ func _run() -> void:
 	settings.cycle_language()
 	# The exit hook must flush even before the debounce timer expires.
 	settings._exit_tree()
-	_assert_saved_language(settings, "zh_CN")
+	_assert_saved_language(settings, "ja")
 	assert(not settings._save_pending)
 	print("PASS: font coverage, rapid language switching, paused saving, exit flush")
 	get_tree().quit()

@@ -1,0 +1,106 @@
+{
+  "id": "1-20",
+  "chapter_id": 1,
+  "rule_version": 3,
+  "chapter_revision": 6,
+  "generated_chapter": true,
+  "allowed_colors": [
+    "red",
+    "green"
+  ],
+  "infer_yellow": false,
+  "design": {
+    "concept": "purple_balance",
+    "featured_clue": "purple",
+    "logic_rounds": 3,
+    "clue_deductions": 1,
+    "unique_solution": true,
+    "featured_clues_required": true
+  },
+  "board": {
+    "layout": "odd_r",
+    "rows": 1,
+    "columns": 5
+  },
+  "cells": [
+    {
+      "id": "r0c0",
+      "row": 0,
+      "col": 0,
+      "mode": "fixed",
+      "type": "red",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c1",
+      "row": 0,
+      "col": 1,
+      "mode": "fixed",
+      "type": "purple",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
+      "id": "r0c2",
+      "row": 0,
+      "col": 2,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true,
+      "answer": {
+        "type": "green"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
+    },
+    {
+      "id": "r0c4",
+      "row": 0,
+      "col": 4,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 0,
+      "scope_radius": 1,
+      "revealed": true,
+      "answer": {
+        "type": "red"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
+    }
+  ],
+  "tutorial": {
+    "floating": {
+      "left": {
+        "en": "Purple shows the absolute difference\nbetween red and green brick counts",
+        "zh_CN": "紫色数字是范围内\n红砖与绿砖数量之差的绝对值",
+        "zh_TW": "紫色數字是範圍內\n紅磚與綠磚數量之差的絕對值",
+        "ja": "紫は範囲内の赤と緑の\nマスの個数の差の絶対値です",
+        "ko": "보라는 범위 내 빨강과 초록\n칸 수 차이의 절댓값입니다",
+        "ru": "Фиолетовый показывает модуль разности\nколичества красных и зелёных блоков",
+        "fr": "Le violet indique la valeur absolue\nde la différence des nombres de blocs rouges et verts",
+        "de": "Violett zeigt den absoluten Unterschied\nder Anzahl roter und grüner Blöcke"
+      },
+      "right": {
+        "en": "Infer only red and green\nPurple stays fixed as a clue",
+        "zh_CN": "只需推断红色与绿色\n紫色是固定线索",
+        "zh_TW": "只需推斷紅色與綠色\n紫色是固定線索",
+        "ja": "推理するのは赤と緑だけ\n紫は固定のヒントです",
+        "ko": "빨강과 초록만 추론하세요\n보라는 고정 단서입니다",
+        "ru": "Определяйте только красный и зелёный\nФиолетовый — заданная подсказка",
+        "fr": "Déduisez seulement le rouge et le vert\nLe violet est un indice fixe",
+        "de": "Bestimme nur Rot und Grün\nViolett ist ein fester Hinweis"
+      }
+    },
+    "practice": false
+  }
+}

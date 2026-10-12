@@ -11,7 +11,7 @@ func _run() -> void:
 	get_tree().root.add_child(main)
 	get_tree().current_scene = main
 	await main.board_controller.board_view.entrance_finished
-	main.current_level_index = main.LEVEL_IDS.find("1-21")
+	main.current_level_index = main.LEVEL_IDS.find("1-8")
 	main._load_current_level()
 	var board: HexBoardView = main.board_controller.board_view
 	await board.entrance_finished
@@ -28,7 +28,6 @@ func _run() -> void:
 	await get_tree().create_timer(0.5).timeout
 	main.pause_menu.open()
 	await get_tree().create_timer(0.25).timeout
-	var elapsed := state.elapsed_seconds
 	var selected := state.selected_cell_id
 	var paused_pixels: Array[Color] = []
 	var original_dark := ThemeManager.is_dark
@@ -39,7 +38,6 @@ func _run() -> void:
 		_check_palette(board)
 		await get_tree().create_timer(0.1).timeout
 		_check_palette(board)
-		assert(state.elapsed_seconds == elapsed)
 		assert(state.selected_cell_id == selected)
 		assert(state.get_runtime(editable[0].id).solved)
 		assert(not state.get_runtime(editable[1].id).solved)

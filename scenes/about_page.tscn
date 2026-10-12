@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scripts/about_page.gd" id="1_script"]
 [ext_resource type="FontFile" path="res://assets/fonts/MiSans-Light.ttf" id="2_font"]
 
+[ext_resource type="Script" path="res://scripts/ui/text_button.gd" id="text_hit_area"]
+
 [sub_resource type="Theme" id="Theme_about"]
 default_font = ExtResource("2_font")
 default_font_size = 18
@@ -23,7 +25,7 @@ offset_top = 45.0
 offset_bottom = 115.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 44
 text = "HOME_ABOUT"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -128,6 +130,7 @@ theme_override_font_sizes/font_size = 18
 text = "ABOUT_LICENSES"
 flat = true
 focus_mode = 0
+script = ExtResource("text_hit_area")
 
 [node name="LicenseText" type="RichTextLabel" parent="Body/Content"]
 visible = false
@@ -156,3 +159,5 @@ theme_override_font_sizes/font_size = 24
 text = "ACTION_BACK"
 flat = true
 focus_mode = 0
+script = ExtResource("text_hit_area")
+

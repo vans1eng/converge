@@ -9,11 +9,14 @@ signal verification_requested
 
 var board_state: BoardState
 var gameplay_input_enabled := true
+var _control_mode := ""
 @onready var board_view: HexBoardView = get_node_or_null(board_view_path)
 @onready var level_controller: LevelController = get_node_or_null(level_controller_path)
 
 
 func _ready() -> void:
+	_control_mode = SettingsManager.control_mode
+	SettingsManager.settings_changed.connect(_on_settings_changed)
 	if board_view != null:
 		board_view.cell_clicked.connect(_on_cell_clicked)
 		board_view.cell_hovered.connect(_on_cell_hovered)
@@ -21,6 +24,16 @@ func _ready() -> void:
 		level_controller.level_loaded.connect(set_board_state)
 		verification_requested.connect(level_controller.verify_selected)
 		level_controller.cell_verified.connect(_on_cell_verified)
+
+
+func _on_settings_changed() -> void:
+	if _control_mode == SettingsManager.control_mode:
+		return
+	_control_mode = SettingsManager.control_mode
+	var runtime := _selected_runtime()
+	if runtime != null:
+		runtime.candidate_pick = ""
+	deselect_cell()
 
 
 func set_board_state(state: BoardState) -> void:
@@ -109,6 +122,12 @@ func _on_cell_clicked(cell_id: String, button_index: int) -> void:
 	if not gameplay_input_enabled or get_tree().paused or board_state == null:
 		return
 	if board_view != null and (board_view._entrance_active or board_view._exit_active or not board_view.visible):
+		return
+	if SettingsManager.control_mode == "careful":
+		if button_index == MOUSE_BUTTON_LEFT:
+			select_cell(cell_id)
+		elif button_index == MOUSE_BUTTON_RIGHT:
+			request_verification()
 		return
 	if button_index == MOUSE_BUTTON_MIDDLE:
 		select_cell(cell_id)

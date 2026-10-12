@@ -17,11 +17,11 @@ func _run() -> void:
 	var samples := {
 		1: [false, false, false, false],
 		5: [false, false, false, false],
-		6: [true, false, false, false],
-		10: [true, true, false, false],
-		12: [true, true, true, false],
-		20: [true, true, true, true],
-		30: [true, true, true, true],
+		6: [false, false, false, false],
+		7: [false, true, false, false],
+		10: [false, true, false, false],
+		13: [false, true, true, false],
+		18: [false, true, true, false],
 	}
 	for number in samples:
 		game.current_level_index = game.LEVEL_IDS.find("1-%d" % number)
@@ -32,7 +32,7 @@ func _run() -> void:
 		assert(legend.get_node("Red").visible and legend.get_node("Green").visible)
 		assert(not legend.get_node("Yellow").visible)
 		assert(legend.get_node("Black/Label").text == "LEGEND_BLACK")
-		if number == 6:
+		if number == 7:
 			assert(game.level_controller.board_state.level.tutorial.floating.left.size() == 8)
 	# Replaying an early level must not expose later concepts.
 	game.current_level_index = 0
@@ -63,7 +63,7 @@ func _run() -> void:
 	board._on_cell_clicked(id, MOUSE_BUTTON_RIGHT)
 	assert(board.board_state.is_complete())
 	# Hidden chapter two introduces yellow and the extra wall/ray explanation.
-	assert(game.level_controller.load_level("2-1"))
+	assert(game.level_controller.load_level("2-17"))
 	assert(legend.get_node("Yellow").visible)
 	assert(legend.get_node("Black/Label").text == "LEGEND_BLACK_RAYS")
 	var hints := 0

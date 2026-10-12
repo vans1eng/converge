@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://c78m60mybp7e6" path="res://scenes/level_complete.tscn" id="8_complete"]
 
 [ext_resource type="Script" path="res://scripts/ui/restart_button.gd" id="9_restart"]
+[ext_resource type="Script" path="res://scripts/ui/control_mode_switch.gd" id="10_mode"]
+
+[ext_resource type="Script" path="res://scripts/ui/text_button.gd" id="text_hit_area"]
 
 [sub_resource type="StyleBoxFlat" id="StyleGuideButtonNormal"]
 bg_color = Color(0, 0, 0, 0)
@@ -66,8 +69,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_tbgi4")
 title_label_path = NodePath("VBoxContainer/LevelTitle")
-timer_label_path = NodePath("TimerLabel")
-status_label_path = NodePath("VBoxContainer/StatusMessage")
+status_label_path = NodePath("StatusMessage")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=44792159]
 layout_mode = 1
@@ -88,6 +90,42 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
+
+[node name="PreviousLevelButton" type="Button" parent="CanvasLayer/HUD/VBoxContainer/LevelTitle"]
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -24.0
+offset_right = -84.0
+offset_bottom = 24.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 28
+text = "‹"
+flat = true
+script = ExtResource("text_hit_area")
+
+[node name="NextLevelButton" type="Button" parent="CanvasLayer/HUD/VBoxContainer/LevelTitle"]
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 84.0
+offset_top = -24.0
+offset_right = 132.0
+offset_bottom = 24.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 28
+text = "›"
+flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Control" type="Control" parent="CanvasLayer/HUD/VBoxContainer" unique_id=816100897]
 custom_minimum_size = Vector2(0, 24)
@@ -111,9 +149,16 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="StatusMessage" type="RichTextLabel" parent="CanvasLayer/HUD/VBoxContainer" unique_id=1035453166]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
+[node name="StatusMessage" type="RichTextLabel" parent="CanvasLayer/HUD" unique_id=1035453166]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("6_font")
 theme_override_font_sizes/normal_font_size = 16
@@ -121,15 +166,6 @@ bbcode_enabled = true
 scroll_active = false
 
 [node name="MistakesLabel" type="Label" parent="CanvasLayer/HUD" unique_id=1041552307]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 30.0
-offset_right = 260.0
-offset_bottom = 60.0
-theme_override_fonts/font = ExtResource("6_font")
-theme_override_font_sizes/font_size = 16
-
-[node name="TimerLabel" type="Label" parent="CanvasLayer/HUD" unique_id=2116451661]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -138,14 +174,14 @@ offset_left = -208.0
 offset_top = 28.0
 offset_right = -28.0
 offset_bottom = 68.0
-grow_horizontal = 0
 theme_override_fonts/font = ExtResource("6_font")
-theme_override_font_sizes/font_size = 24
-text = "00:00"
+theme_override_font_sizes/font_size = 16
+grow_horizontal = 0
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="GuideButton" type="Button" parent="CanvasLayer/HUD" unique_id=299301573]
+visible = false
 custom_minimum_size = Vector2(34, 34)
 layout_mode = 0
 offset_left = 28.0
@@ -164,11 +200,24 @@ text = "?"
 [node name="RestartButton" type="Button" parent="CanvasLayer/HUD"]
 layout_mode = 0
 offset_left = 28.0
-offset_top = 72.0
+offset_top = 28.0
 offset_right = 62.0
-offset_bottom = 106.0
+offset_bottom = 62.0
 tooltip_text = "RESTART_HINT"
 script = ExtResource("9_restart")
+
+[node name="ControlModeSwitch" type="HBoxContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -52.0
+offset_right = 28.0
+offset_bottom = -28.0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("10_mode")
 
 [node name="LegendPanel" type="PanelContainer" parent="CanvasLayer/HUD" unique_id=1200214805]
 visible = false
@@ -195,6 +244,13 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 13
 text = "LEGEND_SCOPE"
+
+[node name="Arrow" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 13
+text = "LEGEND_ARROW"
 
 [node name="Radius2" type="Label" parent="CanvasLayer/HUD/LegendPanel/Legend"]
 visible = false
@@ -297,7 +353,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 44
 text = "PAUSE_TITLE"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -306,12 +362,33 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
+[node name="Controls" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Controls"]
+custom_minimum_size = Vector2(440, 52)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 24
+text = "SETTING_CONTROL"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Controls"]
+custom_minimum_size = Vector2(810, 52)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 18
+flat = true
+script = ExtResource("text_hit_area")
+
 [node name="Language" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=2108879785]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Language" unique_id=1537014419]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
@@ -320,18 +397,19 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Language" unique_id=1864460115]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 18
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Display" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=531034994]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Display" unique_id=971667030]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
@@ -340,18 +418,19 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Display" unique_id=854232053]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 18
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Resolution" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=186124361]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Resolution" unique_id=1289605964]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
@@ -360,18 +439,19 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Resolution" unique_id=1281421565]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 18
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Theme" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1204122773]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Theme" unique_id=2057477956]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
@@ -380,18 +460,19 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Theme" unique_id=1898523843]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 18
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Music" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=2116483392]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Music" unique_id=1631135234]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
@@ -400,18 +481,19 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Music" unique_id=1740480391]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 18
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="Sound" type="HBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1928241747]
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Sound" unique_id=1471116367]
-custom_minimum_size = Vector2(440, 60)
+custom_minimum_size = Vector2(440, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
@@ -420,11 +502,12 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Value" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Sound" unique_id=770766357]
-custom_minimum_size = Vector2(810, 60)
+custom_minimum_size = Vector2(810, 52)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 18
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="BottomSpacer" type="Control" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1510661598]
 custom_minimum_size = Vector2(0, 30)
@@ -443,6 +526,7 @@ theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
 text = "PAUSE_BACK_TO_MAIN"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="RestartButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Footer"]
 custom_minimum_size = Vector2(0, 120)
@@ -452,6 +536,7 @@ theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
 text = "PAUSE_RESTART"
 flat = true
+script = ExtResource("text_hit_area")
 
 [node name="ResumeButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/Footer" unique_id=591916776]
 custom_minimum_size = Vector2(0, 120)
@@ -461,3 +546,5 @@ theme_override_fonts/font = ExtResource("6_font")
 theme_override_font_sizes/font_size = 24
 text = "PAUSE_RESUME"
 flat = true
+script = ExtResource("text_hit_area")
+

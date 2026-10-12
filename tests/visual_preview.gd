@@ -9,7 +9,7 @@ func _capture() -> void:
 	var main: Node = load("res://scenes/main.tscn").instantiate()
 	get_tree().root.add_child(main)
 	get_tree().current_scene = main
-	for id in ["1-20", "1-22", "1-30", "2-1", "2-4", "2-15", "2-30"]:
+	for id in ["1-13", "2-8", "1-18", "2-17", "2-20", "2-31", "2-46"]:
 		assert(main.level_controller.load_level(id))
 		await get_tree().create_timer(1.0).timeout
 		var board: HexBoardView = main.board_controller.board_view

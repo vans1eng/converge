@@ -10,36 +10,53 @@
   ],
   "infer_yellow": false,
   "design": {
-    "concept": "yellow_six_arms",
+    "concept": "yellow_blocked_pairs",
     "featured_clue": "yellow",
     "logic_rounds": 5,
-    "clue_deductions": 12,
+    "clue_deductions": 6,
     "unique_solution": true,
     "featured_clues_required": true,
-    "seed": 826005,
-    "silhouette": "star",
-    "obstacle": "none"
+    "seed": 810028,
+    "silhouette": "hex",
+    "obstacle": "gate"
   },
   "board": {
     "layout": "odd_r",
-    "rows": 9,
-    "columns": 9
+    "rows": 7,
+    "columns": 7
   },
   "cells": [
     {
       "id": "r0c2",
       "row": 0,
       "col": 2,
-      "mode": "fixed",
-      "type": "purple",
+      "mode": "candidate",
+      "type": "neutral",
       "value": 1,
-      "scope_radius": 2,
-      "revealed": true
+      "scope_radius": 1,
+      "revealed": true,
+      "answer": {
+        "type": "green"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
     },
     {
       "id": "r0c3",
       "row": 0,
       "col": 3,
+      "mode": "fixed",
+      "type": "yellow",
+      "value": 1,
+      "scope_radius": 2,
+      "revealed": true
+    },
+    {
+      "id": "r0c4",
+      "row": 0,
+      "col": 4,
       "mode": "candidate",
       "type": "neutral",
       "value": 1,
@@ -57,23 +74,13 @@
       "id": "r0c5",
       "row": 0,
       "col": 5,
-      "mode": "fixed",
-      "type": "purple",
-      "value": 2,
-      "scope_radius": 3,
-      "revealed": true
-    },
-    {
-      "id": "r0c6",
-      "row": 0,
-      "col": 6,
       "mode": "candidate",
       "type": "neutral",
-      "value": 0,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
-        "type": "red"
+        "type": "green"
       },
       "candidate_types": [
         "red",
@@ -90,7 +97,7 @@
       "scope_radius": 1,
       "revealed": true,
       "answer": {
-        "type": "red"
+        "type": "green"
       },
       "candidate_types": [
         "red",
@@ -103,7 +110,7 @@
       "col": 2,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -120,7 +127,7 @@
       "col": 3,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -141,7 +148,7 @@
       "scope_radius": 1,
       "revealed": true,
       "answer": {
-        "type": "green"
+        "type": "red"
       },
       "candidate_types": [
         "red",
@@ -154,7 +161,7 @@
       "col": 5,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -166,76 +173,22 @@
       ]
     },
     {
-      "id": "r1c6",
-      "row": 1,
-      "col": 6,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
+      "id": "r2c1",
+      "row": 2,
+      "col": 1,
+      "mode": "fixed",
+      "type": "yellow",
+      "value": 0,
+      "scope_radius": 2,
+      "revealed": true
     },
     {
       "id": "r2c2",
       "row": 2,
       "col": 2,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 2,
-      "scope_radius": 2,
-      "revealed": true
-    },
-    {
-      "id": "r2c3",
-      "row": 2,
-      "col": 3,
       "mode": "candidate",
       "type": "neutral",
       "value": 2,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r2c4",
-      "row": 2,
-      "col": 4,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 2,
-      "revealed": true
-    },
-    {
-      "id": "r2c5",
-      "row": 2,
-      "col": 5,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 0,
-      "scope_radius": 3,
-      "revealed": true
-    },
-    {
-      "id": "r2c6",
-      "row": 2,
-      "col": 6,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 0,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -245,6 +198,60 @@
         "red",
         "green"
       ]
+    },
+    {
+      "id": "r2c3",
+      "row": 2,
+      "col": 3,
+      "mode": "fixed",
+      "type": "yellow",
+      "value": 1,
+      "scope_radius": 2,
+      "revealed": true
+    },
+    {
+      "id": "r2c4",
+      "row": 2,
+      "col": 4,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true,
+      "answer": {
+        "type": "green"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
+    },
+    {
+      "id": "r2c5",
+      "row": 2,
+      "col": 5,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 2,
+      "scope_radius": 1,
+      "revealed": true,
+      "answer": {
+        "type": "red"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
+    },
+    {
+      "id": "r2c6",
+      "row": 2,
+      "col": 6,
+      "mode": "fixed",
+      "type": "yellow",
+      "value": 1,
+      "scope_radius": 2,
+      "revealed": true
     },
     {
       "id": "r3c0",
@@ -252,11 +259,11 @@
       "col": 0,
       "mode": "candidate",
       "type": "neutral",
-      "value": 1,
+      "value": 0,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
-        "type": "red"
+        "type": "green"
       },
       "candidate_types": [
         "red",
@@ -269,11 +276,11 @@
       "col": 1,
       "mode": "candidate",
       "type": "neutral",
-      "value": 1,
+      "value": 2,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
-        "type": "green"
+        "type": "red"
       },
       "candidate_types": [
         "red",
@@ -284,70 +291,26 @@
       "id": "r3c2",
       "row": 3,
       "col": 2,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 2,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
+      "mode": "fixed",
+      "type": "yellow",
+      "value": 1,
+      "scope_radius": 2,
+      "revealed": true
     },
     {
       "id": "r3c3",
       "row": 3,
       "col": 3,
       "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 2,
+      "type": "black",
+      "value": null,
+      "scope_radius": 1,
       "revealed": true
     },
     {
       "id": "r3c4",
       "row": 3,
       "col": 4,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r3c5",
-      "row": 3,
-      "col": 5,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 2,
-      "scope_radius": 2,
-      "revealed": true
-    },
-    {
-      "id": "r3c6",
-      "row": 3,
-      "col": 6,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 3,
-      "revealed": true
-    },
-    {
-      "id": "r3c7",
-      "row": 3,
-      "col": 7,
       "mode": "candidate",
       "type": "neutral",
       "value": 1,
@@ -362,9 +325,9 @@
       ]
     },
     {
-      "id": "r4c0",
-      "row": 4,
-      "col": 0,
+      "id": "r3c5",
+      "row": 3,
+      "col": 5,
       "mode": "candidate",
       "type": "neutral",
       "value": 0,
@@ -379,12 +342,29 @@
       ]
     },
     {
+      "id": "r3c6",
+      "row": 3,
+      "col": 6,
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true,
+      "answer": {
+        "type": "red"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
+    },
+    {
       "id": "r4c1",
       "row": 4,
       "col": 1,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -401,102 +381,44 @@
       "col": 2,
       "mode": "fixed",
       "type": "yellow",
-      "value": 0,
-      "scope_radius": 3,
+      "value": 1,
+      "scope_radius": 2,
       "revealed": true
     },
     {
       "id": "r4c3",
       "row": 4,
       "col": 3,
-      "mode": "candidate",
-      "type": "neutral",
+      "mode": "fixed",
+      "type": "yellow",
       "value": 0,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
+      "scope_radius": 2,
+      "revealed": true
     },
     {
       "id": "r4c4",
       "row": 4,
       "col": 4,
       "mode": "fixed",
-      "type": "yellow",
-      "value": 2,
-      "scope_radius": 2,
+      "type": "black",
+      "value": null,
+      "scope_radius": 1,
       "revealed": true
     },
     {
       "id": "r4c5",
       "row": 4,
       "col": 5,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 3,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
+      "mode": "fixed",
+      "type": "yellow",
+      "value": 0,
+      "scope_radius": 2,
+      "revealed": true
     },
     {
       "id": "r4c6",
       "row": 4,
       "col": 6,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 3,
-      "revealed": true
-    },
-    {
-      "id": "r4c7",
-      "row": 4,
-      "col": 7,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 3,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r4c8",
-      "row": 4,
-      "col": 8,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r5c0",
-      "row": 5,
-      "col": 0,
       "mode": "candidate",
       "type": "neutral",
       "value": 1,
@@ -514,23 +436,6 @@
       "id": "r5c1",
       "row": 5,
       "col": 1,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r5c2",
-      "row": 5,
-      "col": 2,
       "mode": "fixed",
       "type": "yellow",
       "value": 1,
@@ -538,14 +443,31 @@
       "revealed": true
     },
     {
+      "id": "r5c2",
+      "row": 5,
+      "col": 2,
+      "mode": "fixed",
+      "type": "green",
+      "value": 1,
+      "scope_radius": 1,
+      "revealed": true
+    },
+    {
       "id": "r5c3",
       "row": 5,
       "col": 3,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 0,
-      "scope_radius": 2,
-      "revealed": true
+      "mode": "candidate",
+      "type": "neutral",
+      "value": 2,
+      "scope_radius": 1,
+      "revealed": true,
+      "answer": {
+        "type": "red"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
     },
     {
       "id": "r5c4",
@@ -553,7 +475,7 @@
       "col": 4,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -568,9 +490,19 @@
       "id": "r5c5",
       "row": 5,
       "col": 5,
+      "mode": "fixed",
+      "type": "yellow",
+      "value": 1,
+      "scope_radius": 2,
+      "revealed": true
+    },
+    {
+      "id": "r6c2",
+      "row": 6,
+      "col": 2,
       "mode": "candidate",
       "type": "neutral",
-      "value": 2,
+      "value": 1,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -582,56 +514,12 @@
       ]
     },
     {
-      "id": "r5c6",
-      "row": 5,
-      "col": 6,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 2,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r5c7",
-      "row": 5,
-      "col": 7,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 2,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r6c2",
-      "row": 6,
-      "col": 2,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 0,
-      "scope_radius": 3,
-      "revealed": true
-    },
-    {
       "id": "r6c3",
       "row": 6,
       "col": 3,
       "mode": "candidate",
       "type": "neutral",
-      "value": 0,
+      "value": 2,
       "scope_radius": 1,
       "revealed": true,
       "answer": {
@@ -646,11 +534,18 @@
       "id": "r6c4",
       "row": 6,
       "col": 4,
-      "mode": "fixed",
-      "type": "yellow",
+      "mode": "candidate",
+      "type": "neutral",
       "value": 2,
-      "scope_radius": 2,
-      "revealed": true
+      "scope_radius": 1,
+      "revealed": true,
+      "answer": {
+        "type": "red"
+      },
+      "candidate_types": [
+        "red",
+        "green"
+      ]
     },
     {
       "id": "r6c5",
@@ -658,50 +553,6 @@
       "col": 5,
       "mode": "candidate",
       "type": "neutral",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r6c6",
-      "row": 6,
-      "col": 6,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 3,
-      "scope_radius": 3,
-      "revealed": true
-    },
-    {
-      "id": "r7c1",
-      "row": 7,
-      "col": 1,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r7c2",
-      "row": 7,
-      "col": 2,
-      "mode": "candidate",
-      "type": "neutral",
       "value": 1,
       "scope_radius": 1,
       "revealed": true,
@@ -712,114 +563,7 @@
         "red",
         "green"
       ]
-    },
-    {
-      "id": "r7c3",
-      "row": 7,
-      "col": 3,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 3,
-      "revealed": true
-    },
-    {
-      "id": "r7c4",
-      "row": 7,
-      "col": 4,
-      "mode": "fixed",
-      "type": "yellow",
-      "value": 1,
-      "scope_radius": 3,
-      "revealed": true
-    },
-    {
-      "id": "r7c5",
-      "row": 7,
-      "col": 5,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r7c6",
-      "row": 7,
-      "col": 6,
-      "mode": "fixed",
-      "type": "red",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true
-    },
-    {
-      "id": "r8c2",
-      "row": 8,
-      "col": 2,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r8c3",
-      "row": 8,
-      "col": 3,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 0,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "red"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r8c5",
-      "row": 8,
-      "col": 5,
-      "mode": "candidate",
-      "type": "neutral",
-      "value": 1,
-      "scope_radius": 1,
-      "revealed": true,
-      "answer": {
-        "type": "green"
-      },
-      "candidate_types": [
-        "red",
-        "green"
-      ]
-    },
-    {
-      "id": "r8c6",
-      "row": 8,
-      "col": 6,
-      "mode": "fixed",
-      "type": "purple",
-      "value": 0,
-      "scope_radius": 2,
-      "revealed": true
     }
-  ]
+  ],
+  "source_id": "godot:2-10"
 }

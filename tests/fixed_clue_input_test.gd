@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func _run() -> void:
 	var validator := LevelValidator.new()
-	var level := LevelLoader.new().load_file("res://resources/levels/2-5.json")
+	var level := LevelLoader.new().load_file("res://resources/levels/2-21.json")
 	assert(validator.validate(level), str(validator.issues))
 	var state := BoardState.new(level)
 	for cell in level.cells:
@@ -22,7 +22,7 @@ func _run() -> void:
 	fixed.answer_type = "yellow"
 	fixed.candidate_types = ["red", "green", "yellow"]
 	assert(not validator.validate(level))
-	level = LevelLoader.new().load_file("res://resources/levels/2-5.json")
+	level = LevelLoader.new().load_file("res://resources/levels/2-21.json")
 	level.infer_yellow = true
 	assert(not validator.validate(level))
 	var editor = load("res://scenes/level_editor.tscn").instantiate()

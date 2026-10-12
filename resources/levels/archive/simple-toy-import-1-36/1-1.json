@@ -1,0 +1,46 @@
+{
+  "id": "1-1",
+  "chapter_id": 1,
+  "name": "",
+  "infer_yellow": false,
+  "allowed_colors": ["red","green"],
+  "board": {"layout":"odd_r","rows":1,"columns":1},
+  "tutorial": {
+    "floating": {
+      "left": {
+        "en": "Left-click a gray brick\nto check red immediately",
+        "zh_CN": "左键点击灰色砖块\n直接检验红色",
+        "zh_TW": "左鍵點擊灰色磚塊\n直接檢驗紅色",
+        "ja": "灰色のマスを左クリック\n赤かどうかをすぐ確認",
+        "ko": "회색 칸을 좌클릭하면\n빨강인지 바로 확인합니다",
+        "ru": "Нажмите серый блок левой кнопкой\nдля проверки красного цвета",
+        "fr": "Cliquez un bloc gris avec le bouton gauche\npour vérifier le rouge directement",
+        "de": "Klicke links auf einen grauen Block\num Rot direkt zu prüfen"
+      },
+      "right": {
+        "en": "Right-click a gray brick\nto check green immediately",
+        "zh_CN": "右键点击灰色砖块\n直接检验绿色",
+        "zh_TW": "右鍵點擊灰色磚塊\n直接檢驗綠色",
+        "ja": "灰色のマスを右クリック\n緑かどうかをすぐ確認",
+        "ko": "회색 칸을 우클릭하면\n초록인지 바로 확인합니다",
+        "ru": "Нажмите серый блок правой кнопкой\nдля проверки зелёного цвета",
+        "fr": "Cliquez un bloc gris avec le bouton droit\npour vérifier le vert directement",
+        "de": "Klicke rechts auf einen grauen Block\num Grün direkt zu prüfen"
+      },
+      "intro": {
+        "en": "Middle-click to select · Wheel to hypothesize\nand inspect the scope · R to restart",
+        "zh_CN": "中键选中，滚轮切换假设并查看范围\n按 R 键重玩本关",
+        "zh_TW": "中鍵選中，滾輪切換假設並查看範圍\n按 R 鍵重玩本關",
+        "ja": "中クリックで選択、ホイールで仮定と範囲確認\nRキーでやり直し",
+        "ko": "가운데 클릭으로 선택, 휠로 색 가정과 범위 확인\nR키로 다시 시작",
+        "ru": "Средняя кнопка: выбор, колесо: гипотеза и область\nR: начать заново",
+        "fr": "Clic du milieu : sélectionner, molette : hypothèse et zone\nR : recommencer",
+        "de": "Mittelklick: auswählen, Mausrad: Vermutung und Bereich\nR: neu starten"
+      }
+    },
+    "practice": true
+  },
+  "cells": [
+    {"id":"r0c0","row":0,"col":0,"mode":"candidate","type":"neutral","value":0,"scope_radius":1,"candidate_types":["red","green"],"answer":{"type":"red","accepted_types":["red","green"]}}
+  ]
+}

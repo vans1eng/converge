@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://doxdgvfnsdcxm" path="res://scripts/ui/level_complete.gd" id="1_script"]
 [ext_resource type="FontFile" uid="uid://fe14v67iior5" path="res://assets/fonts/MiSans-Light.ttf" id="2_font"]
 
+[ext_resource type="Script" path="res://scripts/ui/text_button.gd" id="text_hit_area"]
+
 [node name="LevelComplete" type="Control" unique_id=1117347464]
 visible = false
 layout_mode = 3
@@ -29,7 +31,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 44
 text = "RESULT_TITLE"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -49,13 +51,6 @@ theme_override_font_sizes/font_size = 26
 text = "RESULT_LEVEL"
 horizontal_alignment = 1
 
-[node name="Time" type="Label" parent="MarginContainer/VBoxContainer/Center/Content" unique_id=1656509377]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 20
-text = "RESULT_TIME"
-horizontal_alignment = 1
-
 [node name="Mistakes" type="Label" parent="MarginContainer/VBoxContainer/Center/Content"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font")
@@ -69,7 +64,7 @@ layout_mode = 2
 
 [node name="Footer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=559338372]
 layout_mode = 2
-theme_override_constants/separation = 96
+theme_override_constants/separation = 64
 alignment = 1
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/Footer" unique_id=1905607488]
@@ -80,6 +75,17 @@ theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 24
 text = "RESULT_HOME"
 flat = true
+script = ExtResource("text_hit_area")
+
+[node name="ReplayButton" type="Button" parent="MarginContainer/VBoxContainer/Footer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "RESULT_REPLAY"
+flat = true
+script = ExtResource("text_hit_area")
 
 [node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer/Footer" unique_id=1073156616]
 custom_minimum_size = Vector2(0, 120)
@@ -89,3 +95,5 @@ theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 24
 text = "RESULT_NEXT"
 flat = true
+script = ExtResource("text_hit_area")
+

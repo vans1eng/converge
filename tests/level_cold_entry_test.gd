@@ -20,7 +20,7 @@ func _on_node_added(node: Node) -> void:
 	if node.get_script() != null and node.get_script().resource_path == "res://scripts/main.gd":
 		_main = node
 		# Unlock only in memory; never change the user's progress file.
-		node._progress._data.set_value("completed", "1-24", true)
+		node._progress._data.set_value("completed", "1-17", true)
 
 
 func _process(_delta: float) -> void:
@@ -55,14 +55,14 @@ func _run() -> void:
 		var select: Control = get_tree().current_scene
 		while select._is_transitioning:
 			await get_tree().process_frame
-		select._progress._data.set_value("completed", "1-24", true)
+		select._progress._data.set_value("completed", "1-17", true)
 		_phase = "selection"
 		_previous = Time.get_ticks_usec()
 		_samples.clear()
 		_recording = true
-		select._open_level("1-25")
+		select._open_level("1-18")
 		await get_tree().scene_changed
-		assert(_main.selected_level == "1-25")
+		assert(_main.selected_level == "1-18")
 		await _main.board_controller.board_view.entrance_finished
 		await get_tree().create_timer(0.15).timeout
 		_recording = false
@@ -83,5 +83,5 @@ func _run() -> void:
 		if run == 0:
 			get_tree().change_scene_to_file("res://scenes/level_select.tscn")
 			await get_tree().scene_changed
-	print("PASS: cold launch -> home -> selection -> first level 25, then repeat, without saving progress.")
+	print("PASS: cold launch -> home -> selection -> first large level 18, then repeat, without saving progress.")
 	get_tree().quit()

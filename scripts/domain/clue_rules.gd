@@ -12,7 +12,9 @@ static func scope(cell: CellDefinition, grid: HexGrid, tile_type: String = "") -
 	if tile_type.is_empty():
 		tile_type = cell.effective_type()
 	var result: Array[CellDefinition] = []
-	if tile_type == CellDefinition.TYPE_YELLOW:
+	if not cell.direction.is_empty():
+		result = grid.direction_cells(cell, CellDefinition.DIRECTIONS.find(cell.direction))
+	elif tile_type == CellDefinition.TYPE_YELLOW:
 		for axis in 3:
 			result.append_array(grid.axis_cells(cell, axis, cell.scope_radius))
 	else:

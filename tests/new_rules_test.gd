@@ -27,7 +27,7 @@ func _run() -> void:
 	get_tree().current_scene = main
 	await get_tree().create_timer(1.0).timeout
 	# Exercise hidden chapter rules directly without changing the demo catalog.
-	assert(main.level_controller.load_level("2-12"))
+	assert(main.level_controller.load_level("2-28"))
 	await get_tree().create_timer(1.0).timeout
 	main.level_controller.level_completed.disconnect(main._on_level_completed)
 	var controller: BoardController = main.board_controller
