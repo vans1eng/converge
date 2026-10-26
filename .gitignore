@@ -1,4 +1,23 @@
-# Godot 4+ specific ignores
+# Godot editor caches and generated Android build
 .godot/
 /android/
-out/
+
+# Exported builds and release artifacts
+/out/
+/build/
+/dist/
+*.pck
+*.exe
+*.dmg
+*.apk
+*.aab
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
