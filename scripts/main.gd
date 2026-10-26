@@ -123,7 +123,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.is_pressed() and not event.is_echo() and event.keycode == KEY_ESCAPE:
-		pause_menu.open()
+		if not waiting_for_next_level and not level_complete.visible and (level_controller.board_state == null or not level_controller.board_state.is_complete()):
+			pause_menu.open()
 		get_viewport().set_input_as_handled()
 		return
 	if OS.has_feature("editor") and event is InputEventKey and event.is_pressed() and not event.is_echo() and event.keycode == KEY_QUOTELEFT:
